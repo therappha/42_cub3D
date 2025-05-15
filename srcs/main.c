@@ -472,7 +472,6 @@ void	raycast(t_cub *cub)
 			side = 1;
 		}
 		//Check if ray has hit a wall
-		printf("mapX: %d mapY: %d\n", mapX, mapY);
 		if (mapX < 0 || mapY < 0 || mapX >= cub->map_width || mapY >= cub->map_height)
 			break;
 		if (cub->map[mapY][mapX] == '1')
@@ -514,6 +513,23 @@ void	raycast(t_cub *cub)
 }
 }
 
+double	last_time = 0;
+double	current_time;
+double	frame_time;
+int		fps;
+
+void	game_loop(t_cub *cub)
+{
+	current_time = get_time();
+	frame_time = current_time - last_time;
+	last_time = current_time;
+
+	if (frame_time > 0)
+		fps = (int)(1000.0 / frame_time);
+	char *fps_str = ft_itoa(fps); // Convert int to string
+	mlx_string_put(cub->mlx_ptr, cub->win_ptr, 10, SCREEN_SIZE_Y - 10, 0xffffff, fps_str);
+	free(fps_str);
+}
 int	update(t_cub *cub)
 {
 	calculate_Delta();
@@ -522,7 +538,6 @@ int	update(t_cub *cub)
 	(*cub).image.addr = mlx_get_data_addr((*cub).image.img, &(*cub).image.bits_per_pixel, &(*cub).image.line_length, &(*cub).image.endian);
 	cub->game.img = mlx_new_image((*cub).mlx_ptr, SCREEN_SIZE_X / 2, SCREEN_SIZE_Y);
 	cub->game.addr = mlx_get_data_addr((*cub).game.img, &(*cub).game.bits_per_pixel, &(*cub).game.line_length, &(*cub).game.endian);
-
 	circleBres(cub, player.pos.x * TILE_SIZE -1, player.pos.y * TILE_SIZE - 1, TILE_SIZE / 2 - 4);
 	drawrect(&cub->game, (t_point){0, 0}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2}, 0x00bfff);
 	drawrect(&cub->game, (t_point){SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2}, 0X808080);
@@ -535,5 +550,6 @@ int	update(t_cub *cub)
 	mlx_destroy_image(cub->mlx_ptr, cub->game.img);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->image.img, 0, 0);
 	mlx_destroy_image(cub->mlx_ptr, cub->image.img);
+	game_loop(cub);
 	return (1);
 }
