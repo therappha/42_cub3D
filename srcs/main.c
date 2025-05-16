@@ -154,7 +154,7 @@ void	get_player_pos(t_cub *cub)
 	player.plane.y = 0.66;
 }
 
-/*void get_textures(t_cub *cub)
+void get_textures(t_cub *cub)
 {
 	int x = 64;
 	int y = 64;
@@ -165,8 +165,23 @@ void	get_player_pos(t_cub *cub)
 	cub->north_texture.addr = mlx_get_data_addr(cub->north_texture.img, \
 			&cub->north_texture.bits_per_pixel, &cub->north_texture.line_length, \
 			&cub->north_texture.endian);
+	cub->east_texture.img = mlx_xpm_file_to_image(cub->mlx_ptr, \
+			"./assets/east.xpm", &x, &y);
+	cub->east_texture.addr = mlx_get_data_addr(cub->east_texture.img, \
+			&cub->east_texture.bits_per_pixel, &cub->east_texture.line_length, \
+			&cub->east_texture.endian);
+	cub->west_texture.img = mlx_xpm_file_to_image(cub->mlx_ptr, \
+			"./assets/west.xpm", &x, &y);
+	cub->west_texture.addr = mlx_get_data_addr(cub->west_texture.img, \
+			&cub->west_texture.bits_per_pixel, &cub->west_texture.line_length, \
+			&cub->west_texture.endian);
+	cub->south_texture.img = mlx_xpm_file_to_image(cub->mlx_ptr, \
+			"./assets/south.xpm", &x, &y);
+	cub->south_texture.addr = mlx_get_data_addr(cub->south_texture.img, \
+			&cub->south_texture.bits_per_pixel, &cub->south_texture.line_length, \
+			&cub->south_texture.endian);
 
-}*/
+}
 int	main(int ac, char **av)
 {
 	t_cub	cub;
@@ -187,7 +202,7 @@ int	main(int ac, char **av)
 		cub.map_height++;
 	}
 	cub.map_width = ft_strlen(cub.map[0]);
-	//get_textures(&cub);
+	get_textures(&cub);
 	mlx_hook(cub.win_ptr, DestroyNotify, 0L, free_displays, &cub);
 	get_player_pos(&cub);
 	last_frame_time = get_time();
@@ -292,6 +307,60 @@ void	drawrect(t_image *image, t_point pos, t_point size, int color)
 	}
 }
 
+unsigned int darken_color(unsigned int color, float factor)
+{
+	if (factor < 0.0f) factor = 0.0f;
+	if (factor > 1.0f) factor = 1.0f;
+
+	unsigned char r = (color >> 16) & 0xFF;
+	unsigned char g = (color >> 8) & 0xFF;
+	unsigned char b = color & 0xFF;
+
+	r = (unsigned char)(r * factor);
+	g = (unsigned char)(g * factor);
+	b = (unsigned char)(b * factor);
+
+	return (r << 16) | (g << 8) | b;
+}
+void	drawsky(t_image *image, t_point pos, t_point size, int color)
+{
+	int	x = 0;
+	int y = 0;
+
+
+	while (x < size.x)
+	{
+		y = 0;
+		while (y < size.y)
+		{
+			float factor = 1.0f - ((float)y / size.y); // from 1.0 at top to 0.0 at bottom
+			int shaded = darken_color(color, factor);
+			ft_pixelput(image, pos.x + x, pos.y + y++, shaded);
+		}
+		x++;
+	}
+}
+
+void	drawfloor(t_image *image, t_point pos, t_point size, int color)
+{
+	int	x = 0;
+	int y = 0;
+	float factor;
+	int shaded;
+
+	while (x < size.x)
+	{
+		y = 0;
+		while (y < size.y)
+		{
+			factor = ((float)y / size.y); // from 1.0 at top to 0.0 at bottom
+			shaded = darken_color(color, factor);
+			ft_pixelput(image, pos.x + x, pos.y + y++, shaded);
+		}
+		x++;
+	}
+}
+
 void drawCircle(t_cub *cub, int xc, int yc, int x, int y)
 {
 	ft_pixelput(&cub->image, xc+x, yc+y, 0x00FF00);
@@ -355,24 +424,40 @@ void drawmap(t_cub *cub)
 	int	x = 0;
 	int y = 0;
 
+	int drawx;
+	int drawy;
+
 	while (cub->map[y])
 	{
 		x = 0;
 		while(cub->map[y][x])
 		{
+
+			drawx = x * TILE_SIZE -  player.pos.x * TILE_SIZE + SCREEN_SIZE_X / 4;
+			drawy = y * TILE_SIZE - player.pos.y * TILE_SIZE + SCREEN_SIZE_Y / 2;
+			if (drawx + TILE_SIZE >= SCREEN_SIZE_X / 2 || drawx < 0  || drawy < 0 || drawy + TILE_SIZE >= SCREEN_SIZE_Y)
+			{
+				x++;
+				continue;
+			}
+
 			if (cub->map[y][x] == '1')
-				drawrect(&cub->image, (t_point){x * TILE_SIZE, y * TILE_SIZE},  (t_point){TILE_SIZE -1, TILE_SIZE -1}, 0xFFFFFF);
+				drawrect(&cub->image, (t_point){drawx, drawy },  (t_point){TILE_SIZE -1, TILE_SIZE -1}, 0xFFFFFF);
 			x++;
 		}
 		y++;
 	}
 }
 
+
+
 void get_direction(t_cub *cub)
 {
-	double x1 = player.pos.x * TILE_SIZE - 1;
-	double y1 = player.pos.y * TILE_SIZE - 1;
+	//double x1 = player.pos.x * TILE_SIZE - 1;
+	//double y1 = player.pos.y * TILE_SIZE - 1;
 
+	double x1 = SCREEN_SIZE_X / 4;
+	double y1 = SCREEN_SIZE_Y / 2;
 	double x2 = get_mouse_position(cub).x;
 	double y2 = get_mouse_position(cub).y;
 
@@ -391,25 +476,63 @@ void get_direction(t_cub *cub)
 		player.camera.x = 0;
 		player.camera.y = 0;
 	}
-	player.plane.x = -player.camera.y * 0.66;
-	player.plane.y = player.camera.x * 0.66;
-
+	player.plane.x = -player.camera.y * 0.50;
+	player.plane.y = player.camera.x * 0.50;
 }
 
-void drawtexture(t_cub *cub, int drawStart, int drawEnd, int lineHeight, int step, int texX, int x)
+
+void	drawrect_texture(t_cub *cub, t_point pos, t_point size, int drawStart, int lineHeight, float step, int texX , t_image *texture, double perpWallDist)
+{
+	int	x = 0;
+	int y = 0;
+	int texY;
+	int color;
+	double texPos;
+	float factor = 1.0f / (1.0f + perpWallDist * 0.2f);
+
+	texPos = (drawStart - SCREEN_SIZE_Y / 2 + lineHeight / 2) * step;
+	if (texPos < 0)
+		texPos = 0;
+	while (x < size.x)
+	{
+		y = 0;
+		while (y < size.y)
+		{
+			texY = (int)texPos;
+			texPos += step;
+			if (texY < 0)
+				texY = 0;
+			if (texY >= 64)
+				texY = 63;
+			color = *(int *)((*texture).addr + (texY * (*texture).line_length + texX * ((*texture).bits_per_pixel / 8)));
+			color = darken_color(color, factor);
+			ft_pixelput(&cub->game, pos.x + x, pos.y + y++, color);
+		}
+		x++;
+	}
+}
+
+t_image  *get_wall_color_from_direction(t_cub *cub, int side, float ray_x, float ray_y)
 {
 
-	(void)lineHeight;
-	(void)step;
-	double texPos = (drawStart - SCREEN_SIZE_Y / 2 + lineHeight / 2) * step;
-	for(int y = drawStart; y<drawEnd; y++)
+/*North	0	-1
+South	0	+1
+East	+1	0
+West	-1	0*/
+	if (side == 0)
 	{
-
-		int texY = (int)texPos & (64 - 1);
-		texPos += step;
-		int color = *(int *)(cub->north_texture.addr + (texY * cub->north_texture.line_length + texX * (cub->north_texture.bits_per_pixel / 8)));		ft_pixelput(&cub->game, x, y++, color);
-		ft_pixelput(&cub->game, x, y++, color);
-      }
+		if (ray_x > 0)
+			return &cub->west_texture;
+		else
+			return &cub->east_texture;
+	}
+	else
+	{
+		if (ray_y > 0)
+			return &cub->north_texture;
+		else
+			return &cub->south_texture;
+	}
 }
 
 void	raycast(t_cub *cub)
@@ -483,6 +606,9 @@ void	raycast(t_cub *cub)
 	else
 		perpWallDist = (mapY - player.pos.y + (1 - stepY) / 2) / rayDirY;
 
+
+	if (perpWallDist < 0.01)
+	perpWallDist = 0.01;
 	int lineHeight = (int)(SCREEN_SIZE_Y / perpWallDist);
 
 	int drawStart = -lineHeight / 2 + SCREEN_SIZE_Y / 2;
@@ -490,28 +616,29 @@ void	raycast(t_cub *cub)
 	int drawEnd = lineHeight / 2 + SCREEN_SIZE_Y / 2;
 	if (drawEnd >= SCREEN_SIZE_Y) drawEnd = SCREEN_SIZE_Y - 1;
 
-	// Choose wall color
-	int color = 0x00FF00;
-	if (side == 1)
-		color = 0xFF0000;
 
-	/*double wallX; //where exactly the wall was hit
-      if (side == 0) wallX = player.pos.y + perpWallDist * rayDirY;
-      else           wallX = player.pos.x + perpWallDist * rayDirX;
-      wallX -= floor((wallX));
+	double wallX;
+	if (side == 0)
+		wallX = player.pos.y + perpWallDist * rayDirY;
+	else
+		wallX = player.pos.x + perpWallDist * rayDirX;
+	wallX -= floor((wallX));
 
-      //x coordinate on the texture
-      int texX = (int)(wallX * (double)(64));
-      if(side == 0 && rayDirX > 0)
-	  	texX = 64 - texX - 1;
-      if(side == 1 && rayDirY < 0)
-	  	texX = 64 - texX - 1;
+	int texX = (int)(wallX * (double)(64));
+	if(side == 0 && rayDirX < 0)
+		texX = 64 - texX - 1;
+	if(side == 1 && rayDirY > 0)
+		texX = 64 - texX - 1;
+	if (lineHeight < 1)
+		lineHeight = 1;
 	double step = 1.0 * 64 / lineHeight;
-	drawtexture(cub, drawStart, drawEnd, lineHeight, step, texX, x);*/
 
-	drawrect(&cub->game, (t_point){x, drawStart}, (t_point){1, drawEnd - drawStart}, color);
+	t_image *texture = get_wall_color_from_direction(cub, side, rayDirX, rayDirY);
+	drawrect_texture(cub,  (t_point){x, drawStart}, (t_point){1, drawEnd - drawStart},  drawStart, lineHeight, step , texX, texture, perpWallDist);
 }
 }
+
+
 
 double	last_time = 0;
 double	current_time;
@@ -530,6 +657,8 @@ void	game_loop(t_cub *cub)
 	mlx_string_put(cub->mlx_ptr, cub->win_ptr, 10, SCREEN_SIZE_Y - 10, 0xffffff, fps_str);
 	free(fps_str);
 }
+
+
 int	update(t_cub *cub)
 {
 	calculate_Delta();
@@ -538,11 +667,11 @@ int	update(t_cub *cub)
 	(*cub).image.addr = mlx_get_data_addr((*cub).image.img, &(*cub).image.bits_per_pixel, &(*cub).image.line_length, &(*cub).image.endian);
 	cub->game.img = mlx_new_image((*cub).mlx_ptr, SCREEN_SIZE_X / 2, SCREEN_SIZE_Y);
 	cub->game.addr = mlx_get_data_addr((*cub).game.img, &(*cub).game.bits_per_pixel, &(*cub).game.line_length, &(*cub).game.endian);
-	circleBres(cub, player.pos.x * TILE_SIZE -1, player.pos.y * TILE_SIZE - 1, TILE_SIZE / 2 - 4);
-	drawrect(&cub->game, (t_point){0, 0}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2}, 0x00bfff);
-	drawrect(&cub->game, (t_point){SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2}, 0X808080);
+	circleBres(cub, SCREEN_SIZE_X / 4, SCREEN_SIZE_Y / 2, TILE_SIZE / 2 - 4);
+	drawsky(&cub->game, (t_point){0, 0}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2}, 0x3299CC);
+	drawfloor(&cub->game, (t_point){SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2}, 0x238E23);
 	get_direction(cub);
-	drawline(cub, (t_point){player.pos.x * TILE_SIZE -1, player.pos.y * TILE_SIZE -1}, get_mouse_position(cub));
+	drawline(cub, (t_point){ SCREEN_SIZE_X / 4, SCREEN_SIZE_Y / 2}, get_mouse_position(cub));
 	drawmap(cub);
 	move();
 	raycast(cub);
