@@ -11,7 +11,7 @@ LIBFT= $(LIBFT_DIR)/libft.a
 SRCS_DIR= ./srcs
 
 SRCS= $(SRCS_DIR)/main.c $(SRCS_DIR)/free_displays.c $(SRCS_DIR)/drawlines.c \
-$(SRCS_DIR)/ft_free.c   $(SRCS_DIR)/init_window.c $(SRCS_DIR)/math.c \
+$(SRCS_DIR)/ft_free.c   $(SRCS_DIR)/init_window.c  \
 $(SRCS_DIR)/ft_pixelput.c $(SRCS_DIR)/get_time.c
 
 OBJS=$(SRCS:.c=.o)

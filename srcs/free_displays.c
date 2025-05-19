@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:41:42 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/15 18:47:53 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/19 18:58:34 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	free_displays(t_cub *cub)
 	mlx_loop_end((*cub).mlx_ptr);
 	mlx_destroy_window((*cub).mlx_ptr, (*cub).win_ptr);
 	mlx_destroy_display((*cub).mlx_ptr);
-	ft_freesplit((*cub).map);
 	free((*cub).mlx_ptr);
 	ft_printf("Closing Application!");
 	exit(1);

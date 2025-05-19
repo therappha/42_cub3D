@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/15 18:51:59 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/19 18:43:48 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ typedef struct s_player
 {
 	t_point pos;
 	t_point direction;
-	t_point plane;
-	t_point camera;
 }	t_player;
 
 

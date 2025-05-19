@@ -6,11 +6,21 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:11:04 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/14 17:32:18 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/19 18:46:27 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
+
+int	ft_abs(int num)
+{
+	if (num <= -2147483648)
+		return (2147483647);
+	if (num < 0)
+		return (num * -1);
+	return (num);
+}
+
 
 void	drawline_low(t_cub *cub, t_point start, t_point dest)
 {
