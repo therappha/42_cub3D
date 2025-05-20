@@ -18,11 +18,14 @@ t_player player2;
 t_player ball;
 t_point padsize = {20, 100};
 t_point ballsize = {16, 16};
+int		pad1_color = 0x0573ad;
+int		pad2_color = 0x990e24;
 char	score_1[] = "0";
 char	score_2[] = "0";
 bool	hit_left = true;
 bool	hit_right = true;
 float	ball_speed = 350;
+float	starting_speed = 350;
 float	ball_accel = 500;
 bool	started = false;
 float	speed = 500;
@@ -93,7 +96,7 @@ int	key_press(int keysym, t_cub *cub)
 	if (keysym == XK_space && !started)
 	{
 		get_random();
-		ball_speed = 350;
+		ball_speed = 500;
 		started = true;
 	}
 	if (keysym == XK_Escape)
@@ -173,10 +176,6 @@ void init_players()
 {
 	hit_right = true;
 	hit_left = true;
-	player.pos = (t_point){ offset, SCREEN_SIZE_Y / 2 };
-	player.direction = (t_point){0, 0};
-	player2.pos = (t_point){SCREEN_SIZE_X - (offset + padsize.x), SCREEN_SIZE_Y / 2};
-	player2.direction = (t_point){0, 0};
 	ball.pos = (t_point){SCREEN_SIZE_X / 2 - (ballsize.x / 2), SCREEN_SIZE_Y / 2 - (ballsize.y / 2)};
 }
 int	main(int ac, char **av)
@@ -185,7 +184,10 @@ int	main(int ac, char **av)
 	srand(time(NULL));
 	init_window(&cub);
 
-
+	player.pos = (t_point){ offset, SCREEN_SIZE_Y / 2 };
+	player2.pos = (t_point){SCREEN_SIZE_X - (offset + padsize.x), SCREEN_SIZE_Y / 2};
+	player.direction = (t_point){0, 0};
+	player2.direction = (t_point){0, 0};
 	init_players();
 	mlx_loop_hook(cub.mlx_ptr, &game_loop, &cub);
 	mlx_hook(cub.win_ptr, 2, 1L << 0, &key_press, &cub);
@@ -267,8 +269,8 @@ int renderer(t_cub *cub)
 
 	drawrect(&cub->image, (t_point){0, 0}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y}, 0x2E8B47);
 	drawline(cub, (t_point){SCREEN_SIZE_X / 2, 0}, (t_point){SCREEN_SIZE_X / 2, SCREEN_SIZE_Y});
-	drawrect(&cub->image, player.pos, padsize, 0xFF0000);
-	drawrect(&cub->image, player2.pos, padsize, 0x00FF00);
+	drawrect(&cub->image, player.pos, padsize, pad1_color);
+	drawrect(&cub->image, player2.pos, padsize, pad2_color);
 	drawrect(&cub->image, ball.pos, ballsize, 0xFFFFFF);
 
 
@@ -343,9 +345,9 @@ int update(t_cub *cub)
 {
 	(void)cub;
 	calculate_Delta();
+	move();
 	if (started)
 	{
-		move();
 		move_ball();
 	}
 	return (0);
