@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/19 18:43:48 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:39:28 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <math.h>
 # include <sys/time.h>
 # include <stdbool.h>
+#include <time.h>
 
 # define SCREEN_SIZE_X 1200
 # define SCREEN_SIZE_Y 600
@@ -35,6 +36,7 @@ typedef struct s_player
 {
 	t_point pos;
 	t_point direction;
+	t_point velocity;
 }	t_player;
 
 
