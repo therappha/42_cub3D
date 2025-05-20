@@ -27,7 +27,7 @@ char	score_2[] = "0";
 bool	hit_left = true;
 bool	hit_right = true;
 float	ball_speed = 400;
-float	start_speed = 400;
+float	start_speed = 600;
 float	boost = 0.03;
 float	ball_accel = 500;
 bool	started = false;
@@ -36,7 +36,6 @@ float delta = 0;
 float accel = 1000;
 float friction = 1000;
 float offset = 40;
-bool	print = false;
 long long last_frame_time = 0;
 
 
@@ -366,11 +365,6 @@ int update(t_cub *cub)
 	move();
 	if (started)
 	{
-		if (ballsize.x == 16 && !print)
-		{
-			printf("ballpos = %f\n", ball.pos.x);
-			print = true;
-		}
 		if (ball.pos.x < SCREEN_SIZE_X / 2)
 		{
 			if (ball.pos.x > SCREEN_SIZE_X / 4)
