@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*    */
-/*  :::::::::::   */
-/*   main.c   :+::+:    :+:   */
-/*    +:+ +:+   +:+     */
-/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+ +#+  */
-/*+#+#+#+#+#+   +#+     */
-/*   Created: 2025/01/25 17:42:20 by rafaelfe    #+#    #+# */
-/*   Updated: 2025/05/15 16:45:52 by rafaelfe   ###   ########.fr */
-/*    */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gde-la-r <gde-la-r@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/20 19:24:34 by gde-la-r          #+#    #+#             */
+/*   Updated: 2025/05/20 19:27:15 by gde-la-r         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
@@ -17,7 +17,9 @@ t_player player;
 t_player player2;
 t_player ball;
 t_point padsize = {20, 100};
-t_point ballsize = {16, 16};
+int		ball_max = 64;
+int		ball_min = 16;
+t_point ballsize = {48, 48};
 int		pad1_color = 0x0573ad;
 int		pad2_color = 0x990e24;
 char	score_1[] = "0";
@@ -34,6 +36,7 @@ float delta = 0;
 float accel = 1000;
 float friction = 1000;
 float offset = 40;
+bool	print = false;
 long long last_frame_time = 0;
 
 
@@ -363,6 +366,41 @@ int update(t_cub *cub)
 	move();
 	if (started)
 	{
+		if (ballsize.x == 16 && !print)
+		{
+			printf("ballpos = %f\n", ball.pos.x);
+			print = true;
+		}
+		if (ball.pos.x < SCREEN_SIZE_X / 2)
+		{
+			if (ball.pos.x > SCREEN_SIZE_X / 4)
+			{
+				ballsize.x = ball.pos.x / 10 - 16;
+				ballsize.x = clamp(ballsize.x, ball_min, ball_max);
+				ballsize.y = ballsize.x;
+			}
+			else
+			{
+				ballsize.x = (SCREEN_SIZE_X / 4 - ball.pos.x) / 16 + 16;
+				ballsize.x = clamp(ballsize.x, ball_min, ball_max);
+				ballsize.y = ballsize.x;
+			}
+		}
+		else if (ball.pos.x >= SCREEN_SIZE_X / 2)
+		{
+			if (ball.pos.x + ballsize.x < SCREEN_SIZE_X - SCREEN_SIZE_X / 4)
+			{
+				ballsize.x = (SCREEN_SIZE_X - ball.pos.x + ballsize.x) / 10 - 16;
+				ballsize.x = clamp(ballsize.x, ball_min, ball_max);
+				ballsize.y = ballsize.x;
+			}
+			else
+			{
+				ballsize.x = (ball.pos.x + ballsize.x - (SCREEN_SIZE_X - SCREEN_SIZE_X / 4)) / 16 + 16;
+				ballsize.x = clamp(ballsize.x, ball_min, ball_max);
+				ballsize.y = ballsize.x;
+			}
+		}
 		move_ball();
 	}
 	return (0);
