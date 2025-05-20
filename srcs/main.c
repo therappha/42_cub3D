@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 19:24:34 by gde-la-r          #+#    #+#             */
-/*   Updated: 2025/05/20 19:58:36 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:18:11 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,7 +301,7 @@ void	hit_player()
 {
 	if (hit_left && ball.pos.x > offset && ball.pos.x <= offset + padsize.x)
 	{
-		if (ball.pos.y >= player.pos.y - 2 && ball.pos.y <= player.pos.y + 2 + padsize.y)
+		if (ball.pos.y + ballsize.x >= player.pos.y - 5 && ball.pos.y <= player.pos.y + 2 + padsize.y)
 		{
 			hit_left = false;
 			hit_right = true;
@@ -313,7 +313,7 @@ void	hit_player()
 	}
 	else if (hit_right && ball.pos.x + ballsize.x <= SCREEN_SIZE_X - offset && ball.pos.x + ballsize.x >= SCREEN_SIZE_X - offset - padsize.x)
 	{
-		if (ball.pos.y >= player2.pos.y - 2 && ball.pos.y <= player2.pos.y + 2 + padsize.y)
+		if (ball.pos.y + ballsize.x  >= player2.pos.y - 2 && ball.pos.y <= player2.pos.y + 2 + padsize.y)
 		{
 			hit_left = true;
 			hit_right = false;
@@ -375,7 +375,7 @@ int update(t_cub *cub)
 			}
 			else
 			{
-				ballsize.x = (SCREEN_SIZE_X / 4 - ball.pos.x) / 16 + 16;
+				ballsize.x = (SCREEN_SIZE_X / 4 - ball.pos.x) / 20 + 16;
 				ballsize.x = clamp(ballsize.x, ball_min, ball_max);
 				ballsize.y = ballsize.x;
 			}
@@ -390,7 +390,7 @@ int update(t_cub *cub)
 			}
 			else
 			{
-				ballsize.x = (ball.pos.x + ballsize.x - (SCREEN_SIZE_X - SCREEN_SIZE_X / 4)) / 16 + 16;
+				ballsize.x = (ball.pos.x + ballsize.x - (SCREEN_SIZE_X - SCREEN_SIZE_X / 4)) / 20 + 16;
 				ballsize.x = clamp(ballsize.x, ball_min, ball_max);
 				ballsize.y = ballsize.x;
 			}
