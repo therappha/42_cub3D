@@ -24,8 +24,9 @@ char	score_1[] = "0";
 char	score_2[] = "0";
 bool	hit_left = true;
 bool	hit_right = true;
-float	ball_speed = 350;
-float	starting_speed = 350;
+float	ball_speed = 400;
+float	start_speed = 400;
+float	boost = 0.03;
 float	ball_accel = 500;
 bool	started = false;
 float	speed = 500;
@@ -96,7 +97,7 @@ int	key_press(int keysym, t_cub *cub)
 	if (keysym == XK_space && !started)
 	{
 		get_random();
-		ball_speed = 500;
+		ball_speed = start_speed;
 		started = true;
 	}
 	if (keysym == XK_Escape)
@@ -255,10 +256,24 @@ void	print_score()
 {
 	mlx_string_put(cub.mlx_ptr, cub.win_ptr, SCREEN_SIZE_X / 2 - offset, offset, 0xFFFFFF, score_1);
 	mlx_string_put(cub.mlx_ptr, cub.win_ptr, SCREEN_SIZE_X / 2 + offset, offset, 0xFFFFFF, score_2);
+	if (!started)
+		mlx_string_put(cub.mlx_ptr, cub.win_ptr, SCREEN_SIZE_X / 2 - offset * 2, SCREEN_SIZE_Y / 2 - 100, 0xFFFFFF, "PRESS SPACE TO START THE GAME!");
 	if (score_2[0] == '5')
+	{
 		mlx_string_put(cub.mlx_ptr, cub.win_ptr, SCREEN_SIZE_X / 2 - offset, SCREEN_SIZE_Y / 2 - 100, 0xFFFFFF, "Player 2 won!");
+		score_2[0] = '0';
+		score_1[0] = '0';
+		ball_speed = start_speed;
+		return ;
+	}
 	if (score_1[0] == '5')
+	{
 		mlx_string_put(cub.mlx_ptr, cub.win_ptr, SCREEN_SIZE_X / 2 - offset, SCREEN_SIZE_Y / 2 - 100, 0xFFFFFF, "Player 1 won!");
+		score_2[0] = '0';
+		score_1[0] = '0';
+		ball_speed = start_speed;
+		return ;
+	}
 }
 
 int renderer(t_cub *cub)
@@ -284,25 +299,25 @@ void	hit_player()
 {
 	if (hit_left && ball.pos.x > offset && ball.pos.x <= offset + padsize.x)
 	{
-		if (ball.pos.y >= player.pos.y && ball.pos.y <= player.pos.y + padsize.y)
+		if (ball.pos.y >= player.pos.y - 2 && ball.pos.y <= player.pos.y + 2 + padsize.y)
 		{
 			hit_left = false;
 			hit_right = true;
 			ball.direction.y = (float)rand() / (float)RAND_MAX * 1.4f - 0.7f;
 			ball.direction.x = -ball.direction.x;
-			ball_speed += ball_speed * 0.05;
+			ball_speed += ball_speed * boost;
 			ball.direction = (t_point)normalize(ball.direction);
 		}
 	}
 	else if (hit_right && ball.pos.x + ballsize.x <= SCREEN_SIZE_X - offset && ball.pos.x + ballsize.x >= SCREEN_SIZE_X - offset - padsize.x)
 	{
-		if (ball.pos.y >= player2.pos.y && ball.pos.y <= player2.pos.y + padsize.y)
+		if (ball.pos.y >= player2.pos.y - 2 && ball.pos.y <= player2.pos.y + 2 + padsize.y)
 		{
 			hit_left = true;
 			hit_right = false;
 			ball.direction.y = (float)rand() / (float)RAND_MAX * 1.4f - 0.7f;
 			ball.direction.x = -ball.direction.x;
-			ball_speed += ball_speed * 0.05;
+			ball_speed += ball_speed * boost;
 			ball.direction = (t_point)normalize(ball.direction);
 		}
 	}
