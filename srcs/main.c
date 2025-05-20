@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-la-r <gde-la-r@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 19:24:34 by gde-la-r          #+#    #+#             */
-/*   Updated: 2025/05/20 19:27:15 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:58:36 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	score_2[] = "0";
 bool	hit_left = true;
 bool	hit_right = true;
 float	ball_speed = 400;
-float	start_speed = 600;
+float	start_speed = 400;
 float	boost = 0.03;
 float	ball_accel = 500;
 bool	started = false;
