@@ -28,6 +28,8 @@ $(SRCS_DIR)/ft_pixelput.c \
 $(SRCS_DIR)/input_handler.c \
 $(SRCS_DIR)/raycast.c \
 $(SRCS_DIR)/move.c \
+$(SRCS_DIR)/debug.c \
+
 
 OBJS=$(SRCS:.c=.o)
 

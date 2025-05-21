@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/21 19:13:37 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/21 19:52:57 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@
 
 # define SCREEN_SIZE_X 1024
 # define SCREEN_SIZE_Y 768
-# define LINE_COLOR 0x00FF00
+# define LINE_COLOR 0xFFFF00
 # define TILE_SIZE 32
+# define CIRCLE_SIZE 60
 # define FOV 66
 # define CAMERA_SPEED 5.0
 
@@ -36,10 +37,10 @@ typedef struct s_point
 
 typedef struct s_player
 {
-	t_point pos;
-	t_point direction;
-	t_point plane;
-	t_point camera;
+	t_point		pos;
+	t_point		direction;
+	t_point		plane;
+	t_point		camera;
 	float		camerax;
 }	t_player;
 
@@ -79,7 +80,7 @@ typedef struct s_cub
 	float		delta;
 	float		rot_speed;
 	t_player	player;
-	t_image	image;
+	t_image		image;
 }	t_cub;
 
 int			free_displays(t_cub *cub);
@@ -121,5 +122,9 @@ void		ft_free_arr(char **arr);
 t_point		get_mouse_position(t_cub *cub);
 
 //move
-void	move_camera(t_cub *cub);
+void		move_camera(t_cub *cub);
+
+
+//debug
+void		debug_directions(t_cub *cub);
 #endif

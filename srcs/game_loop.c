@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:06:28 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/21 19:11:18 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/21 19:48:43 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,9 @@ int	renderer(t_cub *cub)
 	drawrect(&cub->image, (t_point){0, SCREEN_SIZE_Y / 2}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2}, 0x228B22);
 
 	raycast(cub);
-	t_point normalized_player = normalize(cub->player.direction);
-	drawline(cub, (t_point){SCREEN_SIZE_X / 4, SCREEN_SIZE_Y / 2}, (t_point){SCREEN_SIZE_X / 4 + normalized_player.x * 100,  SCREEN_SIZE_Y / 2 + normalized_player.y * 100});
-	circleBres(cub, SCREEN_SIZE_X / 4, SCREEN_SIZE_Y / 2, 101);
-	circleBres(cub, SCREEN_SIZE_X / 4, SCREEN_SIZE_Y / 2, 100);
-
-	drawline(cub, (t_point){SCREEN_SIZE_X - SCREEN_SIZE_X / 4, SCREEN_SIZE_Y / 2}, (t_point){SCREEN_SIZE_X - SCREEN_SIZE_X / 4 + cub->player.camera.x * 100,  SCREEN_SIZE_Y / 2 + cub->player.camera.y * 100});
-	circleBres(cub, SCREEN_SIZE_X -  SCREEN_SIZE_X / 4, SCREEN_SIZE_Y / 2, 100);
-	circleBres(cub, SCREEN_SIZE_X -  SCREEN_SIZE_X / 4, SCREEN_SIZE_Y / 2, 101);
 
 
+	debug_directions(cub);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->image.img, 0, 0);
 	mlx_destroy_image(cub->mlx_ptr, cub->image.img);
 	return (1);
