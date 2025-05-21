@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/21 17:46:52 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/21 19:01:28 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define SCREEN_SIZE_Y 768
 # define LINE_COLOR 0xFFFFFF
 # define TILE_SIZE 32
+# define FOV 66
+# define CAMERA_SPEED 5.0
 
 typedef struct s_point
 {
@@ -38,6 +40,7 @@ typedef struct s_player
 	t_point direction;
 	t_point plane;
 	t_point camera;
+	float		camerax;
 }	t_player;
 
 
@@ -74,6 +77,7 @@ typedef struct s_cub
 	t_image		west_texture;
 	long long	last_frame_time;
 	float		delta;
+	float		rot_speed;
 	t_player	player;
 	t_image	image;
 }	t_cub;
@@ -113,8 +117,9 @@ float		clamp(float value, float min, float max);
 t_point		normalize(t_point point);
 
 //free utils
-
 void		ft_free_arr(char **arr);
+t_point		get_mouse_position(t_cub *cub);
 
-
+//move
+void	move_camera(t_cub *cub);
 #endif

@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 17:45:24 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/21 17:14:17 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/21 18:34:38 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ float clamp(float value, float min, float max)
 t_point	normalize(t_point point)
 {
 	float len = sqrtf(point.x * point.x + point.y * point.y);
-	len = sqrtf(len);
 
 	if (len == 0)
 		return ((t_point){0, 0});

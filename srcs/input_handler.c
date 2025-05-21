@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:09:07 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/21 17:57:54 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/21 18:55:24 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@ int	key_pressed(int keysym, t_cub *cub)
 	if (keysym == XK_Escape)
 		free_displays(cub);
 
+	if (keysym == XK_Left)
+	{
+		cub->player.camerax -= 1;
+	}
+	if (keysym == XK_Right)
+	{
+		cub->player.camerax += 1;
+	}
 	if (keysym == XK_w || keysym == XK_W)
 	{
 		cub->player.direction.y -= 1;
@@ -37,12 +45,20 @@ int	key_pressed(int keysym, t_cub *cub)
 		cub->player.direction.x += 1;
 		cub->player.direction.x = clamp(cub->player.direction.x, -1, 1);
 	}
-	cub->player.direction = normalize(cub->player.direction);
 	return (1);
 }
 
 int	key_released(int keysym, t_cub *cub)
 {
+
+	if (keysym == XK_Left)
+	{
+		cub->player.camerax += 1;
+	}
+	if (keysym == XK_Right)
+	{
+		cub->player.camerax -= 1;
+	}
 	if (keysym == XK_w || keysym == XK_W)
 	{
 		cub->player.direction.y += 1;
@@ -63,6 +79,5 @@ int	key_released(int keysym, t_cub *cub)
 		cub->player.direction.x -= 1;
 		cub->player.direction.x = clamp(cub->player.direction.x, -1, 1);
 	}
-	cub->player.direction = normalize(cub->player.direction);
 	return (1);
 }
