@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/21 19:01:28 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/21 19:13:37 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define SCREEN_SIZE_X 1024
 # define SCREEN_SIZE_Y 768
-# define LINE_COLOR 0xFFFFFF
+# define LINE_COLOR 0x00FF00
 # define TILE_SIZE 32
 # define FOV 66
 # define CAMERA_SPEED 5.0

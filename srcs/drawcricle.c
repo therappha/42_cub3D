@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:02:39 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/21 17:13:33 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/21 19:09:28 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void drawCircle(t_cub *cub, int xc, int yc, int x, int y)
 {
-	ft_pixelput(&cub->image, xc+x, yc+y, 0x00FF00);
-	ft_pixelput(&cub->image, xc-x, yc+y, 0x00FF00);
-	ft_pixelput(&cub->image, xc+x, yc-y, 0x00FF00);
-	ft_pixelput(&cub->image, xc-x, yc-y, 0x00FF00);
-	ft_pixelput(&cub->image, xc+y, yc+x, 0x00FF00);
-	ft_pixelput(&cub->image, xc-y, yc+x, 0x00FF00);
-	ft_pixelput(&cub->image, xc+y, yc-x, 0x00FF00);
-	ft_pixelput(&cub->image, xc-y, yc-x, 0x00FF00);
+	ft_pixelput(&cub->image, xc+x, yc+y, 0x000000);
+	ft_pixelput(&cub->image, xc-x, yc+y, 0x000000);
+	ft_pixelput(&cub->image, xc+x, yc-y, 0x000000);
+	ft_pixelput(&cub->image, xc-x, yc-y, 0x000000);
+	ft_pixelput(&cub->image, xc+y, yc+x, 0x000000);
+	ft_pixelput(&cub->image, xc-y, yc+x, 0x000000);
+	ft_pixelput(&cub->image, xc+y, yc-x, 0x000000);
+	ft_pixelput(&cub->image, xc-y, yc-x, 0x000000);
 }
 
 void circleBres(t_cub *cub, int xc, int yc, int r)
