@@ -25,7 +25,8 @@ $(SRCS_DIR)/render_utils.c \
 $(SRCS_DIR)/ft_free.c \
 $(SRCS_DIR)/init_window.c \
 $(SRCS_DIR)/ft_pixelput.c \
-$(SRCS_DIR)/input_handler.c
+$(SRCS_DIR)/input_handler.c \
+$(SRCS_DIR)/raycast.c
 
 OBJS=$(SRCS:.c=.o)
 

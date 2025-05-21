@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/21 17:27:21 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:46:52 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <sys/time.h>
 # include <stdbool.h>
 
-# define SCREEN_SIZE_X 1200
-# define SCREEN_SIZE_Y 600
+# define SCREEN_SIZE_X 1024
+# define SCREEN_SIZE_Y 768
 # define LINE_COLOR 0xFFFFFF
 # define TILE_SIZE 32
 
@@ -82,18 +82,18 @@ int			free_displays(t_cub *cub);
 void		init_window(t_cub *cub);
 
 //gameloop
-int		game_loop(t_cub *cub);
-void	calculate_Delta(t_cub *cub);
+int			game_loop(t_cub *cub);
+void		calculate_Delta(t_cub *cub);
 
 //init
-void	cub_init(t_cub *cub);
+void		cub_init(t_cub *cub);
 
 //input
-int	key_pressed(int keysym, t_cub *cub);
-int	key_released(int keysym, t_cub *cub);
+int			key_pressed(int keysym, t_cub *cub);
+int			key_released(int keysym, t_cub *cub);
 
 //map
-int	ft_load_map(char *map, t_cub *cub);
+int			ft_load_map(char *map, t_cub *cub);
 
 //render utils
 void		drawrect(t_image *image, t_point pos, t_point size, int color);
@@ -101,6 +101,7 @@ t_image		*get_wall_color_from_direction(t_cub *cub, int side, float ray_x, float
 void		ft_pixelput(t_image *data, int x, int y, int color);
 void		drawline(t_cub *cub, t_point start, t_point dest);
 void		circleBres(t_cub *cub, int xc, int yc, int r);
+void		raycast(t_cub *cub);
 
 //struct utils
 int			check_args(char *str);
@@ -108,12 +109,12 @@ int			check_args(char *str);
 //math
 int			ft_abs(int num);
 long long	get_time(void);
-float		 clamp(float value, float min, float max);
+float		clamp(float value, float min, float max);
 t_point		normalize(t_point point);
 
 //free utils
 
-void	ft_free_arr(char **arr);
+void		ft_free_arr(char **arr);
 
 
 #endif
