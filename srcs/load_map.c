@@ -17,7 +17,7 @@ int	ft_open(char *map, t_cub *cub)
 	cub->fd = open(map, O_RDONLY);
 	if (cub->fd == -1)
 		return (close(cub->fd), ft_putstr_fd("no file", 2),
-			ft_putstr_fd(map, 2), ft_putstr_fd("\n", 2), 0), 0;
+			ft_putstr_fd(map, 2), ft_putstr_fd("\n", 2), 0);
 	return (cub->fd);
 }
 
