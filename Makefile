@@ -1,7 +1,7 @@
 
 NAME= cub3d
 CC= cc
-CFLAGS = -g -Wall -Wextra -Werror -I $(INCLUDES)
+CFLAGS = -g -pthread -I $(INCLUDES)
 LDFLAGS =  -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm
 INCLUDES= ./includes
 LIBFT_DIR= ./libs/libft

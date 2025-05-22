@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*    */
+/**/
 /*  :::::::::::   */
-/*   main.c   :+::+:    :+:   */
-/*    +:+ +:+   +:+     */
-/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+ +#+  */
-/*+#+#+#+#+#+   +#+     */
-/*   Created: 2025/01/25 17:42:20 by rafaelfe    #+#    #+# */
+/*   main.c   :+::+::+:   */
+/*+:+ +:+   +:+ */
+/*   By: rafaelfe <rafaelfe@student.42porto.com>+#+  +:+ +#+  */
+/*+#+#+#+#+#+   +#+ */
+/*   Created: 2025/01/25 17:42:20 by rafaelfe#+##+# */
 /*   Updated: 2025/05/15 16:45:52 by rafaelfe   ###   ########.fr */
-/*    */
+/**/
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
@@ -16,7 +16,8 @@ float delta;
 
 float speed = 3;
 t_player player;
-
+	void	drawsky(t_image *image, t_point pos, t_point size, int color);
+void	drawfloor(t_image *image, t_point pos, t_point size, int color);
 
 long long last_frame_time;
 
@@ -182,6 +183,7 @@ void get_textures(t_cub *cub)
 			&cub->south_texture.endian);
 
 }
+void	drawrect(t_image *image, t_point pos, t_point size, int color);
 int	main(int ac, char **av)
 {
 	t_cub	cub;
@@ -193,8 +195,21 @@ int	main(int ac, char **av)
 		ft_printf("Error, Could not read file!\n");
 		return (0);
 	}
+	player.camera.x = 1;
+	player.camera.y = 0;
 	cub_init(&cub);
 	init_window(&cub);
+	cub.background.img = mlx_new_image(cub.mlx_ptr, SCREEN_SIZE_X , SCREEN_SIZE_Y);
+	cub.background.addr = mlx_get_data_addr(cub.background.img, &cub.background.bits_per_pixel, &cub.background.line_length, &cub.background.endian);
+	cub.image.img = mlx_new_image(cub.mlx_ptr, SCREEN_SIZE_X , SCREEN_SIZE_Y);
+	cub.image.addr = mlx_get_data_addr(cub.image.img, &cub.image.bits_per_pixel, &cub.image.line_length, &cub.image.endian);
+	cub.game.img = mlx_new_image(cub.mlx_ptr, SCREEN_SIZE_X , SCREEN_SIZE_Y);
+	cub.game.addr = mlx_get_data_addr(cub.game.img, &cub.game.bits_per_pixel, &cub.game.line_length, &cub.game.endian);
+	//drawsky(&cub.background, (t_point){0, 0}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2}, 0x3299CC);
+	//drawfloor(&cub.background, (t_point){0 , SCREEN_SIZE_Y / 2}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2}, 0x238E23);
+	drawrect(&cub.background, (t_point){0, 0}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2}, 0x3299CC);
+	drawrect(&cub.background, (t_point){0 , SCREEN_SIZE_Y / 2}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2}, 0x238E23);
+
 	ft_load_map(av[1], &cub);
 	for (int i = 0; cub.map[i]; i++)
 	{
@@ -218,19 +233,7 @@ int	key_pressed(int keysym, t_cub *cub)
 
 	if (keysym == XK_Escape)
 		free_displays(cub);
-	if (keysym == XK_A || keysym == XK_a)
-	{
-		player.direction.x += -1;
-		if (player.direction.x < -1)
-			player.direction.x = -1;
-	}
 
-	if (keysym == XK_D || keysym == XK_d)
-	{
-		player.direction.x += 1;
-		if (player.direction.x > 1)
-			player.direction.x = 1;
-	}
 	if (keysym == XK_w || keysym == XK_W)
 	{
 		player.direction.y += -1;
@@ -244,9 +247,26 @@ int	key_pressed(int keysym, t_cub *cub)
 		if (player.direction.y > 1)
 			player.direction.y = 1;
 	}
-	if (keysym == XK_space)
+	if (keysym == XK_D || keysym == XK_d)
 	{
+		player.direction.x += 1;
+		if (player.direction.x > 1)
+			player.direction.x = 1;
+	}
+	if (keysym == XK_A || keysym == XK_a)
+	{
+		player.direction.x +=  -1;
+		if (player.direction.y < -1)
+			player.direction.y = -1;
+	}
 
+		if (keysym == XK_Left)
+	{
+		player.camerax -= 1;
+	}
+	if (keysym == XK_Right)
+	{
+		player.camerax += 1;
 	}
 	return (0);
 }
@@ -254,15 +274,7 @@ int	key_pressed(int keysym, t_cub *cub)
 int key_released(int keysym, t_cub *cub)
 {
 	(void)(cub);
-	if (keysym == XK_A || keysym == XK_a)
-	{
-		player.direction.x += 1;
-	}
 
-	if (keysym == XK_D || keysym == XK_d)
-	{
-		player.direction.x -= 1;
-	}
 	if (keysym == XK_W || keysym == XK_w)
 	{
 		player.direction.y += 1;
@@ -272,20 +284,63 @@ int key_released(int keysym, t_cub *cub)
 	{
 		player.direction.y -= 1;
 	}
-
+	if (keysym == XK_D || keysym == XK_d)
+	{
+		player.direction.x += -1;
+		if (player.direction.x < -1)
+			player.direction.x = -1;
+	}
+	if (keysym == XK_A || keysym == XK_a)
+	{
+		player.direction.x += 1;
+		if (player.direction.x > 1)
+			player.direction.x = 1;
+	}
+	if (keysym == XK_Left)
+	{
+		player.camerax += 1;
+	}
+	if (keysym == XK_Right)
+	{
+		player.camerax -= 1;
+	}
 	return (0);
 }
 
-void	move()
+void move()
 {
-	if (player.direction.x != 0)
+	t_point newdir;
+	newdir.x =0;
+	newdir.y = 0;
+	if (player.direction.y == -1)
 	{
-		player.pos.x += player.direction.x * speed * delta;
+		newdir.x += player.camera.x;
+		newdir.y += player.camera.y;
 	}
-	if (player.direction.y != 0)
+	if (player.direction.y == 1)
 	{
-		player.pos.y += player.direction.y * speed * delta;
+	newdir.x -= player.camera.x;
+	newdir.y -= player.camera.y;
 	}
+	if (player.direction.x == -1)
+	{
+	newdir.x += player.camera.y;
+	newdir.y -= player.camera.x;
+	}
+	if (player.direction.x == 1)
+	{
+		newdir.x -= player.camera.y;
+		newdir.y += player.camera.x;
+	}
+	float length = (sqrt(newdir.x * newdir.x + newdir.y * newdir.y));
+	if (length != 0)
+	{
+		newdir.x = newdir.x / length;
+		newdir.y = newdir.y / length;
+		player.pos.x += newdir.x * speed * delta;
+		player.pos.y += newdir.y * speed * delta;
+	}
+
 }
 
 
@@ -411,45 +466,67 @@ t_point get_mouse_position(t_cub *cub)
 		y = 0;
 	return ((t_point){x, y});
 }
+double	last_time = 0;
+double	current_time;
+double	frame_time;
+int		fps;
+static int frame_count = 0;
+static int time_accumulator = 0;
 
-
-void	calculate_Delta(void)
+void calculate_Delta(void)
 {
-	delta = (get_time() - last_frame_time) / 1000.0f;
-	last_frame_time = get_time();
+
+int current_time = get_time(); // milliseconds
+int frame_time = current_time - last_frame_time;
+
+if (frame_time <= 0)
+frame_time = 1;  // avoid divide by zero or negative
+
+last_frame_time = current_time;
+
+// Delta in seconds (for animations, movement, etc)
+delta = frame_time / 1000.0f;
+
+// Accumulate time and count frames
+time_accumulator += frame_time;
+frame_count++;
+
+// Update FPS every 1 second
+if (time_accumulator >= 1000)
+{
+fps = frame_count;
+frame_count = 0;
+time_accumulator = 0;
+}
 }
 
-void drawmap(t_cub *cub)
+void move_camera(t_cub *cub)
 {
-	int	x = 0;
-	int y = 0;
+	float rot_speed = delta * CAMERA_SPEED;
+	double oldDirX, oldDirY;
 
-	int drawx;
-	int drawy;
-
-	while (cub->map[y])
+	if (player.camerax == -1)
 	{
-		x = 0;
-		while(cub->map[y][x])
-		{
+		oldDirX = player.camera.x;
+		oldDirY = player.camera.y;
 
-			drawx = x * TILE_SIZE -  player.pos.x * TILE_SIZE + SCREEN_SIZE_X / 4;
-			drawy = y * TILE_SIZE - player.pos.y * TILE_SIZE + SCREEN_SIZE_Y / 2;
-			if (drawx + TILE_SIZE >= SCREEN_SIZE_X / 2 || drawx < 0  || drawy < 0 || drawy + TILE_SIZE >= SCREEN_SIZE_Y)
-			{
-				x++;
-				continue;
-			}
+		player.camera.x = oldDirX * cos(-rot_speed) - oldDirY * sin(-rot_speed);
+		player.camera.y = oldDirX * sin(-rot_speed) + oldDirY * cos(-rot_speed);
 
-			if (cub->map[y][x] == '1')
-				drawrect(&cub->image, (t_point){drawx, drawy },  (t_point){TILE_SIZE -1, TILE_SIZE -1}, 0xFFFFFF);
-			x++;
-		}
-		y++;
+
 	}
+	else if (player.camerax == 1)
+	{
+		oldDirX = player.camera.x;
+		oldDirY = player.camera.y;
+
+		player.camera.x = oldDirX * cos(rot_speed) - oldDirY * sin(rot_speed);
+		player.camera.y = oldDirX * sin(rot_speed) + oldDirY * cos(rot_speed);
+
+	}
+	player.plane.x = -player.camera.y * ((float)FOV / 100.0f);
+	player.plane.y = player.camera.x * ((float)FOV / 100.0f);
 }
-
-
 
 void get_direction(t_cub *cub)
 {
@@ -488,7 +565,7 @@ void	drawrect_texture(t_cub *cub, t_point pos, t_point size, int drawStart, int 
 	int texY;
 	int color;
 	double texPos;
-	float factor = 1.0f / (1.0f + perpWallDist * 0.2f);
+	//float factor = 1.0f / (1.0f + perpWallDist * 0.2f);
 
 	texPos = (drawStart - SCREEN_SIZE_Y / 2 + lineHeight / 2) * step;
 	if (texPos < 0)
@@ -505,7 +582,7 @@ void	drawrect_texture(t_cub *cub, t_point pos, t_point size, int drawStart, int 
 			if (texY >= 64)
 				texY = 63;
 			color = *(int *)((*texture).addr + (texY * (*texture).line_length + texX * ((*texture).bits_per_pixel / 8)));
-			color = darken_color(color, factor);
+			//color = darken_color(color, factor);
 			ft_pixelput(&cub->game, pos.x + x, pos.y + y++, color);
 		}
 		x++;
@@ -535,16 +612,23 @@ West	-1	0*/
 	}
 }
 
-void	raycast(t_cub *cub)
+void	*raycast(void *data)
 {
-	for(int x = 0; x < SCREEN_SIZE_X / 2; x++)
-	{
-		double cameraX = 2*x/(double)(SCREEN_SIZE_X / 2)-1; //x-coordinate in camera space
-		double rayDirX =  player.camera.x + player.plane.x * cameraX;
-		double rayDirY = player.camera.y + player.plane.y* cameraX;
 
-		int mapX = (int)(player.pos.x);
-		int mapY = (int)(player.pos.y);
+	t_data *cub_data = data;
+	t_cub *cub = cub_data->cub;
+	int from = cub_data->from;
+	int to = cub_data->to;
+	t_player rayplayer = (cub_data)->player;
+
+	for(int x = from; x < to; x++)
+	{
+		double cameraX = 2 * x / (double)(SCREEN_SIZE_X )-1; //x-coordinate in camera space
+		double rayDirX =  rayplayer.camera.x + rayplayer.plane.x * cameraX;
+		double rayDirY = rayplayer.camera.y + rayplayer.plane.y* cameraX;
+
+		int mapX = (int)(rayplayer.pos.x);
+		int mapY = (int)(rayplayer.pos.y);
 		double sideDistX;
 		double sideDistY;
 
@@ -561,22 +645,22 @@ void	raycast(t_cub *cub)
 		if (rayDirX < 0)
 		{
 			stepX = -1;
-			sideDistX = (player.pos.x - mapX) * deltaDistX;
+			sideDistX = (rayplayer.pos.x - mapX) * deltaDistX;
 		}
 		else
 		{
 			stepX = 1;
-			sideDistX = (mapX + 1.0 - player.pos.x) * deltaDistX;
+			sideDistX = (mapX + 1.0 - rayplayer.pos.x) * deltaDistX;
 		}
 		if (rayDirY < 0)
 		{
 			stepY = -1;
-			sideDistY = (player.pos.y - mapY) * deltaDistY;
+			sideDistY = (rayplayer.pos.y - mapY) * deltaDistY;
 		}
 		else
 		{
 			stepY = 1;
-			sideDistY = (mapY + 1.0 - player.pos.y) * deltaDistY;
+			sideDistY = (mapY + 1.0 - rayplayer.pos.y) * deltaDistY;
 		}
 
 
@@ -602,9 +686,9 @@ void	raycast(t_cub *cub)
 	}
 
 	if (side == 0)
-		perpWallDist = (mapX - player.pos.x + (1 - stepX) / 2) / rayDirX;
+		perpWallDist = (mapX - rayplayer.pos.x + (1 - stepX) / 2) / rayDirX;
 	else
-		perpWallDist = (mapY - player.pos.y + (1 - stepY) / 2) / rayDirY;
+		perpWallDist = (mapY - rayplayer.pos.y + (1 - stepY) / 2) / rayDirY;
 
 
 	if (perpWallDist < 0.01)
@@ -619,9 +703,9 @@ void	raycast(t_cub *cub)
 
 	double wallX;
 	if (side == 0)
-		wallX = player.pos.y + perpWallDist * rayDirY;
+		wallX = rayplayer.pos.y + perpWallDist * rayDirY;
 	else
-		wallX = player.pos.x + perpWallDist * rayDirX;
+		wallX = rayplayer.pos.x + perpWallDist * rayDirX;
 	wallX -= floor((wallX));
 
 	int texX = (int)(wallX * (double)(64));
@@ -632,30 +716,41 @@ void	raycast(t_cub *cub)
 	if (lineHeight < 1)
 		lineHeight = 1;
 	double step = 1.0 * 64 / lineHeight;
-
 	t_image *texture = get_wall_color_from_direction(cub, side, rayDirX, rayDirY);
 	drawrect_texture(cub,  (t_point){x, drawStart}, (t_point){1, drawEnd - drawStart},  drawStart, lineHeight, step , texX, texture, perpWallDist);
 }
+	return (NULL);
 }
 
 
 
-double	last_time = 0;
-double	current_time;
-double	frame_time;
-int		fps;
 
-void	game_loop(t_cub *cub)
+
+void call_threads(t_cub *cub)
 {
-	current_time = get_time();
-	frame_time = current_time - last_time;
-	last_time = current_time;
+	pthread_t	*threads;
+	t_data		**thread_data;
 
-	if (frame_time > 0)
-		fps = (int)(1000.0 / frame_time);
-	char *fps_str = ft_itoa(fps); // Convert int to string
-	mlx_string_put(cub->mlx_ptr, cub->win_ptr, 10, SCREEN_SIZE_Y - 10, 0xffffff, fps_str);
-	free(fps_str);
+	threads = malloc(sizeof(pthread_t) * 4);
+	thread_data = malloc(sizeof(t_data *) * 4);
+	for (int i = 0; i < 4; i++)
+	{
+		thread_data[i] = malloc(sizeof(t_data));
+		thread_data[i]->cub = cub;
+		thread_data[i]->from = SCREEN_SIZE_X * 0.25 * i;
+		thread_data[i]->to = SCREEN_SIZE_X * 0.25 * (i + 1);
+		thread_data[i]->player = player;
+		pthread_create(&threads[i], NULL, raycast, thread_data[i]);
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		pthread_join(threads[i], NULL);
+		free(thread_data[i]);
+	}
+
+	free(thread_data);
+	free(threads);
 }
 
 
@@ -663,22 +758,16 @@ int	update(t_cub *cub)
 {
 	calculate_Delta();
 
-	(*cub).image.img = mlx_new_image((*cub).mlx_ptr, SCREEN_SIZE_X / 2, SCREEN_SIZE_Y);
-	(*cub).image.addr = mlx_get_data_addr((*cub).image.img, &(*cub).image.bits_per_pixel, &(*cub).image.line_length, &(*cub).image.endian);
-	cub->game.img = mlx_new_image((*cub).mlx_ptr, SCREEN_SIZE_X / 2, SCREEN_SIZE_Y);
-	cub->game.addr = mlx_get_data_addr((*cub).game.img, &(*cub).game.bits_per_pixel, &(*cub).game.line_length, &(*cub).game.endian);
-	circleBres(cub, SCREEN_SIZE_X / 4, SCREEN_SIZE_Y / 2, TILE_SIZE / 2 - 4);
-	drawsky(&cub->game, (t_point){0, 0}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2}, 0x3299CC);
-	drawfloor(&cub->game, (t_point){SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2}, 0x238E23);
-	get_direction(cub);
-	drawline(cub, (t_point){ SCREEN_SIZE_X / 4, SCREEN_SIZE_Y / 2}, get_mouse_position(cub));
-	drawmap(cub);
+	//memset(cub->image.addr, 0, cub->image.line_length * SCREEN_SIZE_Y);
+	memcpy(cub->game.addr, cub->background.addr, cub->background.line_length * SCREEN_SIZE_Y);
+	move_camera(cub);
+	//drawmap(cub);
 	move();
-	raycast(cub);
-	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->game.img, SCREEN_SIZE_X / 2, 0);
-	mlx_destroy_image(cub->mlx_ptr, cub->game.img);
-	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->image.img, 0, 0);
-	mlx_destroy_image(cub->mlx_ptr, cub->image.img);
-	game_loop(cub);
+	call_threads(cub);
+	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->game.img, 0 , 0);
+	//mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->image.img, 0, 0);
+	char *fps_str = ft_itoa(fps);
+	mlx_string_put(cub->mlx_ptr, cub->win_ptr, 10 ,  10, 0xffffff, fps_str);
+	free(fps_str);
 	return (1);
 }
