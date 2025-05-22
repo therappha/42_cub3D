@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/22 16:00:33 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:59:08 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 # include <sys/time.h>
 # include <stdbool.h>
 # include <pthread.h>
+# include <curses.h>
 
-# define SCREEN_SIZE_X 1280
-# define SCREEN_SIZE_Y 720
+# define SCREEN_SIZE_X 211
+# define SCREEN_SIZE_Y 51
 # define LINE_COLOR 0xFFFFFF
 # define TILE_SIZE 32
 # define CAMERA_SPEED 2

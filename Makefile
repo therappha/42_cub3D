@@ -1,8 +1,8 @@
 
 NAME= cub3d
 CC= cc
-CFLAGS = -g -pthread -I $(INCLUDES)
-LDFLAGS =  -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm
+CFLAGS = -g -pthread  -I $(INCLUDES)
+LDFLAGS =  -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lncurses
 INCLUDES= ./includes
 LIBFT_DIR= ./libs/libft
 MLX_DIR= ./libs/mlx

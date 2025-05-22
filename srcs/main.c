@@ -11,13 +11,18 @@
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
+pthread_mutex_t drawmutex = PTHREAD_MUTEX_INITIALIZER;
 
 float delta;
 
 float speed = 3;
 t_player player;
+int term_width, term_height;
+
 	void	drawsky(t_image *image, t_point pos, t_point size, int color);
 void	drawfloor(t_image *image, t_point pos, t_point size, int color);
+
+
 
 long long last_frame_time;
 
@@ -187,6 +192,18 @@ void	drawrect(t_image *image, t_point pos, t_point size, int color);
 int	main(int ac, char **av)
 {
 	t_cub	cub;
+	WINDOW *win = initscr();
+
+	keypad(win, true);
+	nodelay(win, true);
+	curs_set(0);
+	noecho();
+	start_color();
+
+	init_pair(0, COLOR_GREEN, COLOR_GREEN);
+	init_pair(1, COLOR_BLUE, COLOR_BLUE);
+	init_pair(2, COLOR_YELLOW, COLOR_YELLOW);
+	init_pair(3, COLOR_RED, COLOR_RED);
 	(void)av; (void) ac;
 	if (ac != 2)
 		return (0);
@@ -195,6 +212,7 @@ int	main(int ac, char **av)
 		ft_printf("Error, Could not read file!\n");
 		return (0);
 	}
+	clear();
 	player.camera.x = 1;
 	player.camera.y = 0;
 	cub_init(&cub);
@@ -213,9 +231,10 @@ int	main(int ac, char **av)
 	ft_load_map(av[1], &cub);
 	for (int i = 0; cub.map[i]; i++)
 	{
-		printf("%s\n", cub.map[i]);
+		//printf("%s\n", cub.map[i]);
 		cub.map_height++;
 	}
+	clear();
 	cub.map_width = ft_strlen(cub.map[0]);
 	get_textures(&cub);
 	mlx_hook(cub.win_ptr, DestroyNotify, 0L, free_displays, &cub);
@@ -307,7 +326,7 @@ int key_released(int keysym, t_cub *cub)
 	return (0);
 }
 
-void move()
+void ft_move()
 {
 	t_point newdir;
 	newdir.x =0;
@@ -360,6 +379,22 @@ void	drawrect(t_image *image, t_point pos, t_point size, int color)
 		}
 		x++;
 	}
+}
+
+void drawterm(t_point pos, t_point size, int ch)
+{
+    for (int y = 0; y < size.y; y++)
+    {
+        move(pos.y + y, pos.x);
+        for (int x = 0; x < size.x; x++)
+		{
+   	        pthread_mutex_lock(&drawmutex);
+			//attron(1);
+			mvaddch(pos.y + y, pos.x + x, ch );
+			//attroff(1);
+			pthread_mutex_unlock(&drawmutex);
+		}
+    }
 }
 
 unsigned int darken_color(unsigned int color, float factor)
@@ -449,7 +484,7 @@ void circleBres(t_cub *cub, int xc, int yc, int r){
 	}
 }
 
-t_point get_mouse_position(t_cub *cub)
+t_point ft_get_mouse_position(t_cub *cub)
 {
 	int x = 0;
 	int y = 0;
@@ -535,8 +570,8 @@ void get_direction(t_cub *cub)
 
 	double x1 = SCREEN_SIZE_X / 4;
 	double y1 = SCREEN_SIZE_Y / 2;
-	double x2 = get_mouse_position(cub).x;
-	double y2 = get_mouse_position(cub).y;
+	double x2 = ft_get_mouse_position(cub).x;
+	double y2 = ft_get_mouse_position(cub).y;
 
 	double dx = x2 - x1;
 	double dy = y2 - y1;
@@ -583,6 +618,9 @@ void	drawrect_texture(t_cub *cub, t_point pos, t_point size, int drawStart, int 
 				texY = 63;
 			color = *(int *)((*texture).addr + (texY * (*texture).line_length + texX * ((*texture).bits_per_pixel / 8)));
 			//color = darken_color(color, factor);
+			pthread_mutex_lock(&drawmutex);
+			mvaddch(pos.y + y, pos.x + x, '#' | COLOR_PAIR(3));
+			pthread_mutex_unlock(&drawmutex);
 			ft_pixelput(&cub->game, pos.x + x, pos.y + y++, color);
 		}
 		x++;
@@ -757,17 +795,25 @@ void call_threads(t_cub *cub)
 int	update(t_cub *cub)
 {
 	calculate_Delta();
-
+	clear();
+	//clear();
 	//memset(cub->image.addr, 0, cub->image.line_length * SCREEN_SIZE_Y);
 	memcpy(cub->game.addr, cub->background.addr, cub->background.line_length * SCREEN_SIZE_Y);
 	move_camera(cub);
 	//drawmap(cub);
-	move();
+	ft_move();
+	clear();
+	drawterm((t_point){0, 0}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2 }, (int)('#') | COLOR_PAIR(1));
+	drawterm((t_point){0,SCREEN_SIZE_Y / 2	}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2 }, (int)('#') | COLOR_PAIR(2));
+
+
 	call_threads(cub);
+	refresh();
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->game.img, 0 , 0);
 	//mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->image.img, 0, 0);
 	char *fps_str = ft_itoa(fps);
 	mlx_string_put(cub->mlx_ptr, cub->win_ptr, 10 ,  10, 0xffffff, fps_str);
 	free(fps_str);
+	usleep(16000);
 	return (1);
 }
