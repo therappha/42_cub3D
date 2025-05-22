@@ -202,7 +202,7 @@ int	main(int ac, char **av)
 
 	init_pair(0, COLOR_GREEN, COLOR_GREEN);
 	init_pair(1, COLOR_BLUE, COLOR_BLUE);
-	init_pair(2, COLOR_YELLOW, COLOR_YELLOW);
+	init_pair(2, COLOR_GREEN, COLOR_GREEN);
 	init_pair(3, COLOR_RED, COLOR_RED);
 	(void)av; (void) ac;
 	if (ac != 2)
