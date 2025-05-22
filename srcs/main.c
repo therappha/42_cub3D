@@ -619,7 +619,7 @@ void	drawrect_texture(t_cub *cub, t_point pos, t_point size, int drawStart, int 
 			color = *(int *)((*texture).addr + (texY * (*texture).line_length + texX * ((*texture).bits_per_pixel / 8)));
 			//color = darken_color(color, factor);
 			pthread_mutex_lock(&drawmutex);
-			mvaddch(pos.y + y, pos.x + x, '#' | COLOR_PAIR(3));
+			mvaddch(pos.y + y, pos.x + x, '#' /*| COLOR_PAIR(3)*/);
 			pthread_mutex_unlock(&drawmutex);
 			ft_pixelput(&cub->game, pos.x + x, pos.y + y++, color);
 		}
@@ -803,8 +803,8 @@ int	update(t_cub *cub)
 	//drawmap(cub);
 	ft_move();
 	clear();
-	drawterm((t_point){0, 0}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2 }, (int)('#') | COLOR_PAIR(1));
-	drawterm((t_point){0,SCREEN_SIZE_Y / 2	}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2 }, (int)('#') | COLOR_PAIR(2));
+	//drawterm((t_point){0, 0}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2 }, (int)('#')/* | COLOR_PAIR(1)*/);
+	drawterm((t_point){0,SCREEN_SIZE_Y / 2	}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2 }, (int)('.') /*| COLOR_PAIR(2)*/);
 
 
 	call_threads(cub);
