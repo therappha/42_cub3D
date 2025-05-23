@@ -310,9 +310,8 @@ int key_released(int keysym, t_cub *cub)
 void move(t_cub *cub)
 {
 	t_point newdir;
-	newdir.x = 0;
+	newdir.x =0;
 	newdir.y = 0;
-
 	if (player.direction.y == -1)
 	{
 		newdir.x += player.camera.x;
@@ -320,21 +319,20 @@ void move(t_cub *cub)
 	}
 	if (player.direction.y == 1)
 	{
-		newdir.x -= player.camera.x;
-		newdir.y -= player.camera.y;
+	newdir.x -= player.camera.x;
+	newdir.y -= player.camera.y;
 	}
 	if (player.direction.x == -1)
 	{
-		newdir.x += player.camera.y;
-		newdir.y -= player.camera.x;
+	newdir.x += player.camera.y;
+	newdir.y -= player.camera.x;
 	}
 	if (player.direction.x == 1)
 	{
 		newdir.x -= player.camera.y;
 		newdir.y += player.camera.x;
 	}
-
-	float length = sqrtf(newdir.x * newdir.x + newdir.y * newdir.y);
+	float length = (sqrt(newdir.x * newdir.x + newdir.y * newdir.y));
 	if (length != 0)
 	{
 		newdir.x /= length;
@@ -349,6 +347,9 @@ void move(t_cub *cub)
 			player.pos.y = try_y;
 	}
 }
+
+
+
 
 void	drawrect(t_image *image, t_point pos, t_point size, int color)
 {
@@ -422,14 +423,14 @@ void	drawfloor(t_image *image, t_point pos, t_point size, int color)
 
 void drawCircle(t_cub *cub, int xc, int yc, int x, int y)
 {
-	ft_pixelput(&cub->image, xc+x, yc+y, 0x00FF00);
-	ft_pixelput(&cub->image, xc-x, yc+y, 0x00FF00);
-	ft_pixelput(&cub->image, xc+x, yc-y, 0x00FF00);
-	ft_pixelput(&cub->image, xc-x, yc-y, 0x00FF00);
-	ft_pixelput(&cub->image, xc+y, yc+x, 0x00FF00);
-	ft_pixelput(&cub->image, xc-y, yc+x, 0x00FF00);
-	ft_pixelput(&cub->image, xc+y, yc-x, 0x00FF00);
-	ft_pixelput(&cub->image, xc-y, yc-x, 0x00FF00);
+	ft_pixelput(&cub->game, xc+x, yc+y, 0x00FF00);
+	ft_pixelput(&cub->game, xc-x, yc+y, 0x00FF00);
+	ft_pixelput(&cub->game, xc+x, yc-y, 0x00FF00);
+	ft_pixelput(&cub->game, xc-x, yc-y, 0x00FF00);
+	ft_pixelput(&cub->game, xc+y, yc+x, 0x00FF00);
+	ft_pixelput(&cub->game, xc-y, yc+x, 0x00FF00);
+	ft_pixelput(&cub->game, xc+y, yc-x, 0x00FF00);
+	ft_pixelput(&cub->game, xc-y, yc-x, 0x00FF00);
 }
 
 
@@ -757,19 +758,61 @@ void call_threads(t_cub *cub)
 	free(threads);
 }
 
+t_point	normalize(t_point point)
+{
+	float len = sqrtf(point.x * point.x + point.y * point.y);
+
+	if (len == 0)
+		return ((t_point){0, 0});
+	point.x /= len;
+	point.y /= len;
+	return (point);
+}
+
+void	debug_directions(t_cub *cub)
+{
+	t_point	normalized_player = normalize(player.direction);
+	t_point	normalized_camera = normalize(player.camera);
+
+	// Bottom-left corner position
+	int		x_left = CIRCLE_SIZE + 10;
+	int		y = SCREEN_SIZE_Y - CIRCLE_SIZE - 10;
+
+	// Draw direction line for player.direction
+	drawline(cub,
+		(t_point){x_left, y},
+		(t_point){x_left + normalized_player.x * CIRCLE_SIZE,
+				  y + normalized_player.y * CIRCLE_SIZE});
+	// Draw the double-circle for player.direction
+	circleBres(cub, x_left, y, CIRCLE_SIZE + 1);
+	circleBres(cub, x_left, y, CIRCLE_SIZE);
+
+	// Bottom-right corner position
+	int		x_right = SCREEN_SIZE_X - CIRCLE_SIZE - 10;
+
+	// Draw direction line for player.camera
+	drawline(cub,
+		(t_point){x_right, y},
+		(t_point){x_right + normalized_camera.x * CIRCLE_SIZE,
+				  y + normalized_camera.y * CIRCLE_SIZE});
+	// Draw the double-circle for player.camera
+	circleBres(cub, x_right, y, CIRCLE_SIZE + 1);
+	circleBres(cub, x_right, y, CIRCLE_SIZE);
+}
 
 int	update(t_cub *cub)
 {
 	calculate_Delta();
 
-	//memset(cub->image.addr, 0, cub->image.line_length * SCREEN_SIZE_Y);
+	//memset(cub->game.addr, 0, cub->game.line_length * SCREEN_SIZE_Y);
 	memcpy(cub->game.addr, cub->background.addr, cub->background.line_length * SCREEN_SIZE_Y);
 	move_camera(cub);
 	//drawmap(cub);
 	move(cub);
 	call_threads(cub);
+	debug_directions(cub);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->game.img, 0 , 0);
-	//mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->image.img, 0, 0);
+	//mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->game.img, 0, 0);
 	char *fps_str = ft_itoa(fps);
 	mlx_string_put(cub->mlx_ptr, cub->win_ptr, 10 ,  10, 0xffffff, fps_str);
 	free(fps_str);

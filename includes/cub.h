@@ -28,6 +28,7 @@
 # define TILE_SIZE 32
 # define CAMERA_SPEED 2
 # define FOV 90
+# define CIRCLE_SIZE 60
 
 typedef struct s_point
 {

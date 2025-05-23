@@ -29,7 +29,7 @@ void	drawline_low(t_cub *cub, t_point start, t_point dest)
 	i = 0;
 	while (start.x <= dest.x)
 	{
-		ft_pixelput(&cub->image, start.x++, start.y, LINE_COLOR);
+		ft_pixelput(&cub->game, start.x++, start.y, LINE_COLOR);
 		if (line.d > 0)
 		{
 			start.y = start.y + line.yi;
@@ -57,7 +57,7 @@ void	drawline_high(t_cub *cub, t_point start, t_point dest)
 	line.d = (2 * line.dx) - line.dy;
 	while (start.y <= dest.y)
 	{
-		ft_pixelput(&cub->image, start.x, start.y++, LINE_COLOR);
+		ft_pixelput(&cub->game, start.x, start.y++, LINE_COLOR);
 		if (line.d > 0)
 		{
 			start.x = start.x + line.xi;
