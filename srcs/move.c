@@ -51,4 +51,14 @@ void	move(t_cub *cub)
 		printf("player.pos.x = %f\n", cub->player.pos.x);
 		printf("player.pos.y = %f\n", cub->player.pos.y);
 	}
+	if (cub->player.direction.x == -1)
+	{
+		cub->player.pos.x += 5 * cub->player.camera.y * cub->delta;
+		cub->player.pos.y -= 5 * cub->player.camera.x * cub->delta;
+	}
+	if (cub->player.direction.x == 1)
+	{
+		cub->player.pos.x -= 5 * cub->player.camera.y * cub->delta;
+		cub->player.pos.y += 5 * cub->player.camera.x * cub->delta;
+	}
 }

@@ -105,8 +105,10 @@ void		drawrect(t_image *image, t_point pos, t_point size, int color);
 t_image		*get_wall_color_from_direction(t_cub *cub, int side, float ray_x, float ray_y);
 void		ft_pixelput(t_image *data, int x, int y, int color);
 void		drawline(t_cub *cub, t_point start, t_point dest);
+void		drawtexture(t_cub *cub, t_point pos, t_point size, int textX, float wall_heigth, t_image *text);
 void		circleBres(t_cub *cub, int xc, int yc, int r);
 void		raycast(t_cub *cub);
+t_image  *get_wall_color_from_direction(t_cub *cub, int side, float ray_x, float ray_y);
 
 //struct utils
 int			check_args(char *str);

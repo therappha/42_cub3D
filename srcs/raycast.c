@@ -30,6 +30,8 @@ void	raycast(t_cub *cub)
 	int		wall_height;
 	int		wall_start;
 	int		wall_end;
+	float	wall_hit;
+	int		textX;
 	t_point	map;
 	t_point	ray_pos;
 	t_point	step;
@@ -119,7 +121,17 @@ void	raycast(t_cub *cub)
 		int color = 0xFF0000;
 		if (ray_side)
 			color = 0x00FF00;
-		drawrect(&cub->image, (t_point){x, wall_start}, (t_point){1, wall_end - wall_start}, color);
+		if (ray_side)
+			wall_hit = cub->player.pos.x + delta_hit * rayX;
+		else
+			wall_hit = cub->player.pos.y + delta_hit * rayY;
+		wall_hit -= floor(wall_hit);
+		textX =  (int)(64 * wall_hit);
+		if (ray_side && rayY > 0)
+			textX = 64 - textX - 1;
+		if (!ray_side && rayX < 0)
+			textX = 64 - textX -1;
+		drawtexture(cub, (t_point){x, wall_start}, (t_point){1, wall_end - wall_start}, textX, wall_height, get_wall_color_from_direction(cub, ray_side, rayX, rayY));
 		
 		//debug_raycast(cub, normalize((t_point){rayX, rayY}));
 	}

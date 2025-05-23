@@ -12,21 +12,6 @@
 
 #include "../includes/cub.h"
 
-void	drawrect(t_image *image, t_point pos, t_point size, int color)
-{
-	int	x = 0;
-	int y = 0;
-
-	while (x < size.x)
-	{
-		y = 0;
-		while (y < size.y)
-		{
-			ft_pixelput(image, pos.x + x, pos.y + y++, color);
-		}
-		x++;
-	}
-}
 
 t_image  *get_wall_color_from_direction(t_cub *cub, int side, float ray_x, float ray_y)
 {
@@ -43,5 +28,45 @@ t_image  *get_wall_color_from_direction(t_cub *cub, int side, float ray_x, float
 			return &cub->north_texture;
 		else
 			return &cub->south_texture;
+	}
+}
+
+void	drawtexture(t_cub *cub, t_point pos, t_point size, int textX, float wall_heigth, t_image *text)
+{
+	int	x = 0;
+	int y = 0;
+	int	color;
+	float	step;
+	t_point texture;
+	
+	texture.x = textX;
+	texture.y = 0;
+	step = 64 / wall_heigth;
+	while (x < size.x)
+	{
+		y = 0;
+		while (y < size.y)
+		{
+			texture.y += step;
+			color = *(int *)((*text).addr + ((int)texture.y * (*text).line_length + textX * ((*text).bits_per_pixel / 8)));
+			ft_pixelput(&cub->image, pos.x + x, pos.y + y++, color);
+		}
+		x++;
+	}
+}
+
+void	drawrect(t_image *image, t_point pos, t_point size, int color)
+{
+	int	x = 0;
+	int y = 0;
+
+	while (x < size.x)
+	{
+		y = 0;
+		while (y < size.y)
+		{
+			ft_pixelput(image, pos.x + x, pos.y + y++, color);
+		}
+		x++;
 	}
 }
