@@ -6,37 +6,23 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:39:30 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/21 17:03:34 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:48:19 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-
-void	ft_free(t_cub *cub, char *line)
+int	check_args(char *str)
 {
-	int	i;
+	int	len;
 
-	if (line)
-		free(line);
-	i = 0;
-	if (cub && cub->map)
+	len = ft_strlen(str);
+	if (len < 5)
+		return (0);
+	str = str + len - 4;
+	if (ft_strncmp(".cub", str, 4) == 0)
 	{
-		while (cub->map[i])
-			free(cub->map[i++]);
-		free(cub->map);
+		return (1);
 	}
-}
-
-void	ft_free_arr(char **arr)
-{
-	int	i;
-
-	if (!arr)
-		return ;
-	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
-	return ;
+	return (0);
 }

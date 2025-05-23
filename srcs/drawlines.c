@@ -15,6 +15,7 @@
 void	drawline_low(t_cub *cub, t_point start, t_point dest)
 {
 	t_drawline	line;
+	int			i;
 
 	line.dx = dest.x - start.x;
 	line.dy = dest.y - start.y;
@@ -25,6 +26,7 @@ void	drawline_low(t_cub *cub, t_point start, t_point dest)
 		line.dy = -line.dy;
 	}
 	line.d = (2 * line.dy) - line.dx;
+	i = 0;
 	while (start.x <= dest.x)
 	{
 		ft_pixelput(&cub->image, start.x++, start.y, LINE_COLOR);
@@ -41,7 +43,9 @@ void	drawline_low(t_cub *cub, t_point start, t_point dest)
 void	drawline_high(t_cub *cub, t_point start, t_point dest)
 {
 	t_drawline	line;
+	int			i;
 
+	i = 0;
 	line.dx = dest.x - start.x;
 	line.dy = dest.y - start.y;
 	line.xi = 1;

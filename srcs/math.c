@@ -6,11 +6,9 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 17:45:24 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/21 18:34:38 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/03/10 18:08:00 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../includes/cub.h"
 
 int	ft_abs(int num)
 {
@@ -19,24 +17,4 @@ int	ft_abs(int num)
 	if (num < 0)
 		return (num * -1);
 	return (num);
-}
-
-float clamp(float value, float min, float max)
-{
-	if (value < min)
-		return min;
-	if (value > max)
-		return max;
-	return value;
-}
-
-t_point	normalize(t_point point)
-{
-	float len = sqrtf(point.x * point.x + point.y * point.y);
-
-	if (len == 0)
-		return ((t_point){0, 0});
-	point.x /= len;
-	point.y /= len;
-	return (point);
 }
