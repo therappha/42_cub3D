@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/21 19:52:57 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/23 20:22:38 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define LINE_COLOR 0xFFFF00
 # define TILE_SIZE 32
 # define CIRCLE_SIZE 60
-# define FOV 95
+# define FOV 66
 # define CAMERA_SPEED 5.0
 
 typedef struct s_point
@@ -123,6 +123,7 @@ t_point		get_mouse_position(t_cub *cub);
 
 //move
 void		move_camera(t_cub *cub);
+void		move(t_cub *cub);
 
 
 //debug

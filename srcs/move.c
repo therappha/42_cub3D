@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 18:55:38 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/21 20:42:30 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/23 20:26:46 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,23 @@ void	move_camera(t_cub *cub)
 		cub->player.camera.y = oldDirX * sin(rot_speed) + cub->player.camera.y * cos(rot_speed);
 		cub->player.plane.x = -cub->player.camera.y * ((float)FOV / 100.0f);
 		cub->player.plane.y = cub->player.camera.x * ((float)FOV / 100.0f);
+	}
+}
+
+void	move(t_cub *cub)
+{
+	if (cub->player.direction.y == -1)
+	{
+		cub->player.pos.x += 5 * cub->player.camera.x * cub->delta;
+		cub->player.pos.y += 5 * cub->player.camera.y * cub->delta;
+		printf("player.pos.x = %f\n", cub->player.pos.x);
+		printf("player.pos.y = %f\n", cub->player.pos.y);
+	}
+	if (cub->player.direction.y == 1)
+	{
+		cub->player.pos.x -= 5 * cub->player.camera.x * cub->delta;
+		cub->player.pos.y -= 5 * cub->player.camera.y * cub->delta;
+		printf("player.pos.x = %f\n", cub->player.pos.x);
+		printf("player.pos.y = %f\n", cub->player.pos.y);
 	}
 }
