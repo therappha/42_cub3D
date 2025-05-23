@@ -26,7 +26,7 @@
 # define LINE_COLOR 0xFFFF00
 # define TILE_SIZE 32
 # define CIRCLE_SIZE 60
-# define FOV 66
+# define FOV 95
 # define CAMERA_SPEED 5.0
 
 typedef struct s_point
