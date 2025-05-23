@@ -37,7 +37,6 @@ t_point	get_camera(t_cub *cub, char c)
 	}
 	cub->player.plane.x = camera_dir.x * (float)(FOV / 100);
 	cub->player.plane.y = camera_dir.y * (float)(FOV / 100);
-
 	return (camera_dir);
 }
 
@@ -66,6 +65,7 @@ void	get_player_pos(t_cub *cub)
 int	main(int ac, char **av)
 {
 	t_cub	cub;
+
 	if (ac != 2)
 		return (0);
 	if (!check_args(av[1]))
@@ -87,7 +87,6 @@ int	main(int ac, char **av)
 	mlx_hook(cub.win_ptr, 02, (1L<<0), key_pressed, &cub);
 	mlx_hook(cub.win_ptr, 03, (1L<<1), key_released, &cub);
 	mlx_loop_hook(cub.mlx_ptr, game_loop, &cub);
-
 	mlx_loop(cub.mlx_ptr);
 }
 
