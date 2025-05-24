@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/23 20:22:38 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/24 15:45:54 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 # define TILE_SIZE 32
 # define CIRCLE_SIZE 60
 # define FOV 66
-# define CAMERA_SPEED 5.0
+# define CAMERA_SPEED 4.0
+# define MOVE_SPEED 4.0
 
 typedef struct s_point
 {

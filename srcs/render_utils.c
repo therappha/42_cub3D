@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:00:38 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/21 17:11:38 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/24 15:57:04 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	drawtexture(t_cub *cub, t_point pos, t_point size, int textX, float wall_he
 	int	color;
 	float	step;
 	t_point texture;
-	
+
 	texture.x = textX;
-	texture.y = 0;
 	step = 64 / wall_heigth;
+	texture.x = (pos.y - (SCREEN_SIZE_Y / 2 - wall_heigth / 2)) * step;
 	while (x < size.x)
 	{
 		y = 0;
