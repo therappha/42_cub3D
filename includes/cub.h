@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/24 16:56:42 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/24 16:59:21 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@
 # define SCREEN_SIZE_X 1024
 # define SCREEN_SIZE_Y 768
 # define LINE_COLOR 0xFFFF00
-# define MOVE_SPEED 4.0
+# define MOVE_SPEED 10.0
 # define TILE_SIZE 32
 # define CIRCLE_SIZE 60
 # define FOV 66
 # define CAMERA_SPEED 4.0
-# define MOVE_SPEED 4.0
 
 typedef struct s_point
 {
