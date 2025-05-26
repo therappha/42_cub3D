@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:46:08 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/23 20:32:35 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/26 13:00:51 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	raycast(t_cub *cub)
 	float	rayY;
 	float	delta_X;
 	float	delta_Y;
-	bool	hit = false;
+	bool	hit;
 	bool	ray_side = 0;;
 	float	delta_hit;
 	int		wall_height;
@@ -36,8 +36,6 @@ void	raycast(t_cub *cub)
 	t_point	ray_pos;
 	t_point	step;
 
-
-	//circleBres(cub, SCREEN_SIZE_X / 2, SCREEN_SIZE_Y - SCREEN_SIZE_Y / 4, CIRCLE_SIZE);
 	for (int x = 0; x < SCREEN_SIZE_X; x++)
 	{
 		map.x = (int)cub->player.pos.x;
@@ -70,19 +68,6 @@ void	raycast(t_cub *cub)
 			step.y = 1;
 			ray_pos.y = (map.y + 1.0 - cub->player.pos.y) * delta_Y;
 		}
-
-		// printf("map.x = %f\n", map.x);
-		// printf("map.y = %f\n", map.y);
-		// printf("camerax = %f\n", camerax);
-		// printf("rayX = %f\n", rayX);
-		// printf("rayY = %f\n", rayY);
-		// printf("delta_X = %f\n", delta_X);
-		// printf("delta_Y = %f\n", delta_Y);
-		// printf("step.x = %f\n", step.x);
-		// printf("step.y = %f\n", step.y);
-		// printf("ray_pos.x = %f\n", ray_pos.x);
-		// printf("ray_pos.y = %f\n", ray_pos.y);
-
 		while (!hit) // get_hit(t_ray *);
 		{
 			if (ray_pos.x < ray_pos.y)
@@ -102,10 +87,6 @@ void	raycast(t_cub *cub)
 			if (cub->map[(int)map.y][(int)map.x] == '1')
 				hit = true;
 		}
-		//  if (ray_side == 0)
-		//  	delta_hit = (ray_pos.x - delta_X);
-		//  else
-		//  	delta_hit = (ray_pos.y - delta_Y);
 		if (ray_side == 0)
 			delta_hit = ((int)map.x - cub->player.pos.x + (1 - step.x) / 2) / rayX;
 		else
@@ -132,7 +113,5 @@ void	raycast(t_cub *cub)
 		if (!ray_side && rayX < 0)
 			textX = 64 - textX -1;
 		drawtexture(cub, (t_point){x, wall_start}, (t_point){1, wall_end - wall_start}, textX, wall_height, get_wall_color_from_direction(cub, ray_side, rayX, rayY));
-		
-		//debug_raycast(cub, normalize((t_point){rayX, rayY}));
 	}
 }

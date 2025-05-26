@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/24 16:59:21 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/26 11:27:02 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define SCREEN_SIZE_X 1024
 # define SCREEN_SIZE_Y 768
 # define LINE_COLOR 0xFFFF00
-# define MOVE_SPEED 10.0
+# define MOVE_SPEED 4.0
 # define TILE_SIZE 32
 # define CIRCLE_SIZE 60
 # define FOV 66
@@ -44,7 +44,6 @@ typedef struct s_player
 	t_point		camera;
 	float		camerax;
 }	t_player;
-
 
 typedef struct s_drawline
 {
@@ -93,6 +92,9 @@ void		calculate_Delta(t_cub *cub);
 
 //init
 void		cub_init(t_cub *cub);
+void		get_textures(t_cub *cub);
+t_point		get_camera(t_cub *cub, char c);
+void		get_player_pos(t_cub *cub);
 
 //input
 int			key_pressed(int keysym, t_cub *cub);
