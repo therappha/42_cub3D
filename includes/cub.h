@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/26 11:27:02 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/27 18:11:53 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,12 @@
 # include <sys/time.h>
 # include <stdbool.h>
 
-# define SCREEN_SIZE_X 1024
-# define SCREEN_SIZE_Y 768
+# define SCREEN_SIZE_X 1280
+# define SCREEN_SIZE_Y 760
 # define LINE_COLOR 0xFFFF00
 # define MOVE_SPEED 4.0
-# define TILE_SIZE 32
-# define CIRCLE_SIZE 60
-# define FOV 66
-# define CAMERA_SPEED 4.0
+# define TILE_SIZE 16
+# define SCALE 4
 
 typedef struct s_point
 {
@@ -44,16 +42,6 @@ typedef struct s_player
 	t_point		camera;
 	float		camerax;
 }	t_player;
-
-typedef struct s_drawline
-{
-	int	dx;
-	int	dy;
-	int	xi;
-	int	yi;
-	int	d;
-	int	color;
-}	t_drawline;
 
 typedef struct s_image
 {
@@ -72,10 +60,10 @@ typedef struct s_cub
 	int			fd;
 	int			map_height;
 	int			map_width;
-	t_image		north_texture;
-	t_image		south_texture;
-	t_image		east_texture;
-	t_image		west_texture;
+	t_image		ground;
+	t_image		mario;
+	t_image		brick;
+	t_image		powerup;
 	long long	last_frame_time;
 	float		delta;
 	float		rot_speed;
@@ -93,8 +81,6 @@ void		calculate_Delta(t_cub *cub);
 //init
 void		cub_init(t_cub *cub);
 void		get_textures(t_cub *cub);
-t_point		get_camera(t_cub *cub, char c);
-void		get_player_pos(t_cub *cub);
 
 //input
 int			key_pressed(int keysym, t_cub *cub);
@@ -105,13 +91,9 @@ int			ft_load_map(char *map, t_cub *cub);
 
 //render utils
 void		drawrect(t_image *image, t_point pos, t_point size, int color);
-t_image		*get_wall_color_from_direction(t_cub *cub, int side, float ray_x, float ray_y);
 void		ft_pixelput(t_image *data, int x, int y, int color);
-void		drawline(t_cub *cub, t_point start, t_point dest);
-void		drawtexture(t_cub *cub, t_point pos, t_point size, int textX, float wall_heigth, t_image *text);
-void		circleBres(t_cub *cub, int xc, int yc, int r);
-void		raycast(t_cub *cub);
-t_image  *get_wall_color_from_direction(t_cub *cub, int side, float ray_x, float ray_y);
+void	drawtexture(t_cub *cub, t_point pos, t_point size, t_image *text, float scale);
+
 
 //struct utils
 int			check_args(char *str);

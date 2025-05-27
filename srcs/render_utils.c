@@ -6,54 +6,11 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:00:38 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/24 16:56:20 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/27 17:54:45 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
-
-
-t_image  *get_wall_color_from_direction(t_cub *cub, int side, float ray_x, float ray_y)
-{
-	if (side == 0)
-	{
-		if (ray_x > 0)
-			return &cub->west_texture;
-		else
-			return &cub->east_texture;
-	}
-	else
-	{
-		if (ray_y > 0)
-			return &cub->north_texture;
-		else
-			return &cub->south_texture;
-	}
-}
-
-void	drawtexture(t_cub *cub, t_point pos, t_point size, int textX, float wall_heigth, t_image *text)
-{
-	int	x = 0;
-	int y = 0;
-	int	color;
-	float	step;
-	t_point texture;
-
-	texture.x = textX;
-	step = 64 / wall_heigth;
-	texture.y = (pos.y - SCREEN_SIZE_Y / 2 + wall_heigth / 2) * step;
-	while (x < size.x)
-	{
-		y = 0;
-		while (y < size.y)
-		{
-			texture.y += step;
-			color = *(int *)((*text).addr + ((int)texture.y * (*text).line_length + textX * ((*text).bits_per_pixel / 8)));
-			ft_pixelput(&cub->image, pos.x + x, pos.y + y++, color);
-		}
-		x++;
-	}
-}
 
 void	drawrect(t_image *image, t_point pos, t_point size, int color)
 {
@@ -67,6 +24,44 @@ void	drawrect(t_image *image, t_point pos, t_point size, int color)
 		{
 			ft_pixelput(image, pos.x + x, pos.y + y++, color);
 		}
+		x++;
+	}
+}
+
+void	drawtexture(t_cub *cub, t_point pos, t_point size, t_image *text, float scale)
+{
+	int	x = 0;
+	int y = 0;
+	unsigned int	color;
+	t_point step;
+	t_point texture;
+	t_point original_size;
+
+	original_size.x = size.x;
+	original_size.y = size.y;
+	size.x *= scale;
+	size.y *= scale;
+	texture.x = 0;
+	texture.y = 0;
+	while (x < size.x)
+	{
+		y = 0;
+		while (y < size.y)
+		{
+			texture.x = x / scale;
+			texture.y = y / scale;
+
+			if (texture.x < 0 || texture.x > original_size.x || texture.y < 0 || texture.y > original_size.y)
+				continue;
+			color = *(int *)((*text).addr + ((int)texture.y * (*text).line_length + (int)texture.x * ((*text).bits_per_pixel / 8)));
+			if (color == 0xFF000000)
+			{
+				y++;
+				continue;
+			}
+			ft_pixelput(&cub->image, pos.x + x, pos.y + y++, color);
+		}
+		texture.x += step.x;
 		x++;
 	}
 }

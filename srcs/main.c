@@ -12,11 +12,6 @@
 
 #include "../includes/cub.h"
 
-//	player.plane.x = -player.camera.y * 0.50;
-//	player.plane.y = player.camera.x * 0.50;
-
-
-
 
 
 int	main(int ac, char **av)
@@ -34,13 +29,6 @@ int	main(int ac, char **av)
 	init_window(&cub);
 	get_textures(&cub);
 	ft_load_map(av[1], &cub);
-	for (int i = 0; cub.map[i]; i++)
-	{
-		printf("%s\n", cub.map[i]);
-		cub.map_height++;
-	}
-	cub.map_width = ft_strlen(cub.map[0]);
-	get_player_pos(&cub);
 	mlx_hook(cub.win_ptr, DestroyNotify, (1L<<17), free_displays, &cub);
 	mlx_hook(cub.win_ptr, 02, (1L<<0), key_pressed, &cub);
 	mlx_hook(cub.win_ptr, 03, (1L<<1), key_released, &cub);
