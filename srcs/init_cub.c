@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:03:20 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/27 17:01:57 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/27 21:13:12 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ void	cub_init(t_cub *cub)
 	cub->map_height = 0;
 	cub->map_width = 0;
 	cub->delta = 0;
+	cub->jump = false;
+	cub->player.velocity = (t_point){0, 0};
+
 	cub->last_frame_time = get_time();
 }
-
-
 
 void	get_player_pos(t_cub *cub)
 {

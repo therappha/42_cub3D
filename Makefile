@@ -24,6 +24,7 @@ $(SRCS_DIR)/init_window.c \
 $(SRCS_DIR)/ft_pixelput.c \
 $(SRCS_DIR)/input_handler.c \
 $(SRCS_DIR)/move.c \
+$(SRCS_DIR)/drawmap.c \
 $(SRCS_DIR)/load_images.c
 
 

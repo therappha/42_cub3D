@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/27 18:11:53 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/27 21:23:51 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,16 @@
 # include <stdbool.h>
 
 # define SCREEN_SIZE_X 1280
-# define SCREEN_SIZE_Y 760
+# define SCREEN_SIZE_Y 720
 # define LINE_COLOR 0xFFFF00
 # define MOVE_SPEED 4.0
 # define TILE_SIZE 16
-# define SCALE 4
+# define SCALE 3
+# define ACCEL 10
+# define FRICTION 30
+# define MAX_SPEED 10
+# define JUMP_SPEED 8
+# define GRAVITY 10
 
 typedef struct s_point
 {
@@ -38,9 +43,8 @@ typedef struct s_player
 {
 	t_point		pos;
 	t_point		direction;
-	t_point		plane;
-	t_point		camera;
-	float		camerax;
+	t_point		velocity;
+
 }	t_player;
 
 typedef struct s_image
@@ -64,9 +68,10 @@ typedef struct s_cub
 	t_image		mario;
 	t_image		brick;
 	t_image		powerup;
+	bool		is_on_ground;
+	bool		jump;
 	long long	last_frame_time;
 	float		delta;
-	float		rot_speed;
 	t_player	player;
 	t_image		image;
 }	t_cub;
@@ -88,6 +93,7 @@ int			key_released(int keysym, t_cub *cub);
 
 //map
 int			ft_load_map(char *map, t_cub *cub);
+void		drawmap(t_cub *cub);
 
 //render utils
 void		drawrect(t_image *image, t_point pos, t_point size, int color);
@@ -97,6 +103,7 @@ void	drawtexture(t_cub *cub, t_point pos, t_point size, t_image *text, float sca
 
 //struct utils
 int			check_args(char *str);
+void	get_player_pos(t_cub *cub);
 
 //math
 int			ft_abs(int num);

@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:09:07 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/27 16:57:11 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/27 21:12:50 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	key_pressed(int keysym, t_cub *cub)
 {
 	if (keysym == XK_Escape)
 		free_displays(cub);
-		
+
 	if (keysym == XK_w || keysym == XK_W)
 	{
 		cub->player.direction.y -= 1;
@@ -36,6 +36,12 @@ int	key_pressed(int keysym, t_cub *cub)
 	{
 		cub->player.direction.x += 1;
 		cub->player.direction.x = clamp(cub->player.direction.x, -1, 1);
+	}
+	if (keysym == XK_space)
+	{
+		if (!cub->is_on_ground)
+			return 1;
+		cub->jump = true;
 	}
 	return (1);
 }
