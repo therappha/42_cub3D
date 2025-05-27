@@ -33,7 +33,7 @@ void	drawtexture(t_cub *cub, t_point pos, t_point size, t_image *text, float sca
 	int	x = 0;
 	int y = 0;
 	unsigned int	color;
-	t_point step;
+	t_point step = (t_point){0, 0};
 	t_point texture;
 	t_point original_size;
 
