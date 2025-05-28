@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/28 19:22:30 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:54:46 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ typedef enum	s_state
 	IDLE,
 	RUNNING,
 	JUMPING,
-	FALLING
+	FALLING,
+	STOPPING
 } t_state;
 
 typedef struct s_image
