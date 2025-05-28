@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 19:32:57 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/28 19:00:19 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:53:32 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,18 @@
 void	drawmap(t_cub *cub)
 {
 	float	drawx;
+	float	startingx;
+	float 	endingx;
+
+	startingx = cub->player.pos.x - 16;
+	startingx = clamp(startingx, 0, cub->map_width);
+	endingx = cub->player.pos.x + 16;
+	endingx = clamp(endingx, 0, cub->map_width);
+
+
 	for (int y = 0; cub->map[y]; y++)
 	{
-		for (int x = 0; cub->map[y][x]; x++)
+		for (int x = startingx; x < endingx; x++)
 		{
 			drawx = x * (TILE_SIZE  * SCALE) -  cub->player.pos.x * (TILE_SIZE * SCALE) + SCREEN_SIZE_X / 2;
 			if (cub->map[y][x] == '1')
