@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 19:32:57 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/27 20:32:34 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:00:19 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ void	drawmap(t_cub *cub)
 			if (cub->map[y][x] == 'B')
 				drawtexture(cub, (t_point){drawx , y * (TILE_SIZE * SCALE)},  (t_point){16, 16}, &cub->brick, SCALE);
 			if (cub->map[y][x] == 'P')
-				drawtexture(cub, (t_point){drawx , y * (TILE_SIZE * SCALE)},  (t_point){16, 16}, &cub->powerup, SCALE);
-
+				drawtexture(cub, (t_point){drawx , y * (TILE_SIZE * SCALE)},  (t_point){16, 16}, &cub->powerup[cub->power_up_frames], SCALE);
 		}
 	}
+	drawplayer(cub, (t_point){SCREEN_SIZE_X / 2, cub->player.pos.y * (TILE_SIZE * SCALE)}, (t_point){TILE_SIZE, TILE_SIZE}, &cub->mario, SCALE);
+
 }
 

@@ -1,7 +1,7 @@
 
 NAME= cub3d
 CC= cc
-CFLAGS = -g -Wall -Wextra -Werror -I $(INCLUDES)
+CFLAGS = -g  -I $(INCLUDES)
 LDFLAGS =  -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm
 INCLUDES= ./includes
 LIBFT_DIR= ./libs/libft
@@ -25,7 +25,9 @@ $(SRCS_DIR)/ft_pixelput.c \
 $(SRCS_DIR)/input_handler.c \
 $(SRCS_DIR)/move.c \
 $(SRCS_DIR)/drawmap.c \
-$(SRCS_DIR)/load_images.c
+$(SRCS_DIR)/load_images.c \
+$(SRCS_DIR)/animation.c \
+
 
 
 OBJS=$(SRCS:.c=.o)

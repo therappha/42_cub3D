@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/27 21:23:51 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:22:30 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <math.h>
 # include <sys/time.h>
 # include <stdbool.h>
+# include <string.h>
 
 # define SCREEN_SIZE_X 1280
 # define SCREEN_SIZE_Y 720
@@ -28,7 +29,7 @@
 # define TILE_SIZE 16
 # define SCALE 3
 # define ACCEL 10
-# define FRICTION 30
+# define FRICTION 50
 # define MAX_SPEED 10
 # define JUMP_SPEED 8
 # define GRAVITY 10
@@ -39,13 +40,14 @@ typedef struct s_point
 	float	y;
 }	t_point;
 
-typedef struct s_player
+typedef enum	s_state
 {
-	t_point		pos;
-	t_point		direction;
-	t_point		velocity;
-
-}	t_player;
+	WALKING,
+	IDLE,
+	RUNNING,
+	JUMPING,
+	FALLING
+} t_state;
 
 typedef struct s_image
 {
@@ -55,6 +57,27 @@ typedef struct s_image
 	int		line_length;
 	int		endian;
 }	t_image;
+
+typedef struct s_collision
+{
+	bool	left;
+	bool	right;
+	bool	down;
+	bool	up;
+	bool	is_colliding;
+} t_collision;
+
+typedef struct s_player
+{
+	t_point		pos;
+	t_point		direction;
+	t_point		velocity;
+	t_collision collision;
+	bool		jump;
+	bool		is_on_ground;
+	bool		big;
+	bool		left;
+}	t_player;
 
 typedef struct s_cub
 {
@@ -67,13 +90,14 @@ typedef struct s_cub
 	t_image		ground;
 	t_image		mario;
 	t_image		brick;
-	t_image		powerup;
-	bool		is_on_ground;
-	bool		jump;
+	t_image		background;
+	t_image		powerup[3];
 	long long	last_frame_time;
 	float		delta;
 	t_player	player;
+	float		cameraX;
 	t_image		image;
+	int			power_up_frames;
 }	t_cub;
 
 int			free_displays(t_cub *cub);
@@ -91,6 +115,9 @@ void		get_textures(t_cub *cub);
 int			key_pressed(int keysym, t_cub *cub);
 int			key_released(int keysym, t_cub *cub);
 
+
+//animations
+void	animation_times(t_cub *cub);
 //map
 int			ft_load_map(char *map, t_cub *cub);
 void		drawmap(t_cub *cub);

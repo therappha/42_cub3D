@@ -1,0 +1,161 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/21 18:55:38 by rafaelfe          #+#    #+#             */
+/*   Updated: 2025/05/28 16:58:14 by rafaelfe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/cub.h"
+
+
+float move_towards(float start, float goal, float step);
+t_collision is_colliding(t_point posA, t_point sizeA, t_point posB, t_point sizeB);
+
+void	reset_collisions(t_cub *cub)
+{
+	cub->player.collision.is_colliding = false;
+	cub->player.collision.right = false;
+	cub->player.collision.left = false;
+	cub->player.collision.up = false;
+	cub->player.collision.down = false;
+}
+
+void	move(t_cub *cub)
+{
+	reset_collisions(cub);
+	if (!cub->player.is_on_ground)
+	{
+		cub->player.velocity.y += GRAVITY * cub->delta;
+	}
+	else
+	{
+		cub->player.velocity.y = 0;
+	}
+	if (cub->player.jump && cub->player.is_on_ground)
+	{
+		cub->player.is_on_ground = false;
+		cub->player.velocity.y = -JUMP_SPEED;
+		cub->player.jump = false;
+	}
+
+	if (cub->player.direction.x != 0)
+	{
+		cub->player.velocity.x += cub->player.direction.x * ACCEL * cub->delta;
+		cub->player.velocity.x = clamp(cub->player.velocity.x, -MAX_SPEED, MAX_SPEED);
+	}
+	else if (fabs(cub->player.velocity.x) > 0)
+	{
+		if (cub->player.velocity.x > 0)
+			cub->player.velocity.x = move_towards(cub->player.velocity.x, 0, FRICTION * cub->delta);
+		else if (cub->player.velocity.x < 0)
+		{
+			cub->player.velocity.x = move_towards(cub->player.velocity.x, 0, FRICTION * cub->delta);
+		}
+	}
+	else
+		cub->player.velocity.x = 0;
+
+	//cub->player.pos.x += cub->player.velocity.x * cub->delta;
+	//cub->player.pos.y += cub->player.velocity.y * cub->delta;
+
+	cub->player.pos.x += cub->player.velocity.x * cub->delta;
+	cub->player.pos.y += cub->player.velocity.y * cub->delta;
+
+	t_point playersize = (t_point){1 , 1};
+	if (cub->player.big)
+		playersize = (t_point){TILE_SIZE , TILE_SIZE * 2};
+	t_point offset[12] =
+	{
+		{-1, -2},  {0, -2},  {1, -2},
+		{-1, -1},  {0, -1},  {1, -1},
+		{-1,  0},  {0,  0},  {1,  0},
+		{-1,  1},  {0,  1},  {1,  1}
+
+	};
+
+
+	t_collision collisiontemp;
+	t_point	tile_pos;
+	printf("player: %d, %d\n", (int)cub->player.pos.x, (int)cub->player.pos.y);
+	for (int i = 0; i < 12; i++)
+	{
+		tile_pos.x = (cub->player.pos.x + offset[i].x) ;
+		tile_pos.y = (cub->player.pos.y + offset[i].y) ;
+		if (!((int)tile_pos.x >= 0 && (int)tile_pos.x < cub->map_width && (int)tile_pos.y >= 0 && (int)tile_pos.y < cub->map_height))
+			continue;
+		if (!(cub->map[(int)tile_pos.y][(int)tile_pos.x] == '1' || cub->map[(int)tile_pos.y][(int)tile_pos.x] == 'B'))
+			continue;
+		printf("tiles: %d, %d\n", (int)tile_pos.x, (int)tile_pos.y);
+		collisiontemp = (t_collision)is_colliding(cub->player.pos, playersize, tile_pos, (t_point){1, 1});
+		if (collisiontemp.is_colliding)
+		{
+			cub->player.collision.is_colliding = true;
+			cub->player.collision.left  |= collisiontemp.left;
+			cub->player.collision.right |= collisiontemp.right;
+			cub->player.collision.up    |= collisiontemp.up;
+			cub->player.collision.down  |= collisiontemp.down;
+		}
+	}
+	if (cub->player.collision.is_colliding)
+	{
+		if (cub->player.collision.up)
+			printf("player is colliding up\n");
+		if (cub->player.collision.down)
+		{
+			cub->player.pos.y = tile_pos.y -1 ;
+			cub->player.is_on_ground = true;
+		}
+		else
+		{
+			cub->player.is_on_ground = false;
+		}
+		if (cub->player.is_on_ground)
+			printf("is_on_ground\n");
+		if (cub->player.collision.left)
+			printf("player is colliding left\n");
+		if (cub->player.collision.right)
+			printf("player is colliding right\n");
+	}
+
+}
+
+float move_towards(float start, float goal, float step)
+{
+	if (start < goal)
+		return (fminf(start + step, goal));
+	else if (start > goal)
+		return (fmaxf(start - step, goal));
+	else
+		return (start);
+}
+
+t_collision is_colliding(t_point posA, t_point sizeA, t_point posB, t_point sizeB)
+{
+	t_collision colliding = {false, false, false, false, false};
+
+	float leftA = posA.x;
+	float rightA = posA.x + (sizeA.x );
+	float upA = posA.y;
+	float downA = posA.y + (sizeA.y );
+	float leftB = posB.x;
+	float rightB = posB.x + (sizeB.x);
+	float upB = posB.y;
+	float downB = posB.y + (sizeB.y );
+
+	if (!(rightA >= leftB && leftA <= rightB && downA >= upB && upA <= downB))
+		return (colliding);
+
+	colliding.is_colliding = true;
+	colliding.right = (rightA >= leftB);
+	colliding.left = (leftA <= rightB);
+	colliding.up = upA <= downB;
+	colliding.down = downA >= upB;
+	return colliding;
+}
+
+

@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:00:38 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/27 22:10:23 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:20:01 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	drawplayer(t_cub *cub, t_point pos, t_point size, t_image *text, float scal
 	original_size.y = size.y;
 	size.x *= scale;
 	size.y *= scale;
-	if (cub->player.direction.x == -1)
+	if (cub->player.left)
 	{
 		flip_h = 1;
 	}

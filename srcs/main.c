@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 	get_textures(&cub);
 	ft_load_map(av[1], &cub);
 	get_player_pos(&cub);
-
+	cub.map_width = ft_strlen(cub.map[0]);
 	mlx_hook(cub.win_ptr, DestroyNotify, (1L<<17), free_displays, &cub);
 	mlx_hook(cub.win_ptr, 02, (1L<<0), key_pressed, &cub);
 	mlx_hook(cub.win_ptr, 03, (1L<<1), key_released, &cub);

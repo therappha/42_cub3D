@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:09:07 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/27 21:12:50 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:21:36 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,14 @@ int	key_pressed(int keysym, t_cub *cub)
 	}
 	if (keysym == XK_space)
 	{
-		if (!cub->is_on_ground)
+		if (!cub->player.is_on_ground)
 			return 1;
-		cub->jump = true;
+		cub->player.jump = true;
 	}
+	if (cub->player.direction.x > 0)
+		cub->player.left = false;
+	else if (cub->player.direction.x < 0)
+		cub->player.left = true;
 	return (1);
 }
 
