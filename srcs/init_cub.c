@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:03:20 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 11:44:51 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 15:44:59 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	cub_init(t_cub *cub)
 		cub->textures[i++].img = NULL;
 	}
 	cub->fd = 0;
+	cub->image.img = NULL;
 	cub->player.direction = (t_point){0, 0};
 	cub->player.pos = (t_point){0, 0};
 	cub->player.plane = (t_point){0, 0};
