@@ -28,7 +28,8 @@ void	check_parser(t_cub *cub)
 		i++;
 	}
 	if (!cub->found.ceiling || !cub->found.floor || !cub->found.map ||
-		cub->ceiling_color == -1 || cub->floor_color == -1)
+		cub->ceiling_color == -1 || cub->floor_color == -1
+		|| !cub->found.player)
 		cub->error = true;
 }
 

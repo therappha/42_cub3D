@@ -285,9 +285,34 @@ int	checkline(t_cub *cub, char *line)
 	return (exit);
 }
 
+int	check_map_line(t_cub *cub, char *line)
+{
+	int	i;
+
+	i = 0;
+	if (line[0] == '\n' || line[i] == '\r')
+		return (0);
+	while (line[i])
+	{
+		if (line[i] == '1' || line[i] == '0' || line[i] == '\r'
+				|| line[i] == '\n' || line[i] == ' ')
+			i++;
+		else if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E'
+				|| line[i] == 'W')
+		{
+			i++;
+			if (!cub->found.player)
+				cub->found.player = true;
+			else
+				return (0);
+		}
+		else
+			return (0);
+	}
+	return (1);
+}
 int	ft_load_map(char *map, t_cub *cub)
 {
-	int		len;
 	int		checker;
 	char	*line;
 	char	**temp;
@@ -305,10 +330,9 @@ int	ft_load_map(char *map, t_cub *cub)
 		line = ft_remove_nl(line);
 		if (!cub->found.map && checkline(cub, line))
 			continue;
-		if (line[0] == '\n' || line[0] == '\r')
+		if (!check_map_line(cub, line))
 			cub->error = true;
 		temp = append_cmd(cub->map, line);
-		len = ft_strlen(line);
 		cub->map = temp;
 		free(line);
 	}
