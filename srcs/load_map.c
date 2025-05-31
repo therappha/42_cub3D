@@ -146,6 +146,10 @@ int	extract_number(char *str)
 	number[j] = '\0';
 	if (str[j] && (ft_isdigit(str[j]) || (!is_space(str[j]))))
 		return (-1);
+	while (str[j] && is_space(str[j]))
+		j++;
+	if (str[j] && str[j] != '\0')
+		return (-1);
 	octect = ft_atoi(number);
 	if (octect < 0 || octect > 255)
 		return (-1);
