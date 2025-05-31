@@ -76,8 +76,8 @@ void	get_player_pos(t_cub *cub)
 		{
 			if (ft_strchr("NSEW", cub->map[y][x]))
 			{
-				cub->player.pos.x = x;
-				cub->player.pos.y = y;
+				cub->player.pos.x = x + 0.5f;
+				cub->player.pos.y = y + 0.5f;
 				cub->player.camera = get_camera(cub, cub->map[y][x]);
 			}
 			x++;
