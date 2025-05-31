@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:46:08 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 12:20:10 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 18:26:41 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	raycast(t_cub *cub)
 			delta_hit = ((int)map.x - cub->player.pos.x + (1 - step.x) / 2) / rayX;
 		else
 			delta_hit = ((int)map.y - cub->player.pos.y + (1 - step.y) / 2) / rayY;
-
 		wall_height = (int)(SCREEN_SIZE_Y / delta_hit);
 		wall_start = -wall_height / 2 + SCREEN_SIZE_Y / 2;
 		if (wall_start < 0)

@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 11:55:23 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 18:43:01 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct s_cub
 	void			*mlx_ptr;
 	void			*win_ptr;
 	char			**map;
+	char			**parsed_map;
 	int				fd;
 	int				map_height;
 	int				map_width;

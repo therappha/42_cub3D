@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 16:59:23 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 10:59:03 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 18:41:17 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,6 +290,7 @@ int	check_map_line(t_cub *cub, char *line)
 	int	i;
 
 	i = 0;
+	cub->map_height++;
 	if (line[0] == '\n' || line[i] == '\r')
 		return (0);
 	while (line[i])
@@ -309,6 +310,8 @@ int	check_map_line(t_cub *cub, char *line)
 		else
 			return (0);
 	}
+	if (ft_strlen(line) > cub->map_width)
+		cub->width = ft_strlen(line);
 	return (1);
 }
 int	ft_load_map(char *map, t_cub *cub)

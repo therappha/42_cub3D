@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-la-r <gde-la-r@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:15:22 by gde-la-r          #+#    #+#             */
-/*   Updated: 2025/05/31 16:15:23 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/05/31 18:47:05 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ void	free_all(t_cub *cub)
 			free(cub->textures[i].path);
 	}
 }
+void	check_map(cub)
+{
+	cub->
+}
 int	main(int ac, char **av)
 {
 	t_cub	cub;
@@ -62,7 +66,7 @@ int	main(int ac, char **av)
 	cub_init(&cub);
 	ft_load_map(av[1], &cub);
 	check_parser(&cub);
-	//check_map(cub);
+	check_map(cub);
 	if (cub.error)
 	{
 		free_all(&cub);
