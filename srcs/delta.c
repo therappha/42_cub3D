@@ -14,6 +14,17 @@
 
 void	calculate_Delta(t_cub *cub)
 {
+	static float	accumulator;
+	static int		local_fps;
+	
+	local_fps++;
 	cub->delta = (get_time() - cub->last_frame_time) / 1000.0f;
+	accumulator += cub->delta;
 	cub->last_frame_time = get_time();
+	if (accumulator >= 1.0f)
+	{
+		cub->fps = local_fps;
+		local_fps = 0;
+		accumulator = 0;
+	}
 }

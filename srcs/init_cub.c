@@ -37,6 +37,8 @@ void	cub_init(t_cub *cub)
 	cub->found.player = false;
 	cub->found.map = false;
 	cub->debug = false;
+	cub->fps_string = NULL;
+	cub->fps = 0;
 }
 
 t_point	get_camera(t_cub *cub, char c)

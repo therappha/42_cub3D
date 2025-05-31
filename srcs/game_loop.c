@@ -30,6 +30,12 @@ int	renderer(t_cub *cub)
 	if (cub->debug)
 		debug_directions(cub);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->image.img, 0, 0);
+	if (cub->debug)
+	{
+		cub->fps_string = ft_itoa((int)cub->fps);
+		mlx_string_put(cub->mlx_ptr, cub->win_ptr, 10, 10, 0xFFFFFF, cub->fps_string);
+		free(cub->fps_string);
+	}
 	mlx_destroy_image(cub->mlx_ptr, cub->image.img);
 	return (1);
 }

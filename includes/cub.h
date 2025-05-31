@@ -105,6 +105,8 @@ typedef struct s_cub
 	int				floor_color;
 	bool			error;
 	bool			debug;
+	int				fps;
+	char			*fps_string;
 }	t_cub;
 
 typedef enum e_texture
