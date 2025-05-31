@@ -3,7 +3,7 @@
 for file in maps/valid/*.cub; do
     echo "Abrindo: $file"
 
-    ./cub3d "$file" &     # Executa em background
+    ./cub3D "$file" &     # Executa em background
     pid=$!
     wait $pid             # Espera o processo terminar
     exit_code=$?

@@ -2,7 +2,7 @@
 
 for file in maps/invalid/*.cub; do
     echo "Testando: $file"
-    ./cub3d "$file"
+    ./cub3D "$file"
     exit_code=$?
 
     if [ $exit_code -eq 139 ]; then
