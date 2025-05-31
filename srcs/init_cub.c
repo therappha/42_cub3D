@@ -36,7 +36,7 @@ void	cub_init(t_cub *cub)
 	cub->found.ceiling = false;
 	cub->found.player = false;
 	cub->found.map = false;
-
+	cub->debug = false;
 }
 
 t_point	get_camera(t_cub *cub, char c)

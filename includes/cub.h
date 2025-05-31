@@ -104,6 +104,7 @@ typedef struct s_cub
 	int				ceiling_color;
 	int				floor_color;
 	bool			error;
+	bool			debug;
 }	t_cub;
 
 typedef enum e_texture

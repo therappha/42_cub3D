@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:09:07 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 00:35:29 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 13:35:57 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ int	key_pressed(int keysym, t_cub *cub)
 		cub->player.direction.x += 1;
 		cub->player.direction.x = clamp(cub->player.direction.x, -1, 1);
 	}
+	if (keysym == XK_F3)
+	{
+		if (!cub->debug)
+			cub->debug = true;
+		else
+			cub->debug = false;
+	}
 	return (1);
 }
 
@@ -74,7 +81,7 @@ int	key_released(int keysym, t_cub *cub)
 		cub->player.direction.x += 1;
 		cub->player.direction.x = clamp(cub->player.direction.x, -1, 1);
 	}
-		if (keysym == XK_d || keysym == XK_D)
+	if (keysym == XK_d || keysym == XK_D)
 	{
 		cub->player.direction.x -= 1;
 		cub->player.direction.x = clamp(cub->player.direction.x, -1, 1);

@@ -26,10 +26,9 @@ int	renderer(t_cub *cub)
 	(*cub).image.addr = mlx_get_data_addr((*cub).image.img, &(*cub).image.bits_per_pixel, &(*cub).image.line_length, &(*cub).image.endian);
 	drawrect(&cub->image, (t_point){0, 0}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2}, cub->ceiling_color);
 	drawrect(&cub->image, (t_point){0, SCREEN_SIZE_Y / 2}, (t_point){SCREEN_SIZE_X, SCREEN_SIZE_Y / 2}, cub->floor_color);
-
 	raycast(cub);
-
-	//debug_directions(cub);
+	if (cub->debug)
+		debug_directions(cub);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->image.img, 0, 0);
 	mlx_destroy_image(cub->mlx_ptr, cub->image.img);
 	return (1);
