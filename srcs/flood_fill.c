@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 20:22:34 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 21:38:11 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 21:52:21 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,19 @@ void	flood_fill(t_cub *cub, int x, int y)
 {
 	if (cub->error)
 		return ;
-	if (x < 0 || y < 0 || x >= cub->map_width + 1 || y >= cub->map_height + 1
+	if (x < 0 || y < 0 || x >= cub->map_width + 1 || y >= cub->map_height + 2
 	|| cub->parsed_map[y][x] == 'F')
-	{
-		printf("x = %i y = %i\n", x, y);
 		return ;
-	}
 	if (!ft_strchr("NSEW0", cub->parsed_map[y][x]))
 	{
 		if (cub->parsed_map[y][x] == 'x')
 		{
-			//ft_printf("cub->parsed = %c x = %i y = %i\n", cub->parsed_map[y][x], x, y);
+			cub->parsed_map[y][x] = 'F';
 			cub->error = true;
 			return ;
 		}
 		return ;
 	}
-	//ft_printf("x = %i\ny = %i\n", x, y);
 	cub->parsed_map[y][x] = 'F';
 	flood_fill(cub, x + 1, y);
 	flood_fill(cub, x - 1, y);
@@ -44,7 +40,6 @@ void	flood_fill_caller(t_cub *cub)
 	int x;
 	int	y;
 
-
 	y = 1;
 	while (y < cub->map_height + 2)
 	{
@@ -55,7 +50,14 @@ void	flood_fill_caller(t_cub *cub)
 			{
 				flood_fill(cub, x, y);
 				if (cub->error)
+				{
+					for (int i = 0; i < cub->map_height + 2; i++)
+					{
+						ft_printf("%s\n", cub->parsed_map[i]);
+					}
 					return ;
+				}
+
 			}
 			x++;
 		}
