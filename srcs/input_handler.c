@@ -52,6 +52,10 @@ int	key_pressed(int keysym, t_cub *cub)
 		else
 			cub->debug = false;
 	}
+	if (keysym == XK_Shift_L)
+	{
+		cub->running = 1.5;
+	}
 	return (1);
 }
 
@@ -85,6 +89,10 @@ int	key_released(int keysym, t_cub *cub)
 	{
 		cub->player.direction.x -= 1;
 		cub->player.direction.x = clamp(cub->player.direction.x, -1, 1);
+	}
+	if (keysym == XK_Shift_L)
+	{
+		cub->running = 1.0;
 	}
 	return (1);
 }

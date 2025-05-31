@@ -108,6 +108,7 @@ typedef struct s_cub
 	bool			debug;
 	int				fps;
 	char			*fps_string;
+	float			running;
 }	t_cub;
 
 typedef enum e_texture
