@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:46:08 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 18:26:41 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 19:38:53 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	raycast(t_cub *cub)
 				map.y += step.y;
 				ray_side = 1;
 			}
-			if (map.y < 0 || map.x < 0 )
+			if (map.y < 0 || map.x < 0 || map.x >= cub->map_width || map.y >= cub->map_height)
 				break;
 			if (cub->map[(int)map.y][(int)map.x] == '1')
 				hit = true;

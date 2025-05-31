@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 18:43:01 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 20:47:46 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ typedef struct s_cub
 	bool			error;
 	bool			debug;
 	int				fps;
-	char			*fps_string;
 	float			running;
+	char			*fps_string;
 }	t_cub;
 
 typedef enum e_texture
@@ -118,6 +118,8 @@ typedef enum e_texture
 	EAST,
 	WEST
 }	t_texture;
+
+
 
 int			free_displays(t_cub *cub);
 void		init_window(t_cub *cub);
@@ -138,6 +140,8 @@ int			key_released(int keysym, t_cub *cub);
 
 //map
 int			ft_load_map(char *map, t_cub *cub);
+void	flood_fill(t_cub *cub, int x, int y);
+void	flood_fill_caller(t_cub *cub);
 
 //render utils
 void		drawrect(t_image *image, t_point pos, t_point size, int color);

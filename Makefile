@@ -31,6 +31,7 @@ SRCS= $(SRCS_DIR)/delta.c \
 	  $(SRCS_DIR)/load_images.c \
 	  $(SRCS_DIR)/debug.c \
 	  $(SRCS_DIR)/colision.c \
+	  $(SRCS_DIR)/flood_fill.c \
 
 OBJS=$(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:03:20 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 15:44:59 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 19:35:24 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	cub_init(t_cub *cub)
 	cub->player.camera = (t_point){0, 0};
 	cub->player.camerax = 0;
 	cub->map = NULL;
+	cub->parsed_map = NULL;
 	cub->map_height = 0;
 	cub->map_width = 0;
 	cub->delta = 0;
