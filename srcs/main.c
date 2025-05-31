@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:15:22 by gde-la-r          #+#    #+#             */
-/*   Updated: 2025/05/31 21:17:34 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 22:04:54 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	copy_map(t_cub *cub)
 	}
 	for (int i = 0; i < cub->map_height + 2; i++)
 	{
-		printf("%s\n", cub->parsed_map[i]);
+		//printf("%s\n", cub->parsed_map[i]);
 	}
 }
 
@@ -87,9 +87,9 @@ char	**malloc_map(t_cub *cub)
 
 	while (i < cub->map_height + 2)
 	{
-		cub->parsed_map[i] = ft_calloc(sizeof(char), cub->map_width + 2);
-		ft_memset(cub->parsed_map[i], 'x', cub->map_width + 2);
-		cub->parsed_map[i][cub->map_width + 1] = '\0';
+		cub->parsed_map[i] = ft_calloc(sizeof(char), cub->map_width + 3);
+		ft_memset(cub->parsed_map[i], 'x', cub->map_width + 3);
+		cub->parsed_map[i][cub->map_width + 2] = '\0';
 		i++;
 	}
 	return cub->parsed_map;
@@ -131,11 +131,6 @@ int	main(int ac, char **av)
 	init_window(&cub);
 	if (!get_textures(&cub))
 		return (0);
-	printf("map is:\n");
-	for (int i = 0; cub.map[i]; i++)
-	{
-		ft_printf("%s\n", cub.map[i]);
-	}
 	get_player_pos(&cub);
 	cub.win_ptr = mlx_new_window(cub.mlx_ptr, SCREEN_SIZE_X, SCREEN_SIZE_Y, "cub3d");
 	mlx_hook(cub.win_ptr, DestroyNotify, (1L<<17), free_displays, &cub);

@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 20:22:34 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 21:52:21 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 22:06:40 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	flood_fill(t_cub *cub, int x, int y)
 {
 	if (cub->error)
 		return ;
-	if (x < 0 || y < 0 || x >= cub->map_width + 1 || y >= cub->map_height + 2
+	if (x < 0 || y < 0 || x > cub->map_width + 2 || y > cub->map_height + 2
 	|| cub->parsed_map[y][x] == 'F')
 		return ;
 	if (!ft_strchr("NSEW0", cub->parsed_map[y][x]))
@@ -57,12 +57,10 @@ void	flood_fill_caller(t_cub *cub)
 					}
 					return ;
 				}
-
 			}
 			x++;
 		}
 		y++;
 	}
-	printf("SAIU\n");
 	//ft_free_arr(cub->parsed_map);
 }
