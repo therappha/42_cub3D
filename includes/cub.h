@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 04:26:15 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 11:55:23 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define SCREEN_SIZE_Y 768
 # define LINE_COLOR 0xFFFF00
 # define MOVE_SPEED 4.0
-# define TILE_SIZE 32
+# define TILE_SIZE 64
 # define CIRCLE_SIZE 60
 # define FOV 66
 # define CAMERA_SPEED 4.0
@@ -64,6 +64,8 @@ typedef struct s_image
 	int		endian;
 	char	*path;
 	bool	found;
+	int		x;
+	int		y;
 }	t_image;
 
 typedef struct s_found
@@ -119,7 +121,7 @@ void		calculate_Delta(t_cub *cub);
 
 //init
 void		cub_init(t_cub *cub);
-int		get_textures(t_cub *cub);
+int			get_textures(t_cub *cub);
 t_point		get_camera(t_cub *cub, char c);
 void		get_player_pos(t_cub *cub);
 

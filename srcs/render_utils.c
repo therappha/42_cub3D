@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:00:38 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/30 19:19:18 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 12:01:35 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	drawtexture(t_cub *cub, t_point pos, t_point size, int textX, float wall_he
 	t_point texture;
 
 	texture.x = textX;
-	step = 64 / wall_heigth;
+	step = text->y / wall_heigth;
 	texture.y = (pos.y - SCREEN_SIZE_Y / 2 + wall_heigth / 2) * step;
 	while (x < size.x)
 	{
@@ -48,6 +48,8 @@ void	drawtexture(t_cub *cub, t_point pos, t_point size, int textX, float wall_he
 		while (y < size.y)
 		{
 			texture.y += step;
+			texture.x = clamp(texture.x, 0, text->x - 1);
+			texture.y = clamp(texture.y, 0, text->y - 1);
 			color = *(int *)((*text).addr + ((int)texture.y * (*text).line_length + textX * ((*text).bits_per_pixel / 8)));
 			ft_pixelput(&cub->image, pos.x + x, pos.y + y++, color);
 		}

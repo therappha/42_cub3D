@@ -76,7 +76,6 @@ int	main(int ac, char **av)
 		printf("%s\n", cub.map[i]);
 		cub.map_height++;
 	}
-
 	cub.map_width = ft_strlen(cub.map[0]);
 	get_player_pos(&cub);
 	mlx_hook(cub.win_ptr, DestroyNotify, (1L<<17), free_displays, &cub);

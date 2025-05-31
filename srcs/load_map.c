@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 16:59:23 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 10:40:05 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 10:59:03 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_open(char *map, t_cub *cub)
 	return (cub->fd);
 }
 
-/*static char	*ft_remove_nl(char *line)
+static char	*ft_remove_nl(char *line)
 {
 	char	*temp;
 
@@ -30,7 +30,7 @@ int	ft_open(char *map, t_cub *cub)
 	if (temp)
 		free(temp);
 	return (line);
-}*/
+}
 
 char	**append_cmd(char **cmd, char *newcmd)
 {
@@ -134,6 +134,8 @@ int	extract_number(char *str)
 	char	number[4];
 
 	j = 0;
+	while (str[j] && is_space(str[j]))
+		str++;
 	while (j < 3 && str[j])
 	{
 		if (!ft_isdigit(str[j]))
@@ -295,6 +297,7 @@ int	ft_load_map(char *map, t_cub *cub)
 		line = get_next_line(cub->fd);
 		if (!line)
 			break ;
+		line = ft_remove_nl(line);
 		if (!cub->found.map && checkline(cub, line))
 			continue;
 		temp = append_cmd(cub->map, line);

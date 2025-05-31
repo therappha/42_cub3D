@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:41:42 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 04:18:17 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 11:43:59 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,29 @@ void	ft_freesplit(char **str)
 	free(str);
 }
 
+void	free_images(t_cub *cub)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (cub->textures[i].img)
+			mlx_destroy_image(cub->mlx_ptr, cub->textures[i].img);
+		if (cub->textures[i].path)
+			free(cub->textures[i].path);
+		i++;
+	}
+}
+
 int	free_displays(t_cub *cub)
 {
 	mlx_loop_end((*cub).mlx_ptr);
+	free_images(cub);
 	mlx_destroy_window((*cub).mlx_ptr, (*cub).win_ptr);
 	mlx_destroy_display((*cub).mlx_ptr);
-	//if (cub->map)
-		//ft_freesplit((*cub).map);
+	if (cub->found.map)
+		ft_freesplit((*cub).map);
 	free((*cub).mlx_ptr);
 	ft_printf("Closing Application!");
 	exit(1);
