@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:46:08 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 00:40:01 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 12:20:10 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ void	raycast(t_cub *cub)
 	t_point	map;
 	t_point	ray_pos;
 	t_point	step;
+	t_image	*texture;
 
 	for (int x = 0; x < SCREEN_SIZE_X; x++)
 	{
+		texture = NULL;
 		map.x = (int)cub->player.pos.x;
 		map.y = (int)cub->player.pos.y;
 		hit = false;
@@ -103,12 +105,13 @@ void	raycast(t_cub *cub)
 			wall_hit = cub->player.pos.x + delta_hit * rayX;
 		else
 			wall_hit = cub->player.pos.y + delta_hit * rayY;
+		texture = get_wall_color_from_direction(cub, ray_side, rayX, rayY);
 		wall_hit -= floor(wall_hit);
-		textX =  (int)(64 * wall_hit);
+		textX =  (int)(texture->x * wall_hit);
 		if (ray_side && rayY > 0)
-			textX = 64 - textX - 1;
+			textX = texture->x - textX - 1;
 		if (!ray_side && rayX < 0)
-			textX = 64 - textX -1;
-		drawtexture(cub, (t_point){x, wall_start}, (t_point){1, wall_end - wall_start}, textX, wall_height, get_wall_color_from_direction(cub, ray_side, rayX, rayY));
+			textX = texture->x - textX -1;
+		drawtexture(cub, (t_point){x, wall_start}, (t_point){1, wall_end - wall_start}, textX, wall_height, texture);
 	}
 }
