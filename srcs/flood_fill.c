@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 20:22:34 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 22:06:40 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 22:17:11 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,10 @@ void	flood_fill_caller(t_cub *cub)
 			{
 				flood_fill(cub, x, y);
 				if (cub->error)
-				{
-					for (int i = 0; i < cub->map_height + 2; i++)
-					{
-						ft_printf("%s\n", cub->parsed_map[i]);
-					}
 					return ;
-				}
 			}
 			x++;
 		}
 		y++;
 	}
-	//ft_free_arr(cub->parsed_map);
 }

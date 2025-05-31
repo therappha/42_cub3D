@@ -6,14 +6,11 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:15:22 by gde-la-r          #+#    #+#             */
-/*   Updated: 2025/05/31 22:04:54 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 22:20:19 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
-
-//	player.plane.x = -player.camera.y * 0.50;
-//	player.plane.y = player.camera.x * 0.50;
 
 void	check_parser(t_cub *cub)
 {
@@ -36,16 +33,20 @@ void	check_parser(t_cub *cub)
 void	free_all(t_cub *cub)
 {
 	int	i;
+
 	printf("freeing...\n");
 	if (cub->map && cub->found.map)
 	{
 		printf("freeing map...\n");
 		ft_free_arr(cub->map);
 	}
-	for (i = 0; i < 4; i++)
+
+	i = 0;
+	while (i < 4)
 	{
 		if (cub->textures[i].path)
 			free(cub->textures[i].path);
+		i++;
 	}
 }
 
@@ -69,12 +70,7 @@ void	copy_map(t_cub *cub)
 			}
 			x++;
 		}
-		//cub->parsed_map[y + 2][x + 2] = '\0';
 		y++;
-	}
-	for (int i = 0; i < cub->map_height + 2; i++)
-	{
-		//printf("%s\n", cub->parsed_map[i]);
 	}
 }
 
@@ -96,6 +92,9 @@ char	**malloc_map(t_cub *cub)
 }
 void	check_map(t_cub *cub)
 {
+	int	i;
+
+	i = 0;
 	if (cub->error)
 		return;
 	cub->parsed_map = malloc_map(cub);
@@ -106,6 +105,16 @@ void	check_map(t_cub *cub)
 	}
 	copy_map(cub);
 	flood_fill_caller(cub);
+	if (cub->parsed_map)
+	{
+		while (i < cub->map_height + 2)
+		{
+			free(cub->parsed_map[i]);
+			i++;
+		}
+		free(cub->parsed_map);
+		cub->parsed_map = NULL;
+	}
 }
 int	main(int ac, char **av)
 {
