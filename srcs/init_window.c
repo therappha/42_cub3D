@@ -15,5 +15,4 @@
 void	init_window(t_cub *cub)
 {
 	(*cub).mlx_ptr = mlx_init();
-	(*cub).win_ptr = mlx_new_window((*cub).mlx_ptr, SCREEN_SIZE_X, SCREEN_SIZE_Y, "cub3d");
 }

@@ -78,6 +78,7 @@ int	main(int ac, char **av)
 	}
 	cub.map_width = ft_strlen(cub.map[0]);
 	get_player_pos(&cub);
+	cub.win_ptr = mlx_new_window(cub.mlx_ptr, SCREEN_SIZE_X, SCREEN_SIZE_Y, "cub3d");
 	mlx_hook(cub.win_ptr, DestroyNotify, (1L<<17), free_displays, &cub);
 	mlx_hook(cub.win_ptr, 02, (1L<<0), key_pressed, &cub);
 	mlx_hook(cub.win_ptr, 03, (1L<<1), key_released, &cub);
