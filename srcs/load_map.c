@@ -287,6 +287,7 @@ int	checkline(t_cub *cub, char *line)
 
 int	ft_load_map(char *map, t_cub *cub)
 {
+	int		len;
 	int		checker;
 	char	*line;
 	char	**temp;
@@ -304,8 +305,10 @@ int	ft_load_map(char *map, t_cub *cub)
 		line = ft_remove_nl(line);
 		if (!cub->found.map && checkline(cub, line))
 			continue;
+		if (line[0] == '\n' || line[0] == '\r')
+			cub->error = true;
 		temp = append_cmd(cub->map, line);
-		printf("appending line: '%s'\n", line);
+		len = ft_strlen(line);
 		cub->map = temp;
 		free(line);
 	}

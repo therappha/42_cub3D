@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*    */
-/*  :::::::::::   */
-/*   main.c   :+::+:    :+:   */
-/*    +:+ +:+   +:+     */
-/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+ +#+  */
-/*+#+#+#+#+#+   +#+     */
-/*   Created: 2025/01/25 17:42:20 by rafaelfe    #+#    #+# */
-/*   Updated: 2025/05/15 16:45:52 by rafaelfe   ###   ########.fr */
-/*    */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gde-la-r <gde-la-r@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/31 16:15:22 by gde-la-r          #+#    #+#             */
+/*   Updated: 2025/05/31 16:15:23 by gde-la-r         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
@@ -61,6 +61,7 @@ int	main(int ac, char **av)
 	cub_init(&cub);
 	ft_load_map(av[1], &cub);
 	check_parser(&cub);
+	//check_map(cub);
 	if (cub.error)
 	{
 		free_all(&cub);
@@ -70,7 +71,6 @@ int	main(int ac, char **av)
 	init_window(&cub);
 	if (!get_textures(&cub))
 		return (0);
-	printf("map is:\n");
 	for (int i = 0; cub.map[i]; i++)
 	{
 		printf("%s\n", cub.map[i]);
@@ -85,6 +85,3 @@ int	main(int ac, char **av)
 	mlx_loop_hook(cub.mlx_ptr, game_loop, &cub);
 	mlx_loop(cub.mlx_ptr);
 }
-
-
-
