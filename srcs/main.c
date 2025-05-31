@@ -54,9 +54,7 @@ void	copy_map(t_cub *cub)
 {
 	int	y;
 	int	x;
-	char **temp;
 
-	temp = cub->parsed_map;
 	x = 0;
 	y = 0;
 	while(cub->map[y])

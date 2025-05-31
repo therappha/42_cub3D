@@ -218,12 +218,8 @@ int	handle_color(t_cub *cub, char *line, char which)
 int	check_assets(t_cub *cub, char *line)
 {
 	int		i;
-	int		starting;
-	int		ending;
 
 	i = 0;
-	starting = 0;
-	ending = 0;
 	while (line[i] && is_space(line[i]))
 		i++;
 	if (ft_strncmp("NO", line + i, 2) == 0)
