@@ -42,6 +42,7 @@ void	cub_init(t_cub *cub)
 	cub->fps = 0;
 	cub->mlx_ptr = NULL;
 	cub->win_ptr = NULL;
+	cub->running = 1.0;
 }
 
 t_point	get_camera(t_cub *cub, char c)
