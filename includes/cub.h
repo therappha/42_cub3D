@@ -159,6 +159,8 @@ t_point		get_mouse_position(t_cub *cub);
 void		move_camera(t_cub *cub);
 void		move(t_cub *cub);
 
+//colision.c
+void	get_colision(t_point move, t_cub *cub);
 
 //debug
 void		debug_directions(t_cub *cub);

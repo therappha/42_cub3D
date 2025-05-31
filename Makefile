@@ -11,25 +11,26 @@ LIBFT= $(LIBFT_DIR)/libft.a
 SRCS_DIR= ./srcs
 
 SRCS= $(SRCS_DIR)/delta.c \
-$(SRCS_DIR)/game_loop.c \
-$(SRCS_DIR)/load_map.c \
-$(SRCS_DIR)/drawcricle.c \
-$(SRCS_DIR)/get_mouse_pos.c \
-$(SRCS_DIR)/main.c \
-$(SRCS_DIR)/drawlines.c \
-$(SRCS_DIR)/get_time.c \
-$(SRCS_DIR)/math.c \
-$(SRCS_DIR)/free_displays.c \
-$(SRCS_DIR)/init_cub.c \
-$(SRCS_DIR)/render_utils.c \
-$(SRCS_DIR)/ft_free.c \
-$(SRCS_DIR)/init_window.c \
-$(SRCS_DIR)/ft_pixelput.c \
-$(SRCS_DIR)/input_handler.c \
-$(SRCS_DIR)/raycast.c \
-$(SRCS_DIR)/move.c \
-$(SRCS_DIR)/load_images.c \
-$(SRCS_DIR)/debug.c \
+	  $(SRCS_DIR)/game_loop.c \
+	  $(SRCS_DIR)/load_map.c \
+	  $(SRCS_DIR)/drawcricle.c \
+	  $(SRCS_DIR)/get_mouse_pos.c \
+	  $(SRCS_DIR)/main.c \
+	  $(SRCS_DIR)/drawlines.c \
+	  $(SRCS_DIR)/get_time.c \
+	  $(SRCS_DIR)/math.c \
+	  $(SRCS_DIR)/free_displays.c \
+	  $(SRCS_DIR)/init_cub.c \
+	  $(SRCS_DIR)/render_utils.c \
+	  $(SRCS_DIR)/ft_free.c \
+	  $(SRCS_DIR)/init_window.c \
+	  $(SRCS_DIR)/ft_pixelput.c \
+	  $(SRCS_DIR)/input_handler.c \
+	  $(SRCS_DIR)/raycast.c \
+	  $(SRCS_DIR)/move.c \
+	  $(SRCS_DIR)/load_images.c \
+	  $(SRCS_DIR)/debug.c \
+	  $(SRCS_DIR)/colision.c \
 
 OBJS=$(SRCS:.c=.o)
 

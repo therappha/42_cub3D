@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 18:55:38 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/24 16:56:27 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/05/31 13:07:34 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,5 @@ void	move(t_cub *cub)
 		move.y += cub->player.plane.y;
 	}
 	move = normalize(move);
-	cub->player.pos.x += move.x * MOVE_SPEED * cub->delta;
-	cub->player.pos.y += move.y * MOVE_SPEED * cub->delta;
+	get_colision(move, cub);
 }
