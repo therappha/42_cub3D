@@ -12,26 +12,22 @@
 
 #include "../includes/cub.h"
 
-void	get_colision(t_point move, t_cub *cub)
+void	get_colision(t_point mv, t_cub *cub)
 {
+	float	try_x;
+	float	try_y;
+	float	length;
 
-float try_x;
-float try_y;
-float length;
-
-length = sqrt((move.x * move.x) + (move.y * move.y));
-if (length != 0)
-{
-	move.x /= length;
-	move.y /= length;
-
-	try_x = cub->player.pos.x + move.x * MOVE_SPEED * cub->delta;
-	if (cub->map[(int)(cub->player.pos.y)][(int)(try_x + move.x * 0.1f)] != '1')
-		cub->player.pos.x = try_x;
-
-	try_y = cub->player.pos.y + move.y * MOVE_SPEED * cub->delta;
-	if (cub->map[(int)(try_y + move.y * 0.1f)][(int)(cub->player.pos.x)] != '1')
-		cub->player.pos.y = try_y;
-}
-
+	length = sqrt((mv.x * mv.x) + (mv.y * mv.y));
+	if (length != 0)
+	{
+		mv.x /= length;
+		mv.y /= length;
+		try_x = cub->player.pos.x + mv.x * MOVE_SPEED * cub->delta;
+		if (cub->map[(int)(cub->player.pos.y)][(int)(try_x + mv.x * F)] != '1')
+			cub->player.pos.x = try_x;
+		try_y = cub->player.pos.y + mv.y * MOVE_SPEED * cub->delta;
+		if (cub->map[(int)(try_y + mv.y * F)][(int)(cub->player.pos.x)] != '1')
+			cub->player.pos.y = try_y;
+	}
 }

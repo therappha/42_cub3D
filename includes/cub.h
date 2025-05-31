@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef cub_H
-# define cub_H
+#ifndef CUB_H
+# define CUB_H
+
 # include "../libs/libft/includes/libft.h"
 # include "../libs/mlx/mlx.h"
 # include "../libs/mlx/mlx_int.h"
@@ -29,6 +30,7 @@
 # define CIRCLE_SIZE 60
 # define FOV 66
 # define CAMERA_SPEED 4.0
+# define F 0.1
 
 typedef struct s_point
 {
@@ -134,8 +136,10 @@ int			ft_load_map(char *map, t_cub *cub);
 
 //render utils
 void		drawrect(t_image *image, t_point pos, t_point size, int color);
+//LINE TOO LONG
 t_image		*get_wall_color_from_direction(t_cub *cub, int side, float ray_x, float ray_y);
 void		ft_pixelput(t_image *data, int x, int y, int color);
+//LINE TOO LONG
 void		drawline(t_cub *cub, t_point start, t_point dest);
 void		drawtexture(t_cub *cub, t_point pos, t_point size, int textX, float wall_heigth, t_image *text);
 void		circleBres(t_cub *cub, int xc, int yc, int r);
