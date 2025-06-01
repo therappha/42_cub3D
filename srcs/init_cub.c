@@ -6,21 +6,27 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:03:20 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 19:35:24 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:32:29 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-void	cub_init(t_cub *cub)
+void	init_textures(t_cub *cub)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (i < 4)
 	{
 		cub->textures[i].path = NULL;
 		cub->textures[i++].img = NULL;
 	}
+}
+
+void	cub_init(t_cub *cub)
+{
+	init_textures(cub);
 	cub->fd = 0;
 	cub->image.img = NULL;
 	cub->player.direction = (t_point){0, 0};
@@ -56,7 +62,7 @@ t_point	get_camera(t_cub *cub, char c)
 	}
 	else if (c == 'S')
 	{
-		camera_dir =(t_point){0, 1};
+		camera_dir = (t_point){0, 1};
 	}
 	else if (c == 'E')
 	{
@@ -73,9 +79,11 @@ t_point	get_camera(t_cub *cub, char c)
 
 void	get_player_pos(t_cub *cub)
 {
-	int x = 0;
-	int	y = 0;
+	int	x;
+	int	y;
 
+	x = 0;
+	y = 0;
 	while (cub->map[y])
 	{
 		x = 0;

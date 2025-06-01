@@ -6,11 +6,18 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 19:48:48 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 13:28:13 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:37:30 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
+
+void	print_fps(t_cub *cub)
+{
+	cub->fps_string = ft_itoa((int)cub->fps);
+	mlx_string_put(cub->mlx_ptr, cub->win_ptr, 10, 10, 0xFFFFFF, cub->fps_string);
+	free(cub->fps_string);
+}
 
 void	debug_directions(t_cub *cub)
 {
@@ -23,3 +30,4 @@ void	debug_directions(t_cub *cub)
 	drawcircle(cub, WIDTH -  WIDTH / 4, HEIGHT -  (HEIGHT / 4), CIRCLE_SIZE);
 	drawcircle(cub, WIDTH -  WIDTH / 4, HEIGHT -  (HEIGHT / 4), CIRCLE_SIZE + 1);
 }
+

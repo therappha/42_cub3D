@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:09:07 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 13:19:58 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:29:26 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	key_pressed(int keysym, t_cub *cub)
 			cub->debug = false;
 	}
 	if (keysym == XK_Shift_L)
-		cub->running = 1.0;
+		cub->running = 1.5;
 	return (1);
 }
 
