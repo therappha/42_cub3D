@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pixel_put.c                                     :+:      :+:    :+:   */
+/*   ft_pixelput.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:29:20 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/14 17:29:53 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:00:30 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_pixelput(t_image *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x < 0 || x > SCREEN_SIZE_X || y < 0 || y > SCREEN_SIZE_Y)
+	if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
 		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;

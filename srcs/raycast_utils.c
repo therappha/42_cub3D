@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 12:48:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 12:48:51 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:00:30 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ray_init(t_cub *cub, t_ray *ray, int x)
 	ray->map.x = (int)cub->player.pos.x;
 	ray->map.y = (int)cub->player.pos.y;
 	ray->hit = false;
-	ray->camerax = 2 * x / (double)SCREEN_SIZE_X - 1;
+	ray->camerax = 2 * x / (double)WIDTH - 1;
 	ray->rayX = cub->player.camera.x + cub->player.plane.x * ray->camerax;
 	ray->rayY = cub->player.camera.y + cub->player.plane.y * ray->camerax;
 	ray->delta_X = sqrt(1 + (ray->rayY / ray->rayX) * (ray->rayY / ray->rayX));
@@ -89,16 +89,16 @@ void	get_ray_size(t_cub *cub, t_ray *ray)
 		ray->delta_hit = ((int)ray->map.y - cub->player.pos.y
 				+ (1 - ray->step.y) / 2) / ray->rayY;
 	}
-	ray->wall_height = (int)(SCREEN_SIZE_Y / ray->delta_hit);
-	ray->wall_start = -ray->wall_height / 2 + SCREEN_SIZE_Y / 2;
+	ray->wall_height = (int)(HEIGHT / ray->delta_hit);
+	ray->wall_start = -ray->wall_height / 2 + HEIGHT / 2;
 	if (ray->wall_start < 0)
 	{
 		ray->wall_start = 0;
 	}
-	ray->wall_end = ray->wall_height / 2 + SCREEN_SIZE_Y / 2;
-	if (ray->wall_end >= SCREEN_SIZE_Y)
+	ray->wall_end = ray->wall_height / 2 + HEIGHT / 2;
+	if (ray->wall_end >= HEIGHT)
 	{
-		ray->wall_end = SCREEN_SIZE_Y - 1;
+		ray->wall_end = HEIGHT - 1;
 	}
 }
 

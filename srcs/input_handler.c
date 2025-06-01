@@ -54,7 +54,7 @@ int	key_pressed(int keysym, t_cub *cub)
 	}
 	if (keysym == XK_Shift_L)
 	{
-		cub->running = 1.5;
+		cub->running = 1.0;
 	}
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:00:38 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 12:45:04 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:00:19 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	drawtexture(t_cub *cub, t_point pos, t_point size, t_ray *ray)
 	y = 0;
 	texture.x = ray->textX;
 	step = (float)ray->texture->y / (float)ray->wall_height;
-	texture.y = (pos.y - SCREEN_SIZE_Y / 2 + ray->wall_height / 2) * step;
+	texture.y = (pos.y - HEIGHT / 2 + ray->wall_height / 2) * step;
 	while (x < size.x)
 	{
 		y = 0;

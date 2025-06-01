@@ -44,6 +44,9 @@ SRCS= $(SRCS_DIR)/delta.c \
 	  $(SRCS_DIR)/colision.c \
 	  $(SRCS_DIR)/flood_fill.c \
 	  $(SRCS_DIR)/raycast_utils.c \
+	  $(SRCS_DIR)/checkers.c \
+	  $(SRCS_DIR)/load_map_utils.c \
+	  $(SRCS_DIR)/colors.c \
 
 OBJS=$(SRCS:.c=.o)
 

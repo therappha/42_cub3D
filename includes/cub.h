@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 12:49:24 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:00:30 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <sys/time.h>
 # include <stdbool.h>
 
-# define SCREEN_SIZE_X 1024
-# define SCREEN_SIZE_Y 768
+# define WIDTH 1024
+# define HEIGHT 768
 # define LINE_COLOR 0xFFFF00
 # define MOVE_SPEED 4.0
 # define TILE_SIZE 64
@@ -158,9 +158,10 @@ int			key_pressed(int keysym, t_cub *cub);
 int			key_released(int keysym, t_cub *cub);
 
 //map
-int			ft_load_map(char *map, t_cub *cub);
+int		ft_load_map(char *map, t_cub *cub, int checker, char *line);
 void	flood_fill(t_cub *cub, int x, int y);
 void	flood_fill_caller(t_cub *cub);
+int		extract_number(char *str);
 
 //render utils
 void		drawrect(t_image *image, t_point pos, t_point size, int color);
@@ -201,4 +202,28 @@ void	get_colision(t_point move, t_cub *cub);
 
 //debug
 void		debug_directions(t_cub *cub);
+
+//checks
+int			check_args(char *str);
+int			check_map_line(t_cub *cub, char *line, int i);
+int			checkline(t_cub *cub, char *line);
+int			check_assets(t_cub *cub, char *line);
+
+//load_map
+int			is_space(char c);
+int			is_map(char *line);
+int			extract_path(t_cub *cub, t_image *image, char *line);
+int			handle_color(t_cub *cub, char *line, char which);
+
+//load_map_utils
+int			ft_open(char *map, t_cub *cub);
+char		*ft_remove_nl(char *line);
+char		**append_cmd(char **cmd, char *newcmd);
+int			is_space(char c);
+int			is_map(char *line);
+
+//colors
+bool		ft_load_map_loop(t_cub *cub, char *line, char **temp);
+int			handle_color(t_cub *cub, char *line, char which);
+
 #endif
