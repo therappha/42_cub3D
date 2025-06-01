@@ -36,10 +36,8 @@ void	free_all(t_cub *cub)
 {
 	int	i;
 
-	printf("freeing...\n");
 	if (cub->map && cub->found.map)
 	{
-		printf("freeing map...\n");
 		ft_free_arr(cub->map);
 	}
 	i = 0;
