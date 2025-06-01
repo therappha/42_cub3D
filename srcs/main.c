@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:15:22 by gde-la-r          #+#    #+#             */
-/*   Updated: 2025/06/01 13:00:31 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 15:44:07 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	cub_init(&cub);
-	ft_load_map(av[1], &cub);
+	ft_load_map(av[1], &cub, 0, NULL);
 	check_parser(&cub);
 	check_map(&cub);
 	if (cub.error)

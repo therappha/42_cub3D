@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_images.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 11:25:34 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 13:04:26 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 15:44:07 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,9 @@ int	get_textures(t_cub *cub)
 		}
 		i++;
 	}
-	cub->image.img = mlx_new_image(cub->mlx_ptr, WIDTH, HEIGHT);
-	cub->image.addr = mlx_get_data_addr(cub->image.img,
-			&cub->image.bits_per_pixel, &cub->image.line_length,
-			&(cub->image.endian));
+	(*cub).image.img = mlx_new_image((*cub).mlx_ptr, WIDTH, HEIGHT);
+	(*cub).image.addr = mlx_get_data_addr((*cub).image.img, &(*cub).image.bits_per_pixel, &(*cub).image.line_length, &(*cub).image.endian);
+
 	return (1);
 }
 

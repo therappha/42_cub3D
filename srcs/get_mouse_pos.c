@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pixelput.c                                      :+:      :+:    :+:   */
+/*   get_mouse_pos.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/14 17:29:20 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 15:44:17 by gde-la-r         ###   ########.fr       */
+/*   Created: 2025/05/21 17:01:20 by rafaelfe          #+#    #+#             */
+/*   Updated: 2025/06/01 13:00:30 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-void	ft_pixelput(t_image *data, int x, int y, int color)
+t_point get_mouse_position(t_cub *cub)
 {
-	char	*dst;
+	int x = 0;
+	int y = 0;
 
-	if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
-		return ;
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	mlx_mouse_get_pos(cub->mlx_ptr, cub->win_ptr, \
+			&x, &y);
+	if (x > WIDTH)
+		x = WIDTH;
+	else if (x < 0)
+		x = 0;
+	if (y > HEIGHT)
+		y = HEIGHT;
+	else if (y < 0)
+		y = 0;
+	return ((t_point){x, y});
 }
