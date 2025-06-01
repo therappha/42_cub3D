@@ -55,7 +55,6 @@ int	free_displays(t_cub *cub)
 	}
 	if (cub->found.map)
 		ft_freesplit((*cub).map);
-	ft_printf("Closing Application!\n");
 	exit(1);
 	return (0);
 }

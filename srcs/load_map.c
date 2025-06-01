@@ -30,12 +30,12 @@ int	extract_path(t_cub *cub, t_image *image, char *line)
 	if (line[i])
 	{
 		cub->error = true;
-		return (ft_printf("Error: Invalid char after path!\n"), 0);
+		return (ft_putstr_fd("Error\nInvalid char after path!\n", 2), 0);
 	}
 	if (image->path)
 	{
 		cub->error = true;
-		return (ft_printf("Error: Duplicated texture!\n"), 0);
+		return (ft_putstr_fd("Error\nDuplicated texture!\n", 2), 0);
 	}
 	image->path = ft_strndupto(line, starting, ending);
 	return (1);
@@ -82,6 +82,6 @@ int	ft_load_map(char *map, t_cub *cub, int checker, char *line)
 	ft_load_map_loop(cub, line, temp);
 	get_next_line(-1);
 	if (cub->error)
-		return (printf("error while parsing\n"), 0);
+		return (ft_putstr_fd("Error\nInvalid map\n", 2), 0);
 	return (1);
 }
