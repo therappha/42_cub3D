@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawcircle.c                                       :+:      :+:    :+:   */
+/*   drawcricle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:02:39 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 15:53:35 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:13:44 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	circlebres(t_cub *cub, int xc, int yc, t_point pos)
 	ft_pixelput(&cub->image, xc - y, yc - x, 0x000000);
 }
 
-void drawcircle(t_cub *cub, int xc, int yc, int r)
+void	drawcircle(t_cub *cub, int xc, int yc, int r)
 {
-	int	x;
-	int	y;
-	int	d;
+	int		x;
+	int		y;
+	int		d;
 	t_point	drawpos;
 
 	x = 0;
@@ -50,7 +50,6 @@ void drawcircle(t_cub *cub, int xc, int yc, int r)
 		}
 		else
 			d = d + 4 * x + 6;
-
 		x++;
 		drawpos = (t_point){x, y};
 		circlebres(cub, xc, yc, drawpos);

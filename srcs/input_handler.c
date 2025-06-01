@@ -6,7 +6,7 @@
 /*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:09:07 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 15:44:08 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:14:26 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	key_pressed(int keysym, t_cub *cub)
 
 int	key_released(int keysym, t_cub *cub)
 {
-
 	if (keysym == XK_Left)
 		cub->player.camerax += 1;
 	if (keysym == XK_Right)

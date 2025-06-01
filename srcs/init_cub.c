@@ -6,7 +6,7 @@
 /*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:03:20 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 15:47:43 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:14:23 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	init_textures(t_cub *cub)
 		cub->textures[i].path = NULL;
 		cub->textures[i++].img = NULL;
 	}
+	cub->ceiling_color = -1;
+	cub->floor_color = -1;
 }
 
 void	cub_init(t_cub *cub)
