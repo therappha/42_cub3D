@@ -6,89 +6,87 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:46:08 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 19:38:53 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 11:58:29 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-void	debug_raycast(t_cub *cub, t_point rays)
+void	init_ray_start(t_cub *cub, t_ray *ray)
 {
-	drawline(cub, (t_point){ SCREEN_SIZE_X / 2, SCREEN_SIZE_Y - SCREEN_SIZE_Y / 4}, (t_point){ SCREEN_SIZE_X / 2 + rays.x * CIRCLE_SIZE, SCREEN_SIZE_Y - SCREEN_SIZE_Y / 4 + rays.y * CIRCLE_SIZE});
-
+	if (ray->rayX < 0)
+	{
+		ray->step.x = -1;
+		ray->ray_pos.x = (cub->player.pos.x - ray->map.x) * ray->delta_X;
+	}
+	else
+	{
+		ray->step.x = 1;
+		ray->ray_pos.x = (ray->map.x + 1.0 - cub->player.pos.x) * ray->delta_X;
+	}
+	if (ray->rayY < 0)
+	{
+		ray->step.y = -1;
+		ray->ray_pos.y = (cub->player.pos.y - ray->map.y) * ray->delta_Y;
+	}
+	else
+	{
+		ray->step.y = 1;
+		ray->ray_pos.y = (ray->map.y + 1.0 - cub->player.pos.y) * ray->delta_Y;
+	}
 }
+
+void	ray_init(t_cub *cub, t_ray *ray, int x)
+{
+	ray->texture = NULL;
+	ray->map.x = (int)cub->player.pos.x;
+	ray->map.y = (int)cub->player.pos.y;
+	ray->hit = false;
+	ray->camerax = 2 * x / (double)SCREEN_SIZE_X - 1;
+	ray->rayX = cub->player.camera.x + cub->player.plane.x * ray->camerax;
+	ray->rayY = cub->player.camera.y + cub->player.plane.y * ray->camerax;
+	ray->delta_X = sqrt(1 + (ray->rayY / ray->rayX) * (ray->rayY / ray->rayX));
+	ray->delta_Y = sqrt(1 + (ray->rayX / ray->rayY) * (ray->rayX / ray->rayY));
+	ray->ray_side = false;
+	init_ray_start(cub, ray);
+}
+
+void	get_hit(t_cub *cub, t_ray *ray)
+{
+	while (!ray->hit)
+	{
+		if (ray->ray_pos.x < ray_pos.y)
+		{
+			ray->ray_pos.x += ray->delta_X;
+			ray->map.x += ray->step.x;
+			ray->ray_side = 0;
+		}
+		else
+		{
+			ray->ray_pos.y += ray->delta_Y;
+			ray->map.y += ray->step.y;
+			ray->ray_side = 1;
+		}
+		if (ray->map.y < 0 || ray->map.x < 0 || ray->map.x >= cub->map_width
+			|| ray->map.y >= cub->map_height)
+			break;
+		if (cub->map[(int)ray->map.y][(int)ray->map.x] == '1')
+			ray->hit = true;
+	}
+}
+
 void	raycast(t_cub *cub)
 {
-	float	camerax;
-	float	rayX;
-	float	rayY;
-	float	delta_X;
-	float	delta_Y;
-	bool	hit;
-	bool	ray_side = 0;;
-	float	delta_hit;
-	int		wall_height;
-	int		wall_start;
-	int		wall_end;
-	float	wall_hit;
-	int		textX;
-	t_point	map;
-	t_point	ray_pos;
-	t_point	step;
-	t_image	*texture;
+	t_ray	ray;
+	int		x;
 
-	for (int x = 0; x < SCREEN_SIZE_X; x++)
+	x = 0;
+
+	while (x < SCREEN_SIZE_X)
 	{
-		texture = NULL;
-		map.x = (int)cub->player.pos.x;
-		map.y = (int)cub->player.pos.y;
-		hit = false;
-		camerax = 2 * x / (double)SCREEN_SIZE_X - 1;
-		rayX = cub->player.camera.x + cub->player.plane.x * camerax;
-		rayY = cub->player.camera.y + cub->player.plane.y * camerax;
+		ray_init(cub, &ray, x);
+		get_hit(cub, ray);
 
-		delta_X = sqrt(1 + (rayY / rayX) * (rayY / rayX));
-		delta_Y = sqrt(1 + (rayX / rayY) * (rayX / rayY));
-
-		if (rayX < 0)
-		{
-			step.x = -1;
-			ray_pos.x = (cub->player.pos.x - map.x) * delta_X;
-		}
-		else
-		{
-			step.x = 1;
-			ray_pos.x = (map.x + 1.0 - cub->player.pos.x) * delta_X;
-		}
-		if (rayY < 0)
-		{
-			step.y = -1;
-			ray_pos.y = (cub->player.pos.y - map.y) * delta_Y;
-		}
-		else
-		{
-			step.y = 1;
-			ray_pos.y = (map.y + 1.0 - cub->player.pos.y) * delta_Y;
-		}
-		while (!hit) // get_hit(t_ray *);
-		{
-			if (ray_pos.x < ray_pos.y)
-			{
-				ray_pos.x += delta_X;
-				map.x += step.x;
-				ray_side = 0;
-			}
-			else
-			{
-				ray_pos.y += delta_Y;
-				map.y += step.y;
-				ray_side = 1;
-			}
-			if (map.y < 0 || map.x < 0 || map.x >= cub->map_width || map.y >= cub->map_height)
-				break;
-			if (cub->map[(int)map.y][(int)map.x] == '1')
-				hit = true;
-		}
 		if (ray_side == 0)
 			delta_hit = ((int)map.x - cub->player.pos.x + (1 - step.x) / 2) / rayX;
 		else
@@ -112,5 +110,6 @@ void	raycast(t_cub *cub)
 		if (!ray_side && rayX < 0)
 			textX = texture->x - textX -1;
 		drawtexture(cub, (t_point){x, wall_start}, (t_point){1, wall_end - wall_start}, textX, wall_height, texture);
+		x++;
 	}
 }

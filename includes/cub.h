@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 20:47:46 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 11:46:23 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,27 @@ typedef struct s_found
 	bool	map;
 }	t_found;
 
+typedef struct s_ray
+{
+	float	camerax;
+	float	rayX;
+	float	rayY;
+	float	delta_X;
+	float	delta_Y;
+	bool	hit;
+	bool	ray_side;
+	float	delta_hit;
+	int		wall_height;
+	int		wall_start;
+	int		wall_end;
+	float	wall_hit;
+	int		textX;
+	t_point	map;
+	t_point	ray_pos;
+	t_point	step;
+	t_image	*texture;
+}	t_ray;
+
 /*NO assets/textures/ice.xpm
 SO assets/textures/lava.xpm
 WE assets/textures/bricks.xpm
@@ -118,8 +139,6 @@ typedef enum e_texture
 	EAST,
 	WEST
 }	t_texture;
-
-
 
 int			free_displays(t_cub *cub);
 void		init_window(t_cub *cub);
