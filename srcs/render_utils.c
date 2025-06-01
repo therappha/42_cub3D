@@ -6,7 +6,7 @@
 /*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:00:38 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 15:44:34 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/06/01 15:56:17 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ t_image	*get_wall_text_from_direction(t_cub *cub, t_ray *ray)
 {
 	if (ray->ray_side == 0)
 	{
-		if (ray->rayX > 0)
+		if (ray->rayx > 0)
 			return (&cub->textures[WEST]);
 		else
 			return (&cub->textures[EAST]);
 	}
 	else
 	{
-		if (ray->rayY > 0)
+		if (ray->rayy > 0)
 			return (&cub->textures[NORTH]);
 		else
 			return (&cub->textures[SOUTH]);
@@ -33,7 +33,7 @@ t_image	*get_wall_text_from_direction(t_cub *cub, t_ray *ray)
 unsigned int	get_color(t_ray *ray, t_point texture)
 {
 	return (*(int *)((*ray->texture).addr + ((int)texture.y
-			*(*ray->texture).line_length + ray->textX
+			*(*ray->texture).line_length + ray->textx
 			*((*ray->texture).bits_per_pixel / 8))));
 }
 
@@ -46,7 +46,7 @@ void	drawtexture(t_cub *cub, t_point pos, t_point size, t_ray *ray)
 
 	x = 0;
 	y = 0;
-	texture.x = ray->textX;
+	texture.x = ray->textx;
 	step = (float)ray->texture->y / (float)ray->wall_height;
 	texture.y = (pos.y - HEIGHT / 2 + ray->wall_height / 2) * step;
 	while (x < size.x)

@@ -6,7 +6,7 @@
 /*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 15:43:25 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/06/01 15:56:17 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ typedef struct s_found
 typedef struct s_ray
 {
 	float	camerax;
-	float	rayX;
-	float	rayY;
-	float	delta_X;
-	float	delta_Y;
+	float	rayx;
+	float	rayy;
+	float	delta_x;
+	float	delta_y;
 	bool	hit;
 	bool	ray_side;
 	float	delta_hit;
@@ -92,7 +92,7 @@ typedef struct s_ray
 	int		wall_start;
 	int		wall_end;
 	float	wall_hit;
-	int		textX;
+	int		textx;
 	t_point	map;
 	t_point	ray_pos;
 	t_point	step;
@@ -146,7 +146,7 @@ void		print_fps(t_cub *cub);
 
 //gameloop
 int			game_loop(t_cub *cub);
-void		calculate_Delta(t_cub *cub);
+void		calculate_delta(t_cub *cub);
 
 //init
 void		cub_init(t_cub *cub);
@@ -159,10 +159,10 @@ int			key_pressed(int keysym, t_cub *cub);
 int			key_released(int keysym, t_cub *cub);
 
 //map
-int		ft_load_map(char *map, t_cub *cub, int checker, char *line);
-void	flood_fill(t_cub *cub, int x, int y);
-void	flood_fill_caller(t_cub *cub);
-int		extract_number(char *str);
+int			ft_load_map(char *map, t_cub *cub, int checker, char *line);
+void		flood_fill(t_cub *cub, int x, int y);
+void		flood_fill_caller(t_cub *cub);
+int			extract_number(char *str);
 
 //render utils
 void		drawrect(t_image *image, t_point pos, t_point size, int color);
@@ -199,7 +199,7 @@ void		move_camera(t_cub *cub);
 void		move(t_cub *cub);
 
 //colision.c
-void	get_colision(t_point move, t_cub *cub);
+void		get_colision(t_point move, t_cub *cub);
 
 //debug
 void		debug_directions(t_cub *cub);

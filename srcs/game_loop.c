@@ -6,7 +6,7 @@
 /*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:06:28 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 15:44:09 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/06/01 15:47:43 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	update(t_cub *cub)
 {
-	calculate_Delta(cub);
+	calculate_delta(cub);
 	move_camera(cub);
 	move(cub);
 	return (1);

@@ -17,7 +17,7 @@ void	flood_fill(t_cub *cub, int x, int y)
 	if (cub->error)
 		return ;
 	if (x < 0 || y < 0 || x > cub->map_width + 2 || y > cub->map_height + 2
-	|| cub->parsed_map[y][x] == 'F')
+		|| cub->parsed_map[y][x] == 'F')
 		return ;
 	if (!ft_strchr("NSEW0", cub->parsed_map[y][x]))
 	{
@@ -35,6 +35,7 @@ void	flood_fill(t_cub *cub, int x, int y)
 	flood_fill(cub, x, y + 1);
 	flood_fill(cub, x, y - 1);
 }
+
 void	flood_fill_caller(t_cub *cub)
 {
 	int x;

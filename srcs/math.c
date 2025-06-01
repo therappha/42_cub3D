@@ -21,7 +21,7 @@ int	ft_abs(int num)
 	return (num);
 }
 
-float clamp(float value, float min, float max)
+float	clamp(float value, float min, float max)
 {
 	if (value < min)
 		return min;

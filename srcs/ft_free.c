@@ -12,7 +12,6 @@
 
 #include "../includes/cub.h"
 
-
 void	ft_free(t_cub *cub, char *line)
 {
 	int	i;
