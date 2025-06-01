@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 20:22:34 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 22:17:11 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:39:39 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	flood_fill(t_cub *cub, int x, int y)
 	if (cub->error)
 		return ;
 	if (x < 0 || y < 0 || x > cub->map_width + 2 || y > cub->map_height + 2
-	|| cub->parsed_map[y][x] == 'F')
+		|| cub->parsed_map[y][x] == 'F')
 		return ;
 	if (!ft_strchr("NSEW0", cub->parsed_map[y][x]))
 	{
@@ -35,9 +35,10 @@ void	flood_fill(t_cub *cub, int x, int y)
 	flood_fill(cub, x, y + 1);
 	flood_fill(cub, x, y - 1);
 }
+
 void	flood_fill_caller(t_cub *cub)
 {
-	int x;
+	int	x;
 	int	y;
 
 	y = 1;

@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:09:07 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 13:29:26 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:42:21 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	key_pressed(int keysym, t_cub *cub)
 
 int	key_released(int keysym, t_cub *cub)
 {
-
 	if (keysym == XK_Left)
 		cub->player.camerax += 1;
 	if (keysym == XK_Right)

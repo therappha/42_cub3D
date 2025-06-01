@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 13:35:43 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 15:26:23 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct s_image
 	int		line_length;
 	int		endian;
 	char	*path;
-	bool	found;
 	int		x;
 	int		y;
 }	t_image;
@@ -145,7 +144,8 @@ void		init_window(t_cub *cub);
 
 //gameloop
 int			game_loop(t_cub *cub);
-void		calculate_Delta(t_cub *cub);
+void		calculate_delta(t_cub *cub);
+void		print_fps(t_cub *cub);
 
 //init
 void		cub_init(t_cub *cub);
@@ -159,8 +159,13 @@ int			key_released(int keysym, t_cub *cub);
 
 //map
 int			ft_load_map(char *map, t_cub *cub);
-void	flood_fill(t_cub *cub, int x, int y);
-void	flood_fill_caller(t_cub *cub);
+void		flood_fill(t_cub *cub, int x, int y);
+void		flood_fill_caller(t_cub *cub);
+void		check_map(t_cub *cub);
+char		**malloc_map(t_cub *cub);
+void		copy_map(t_cub *cub);
+void		free_all(t_cub *cub);
+void		check_parser(t_cub *cub);
 
 //render utils
 void		drawrect(t_image *image, t_point pos, t_point size, int color);

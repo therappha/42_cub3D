@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:06:28 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 13:37:24 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:01:51 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	update(t_cub *cub)
 {
-	calculate_Delta(cub);
+	calculate_delta(cub);
 	move_camera(cub);
 	move(cub);
 	return (1);

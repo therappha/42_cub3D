@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 12:48:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 13:00:31 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:42:11 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init_ray_start(t_cub *cub, t_ray *ray)
 		ray->ray_pos.y = (ray->map.y + 1.0 - cub->player.pos.y) * ray->delta_Y;
 	}
 }
+
 void	ray_init(t_cub *cub, t_ray *ray, int x)
 {
 	ray->texture = NULL;
@@ -49,6 +50,7 @@ void	ray_init(t_cub *cub, t_ray *ray, int x)
 	ray->ray_side = false;
 	init_ray_start(cub, ray);
 }
+
 void	get_hit(t_cub *cub, t_ray *ray)
 {
 	while (!ray->hit)

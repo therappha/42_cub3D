@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:03:20 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 13:32:29 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 15:43:10 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	init_textures(t_cub *cub)
 		cub->textures[i].path = NULL;
 		cub->textures[i++].img = NULL;
 	}
+	cub->ceiling_color = -1;
+	cub->floor_color = -1;
 }
 
 void	cub_init(t_cub *cub)

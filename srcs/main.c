@@ -6,114 +6,21 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:15:22 by gde-la-r          #+#    #+#             */
-/*   Updated: 2025/06/01 13:00:31 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:01:42 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-void	check_parser(t_cub *cub)
+void	start_game(t_cub *cub)
 {
-	int	i = 0;
-	while (i < 4)
-	{
-		if (cub->textures[i].path == NULL)
-		{
-			cub->error = true;
-			return ;
-		}
-		i++;
-	}
-	if (!cub->found.ceiling || !cub->found.floor || !cub->found.map ||
-		cub->ceiling_color == -1 || cub->floor_color == -1
-		|| !cub->found.player)
-		cub->error = true;
+	mlx_hook(cub->win_ptr, DestroyNotify, (1L << 17), free_displays, cub);
+	mlx_hook(cub->win_ptr, 02, (1L << 0), key_pressed, cub);
+	mlx_hook(cub->win_ptr, 03, (1L << 1), key_released, cub);
+	mlx_loop_hook(cub->mlx_ptr, game_loop, cub);
+	mlx_loop(cub->mlx_ptr);
 }
 
-void	free_all(t_cub *cub)
-{
-	int	i;
-
-	printf("freeing...\n");
-	if (cub->map && cub->found.map)
-	{
-		printf("freeing map...\n");
-		ft_free_arr(cub->map);
-	}
-
-	i = 0;
-	while (i < 4)
-	{
-		if (cub->textures[i].path)
-			free(cub->textures[i].path);
-		i++;
-	}
-}
-
-void	copy_map(t_cub *cub)
-{
-	int	y;
-	int	x;
-
-	x = 0;
-	y = 0;
-	while(cub->map[y])
-	{
-		x = 0;
-		while (cub->map[y][x])
-		{
-			if (ft_strchr("10WENS", cub->map[y][x]))
-			{
-				cub->parsed_map[y + 1][x + 1] = cub->map[y][x];
-			}
-			x++;
-		}
-		y++;
-	}
-}
-
-char	**malloc_map(t_cub *cub)
-{
-	int	i;
-
-	i = 0;
-	cub->parsed_map = ft_calloc(sizeof(char *), cub->map_height + 2);
-
-	while (i < cub->map_height + 2)
-	{
-		cub->parsed_map[i] = ft_calloc(sizeof(char), cub->map_width + 3);
-		ft_memset(cub->parsed_map[i], 'x', cub->map_width + 3);
-		cub->parsed_map[i][cub->map_width + 2] = '\0';
-		i++;
-	}
-	return cub->parsed_map;
-}
-void	check_map(t_cub *cub)
-{
-	int	i;
-
-	i = 0;
-	if (cub->error)
-		return;
-	cub->parsed_map = malloc_map(cub);
-	if (!cub->parsed_map)
-	{
-		cub->error = true;
-		return ;
-	}
-	copy_map(cub);
-	flood_fill_caller(cub);
-	if (cub->parsed_map)
-	{
-		while (i < cub->map_height + 2)
-		{
-			free(cub->parsed_map[i]);
-			i++;
-		}
-		free(cub->parsed_map);
-		cub->parsed_map = NULL;
-	}
-}
 int	main(int ac, char **av)
 {
 	t_cub	cub;
@@ -122,27 +29,22 @@ int	main(int ac, char **av)
 		return (0);
 	if (!check_args(av[1]))
 	{
-		ft_printf("Error, Could not read file!\n");
+		ft_putstr_fd("Error\n Could not read file!\n", 2);
 		return (0);
 	}
 	cub_init(&cub);
 	ft_load_map(av[1], &cub);
 	check_parser(&cub);
 	check_map(&cub);
+	init_window(&cub);
 	if (cub.error)
 	{
 		free_all(&cub);
 		printf("ops, someting went wrong!\n");
 		return (0);
 	}
-	init_window(&cub);
 	if (!get_textures(&cub))
 		return (0);
 	get_player_pos(&cub);
-	cub.win_ptr = mlx_new_window(cub.mlx_ptr, WIDTH, HEIGHT, "cub3d");
-	mlx_hook(cub.win_ptr, DestroyNotify, (1L<<17), free_displays, &cub);
-	mlx_hook(cub.win_ptr, 02, (1L<<0), key_pressed, &cub);
-	mlx_hook(cub.win_ptr, 03, (1L<<1), key_released, &cub);
-	mlx_loop_hook(cub.mlx_ptr, game_loop, &cub);
-	mlx_loop(cub.mlx_ptr);
+	start_game(&cub);
 }

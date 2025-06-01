@@ -6,7 +6,7 @@
 #    By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/31 23:19:12 by gde-la-r          #+#    #+#              #
-#    Updated: 2025/06/01 12:50:44 by rafaelfe         ###   ########.fr        #
+#    Updated: 2025/06/01 14:59:34 by rafaelfe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ SRCS= $(SRCS_DIR)/delta.c \
 	  $(SRCS_DIR)/game_loop.c \
 	  $(SRCS_DIR)/load_map.c \
 	  $(SRCS_DIR)/drawcricle.c \
-	  $(SRCS_DIR)/get_mouse_pos.c \
 	  $(SRCS_DIR)/main.c \
 	  $(SRCS_DIR)/drawlines.c \
 	  $(SRCS_DIR)/get_time.c \
@@ -44,6 +43,7 @@ SRCS= $(SRCS_DIR)/delta.c \
 	  $(SRCS_DIR)/colision.c \
 	  $(SRCS_DIR)/flood_fill.c \
 	  $(SRCS_DIR)/raycast_utils.c \
+	  $(SRCS_DIR)/check_map.c \
 
 OBJS=$(SRCS:.c=.o)
 

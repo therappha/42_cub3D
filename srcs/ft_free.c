@@ -6,12 +6,11 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:39:30 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 18:38:06 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:41:13 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
-
 
 void	ft_free(t_cub *cub, char *line)
 {
