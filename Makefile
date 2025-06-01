@@ -12,7 +12,7 @@
 
 NAME= cub3D
 CC= cc
-CFLAGS = -g -Wall -Wextra -Werror -I $(INCLUDES) -fsanitize=address
+CFLAGS = -g -Wall -Wextra -Werror -I $(INCLUDES) #-fsanitize=address
 LDFLAGS =  -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm
 INCLUDES= ./includes
 LIBFT_DIR= ./libs/libft
