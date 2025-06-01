@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:06:28 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 16:14:21 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:19:09 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int	update(t_cub *cub)
 
 int	renderer(t_cub *cub)
 {
-	drawrect(&cub->image, (t_point){0, 0}, (t_point){WIDTH, HEIGHT / 2}, cub->ceiling_color);
-	drawrect(&cub->image, (t_point){0, HEIGHT / 2}, (t_point){WIDTH, HEIGHT / 2}, cub->floor_color);
+	drawbackground(cub);
 	raycast(cub);
 	if (cub->debug)
 		debug_directions(cub);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:03:20 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 16:14:23 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:22:46 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	cub_init(t_cub *cub)
 	cub->map_height = 0;
 	cub->map_width = 0;
 	cub->delta = 0;
+	cub->error = false;
 	cub->last_frame_time = get_time();
 	cub->found.floor = false;
 	cub->found.ceiling = false;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 16:13:32 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:20:56 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,11 @@ int			ft_load_map(char *map, t_cub *cub, int checker, char *line);
 void		flood_fill(t_cub *cub, int x, int y);
 void		flood_fill_caller(t_cub *cub);
 int			extract_number(char *str);
+void		check_parser(t_cub *cub);
+void		free_all(t_cub *cub);
+void		copy_map(t_cub *cub);
+char		**malloc_map(t_cub *cub);
+void		check_map(t_cub *cub);
 
 //render utils
 void		drawrect(t_image *image, t_point pos, t_point size, int color);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:09:07 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 16:14:26 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:18:45 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ int	key_pressed(int keysym, t_cub *cub)
 			cub->debug = false;
 	}
 	if (keysym == XK_Shift_L)
-	{
 		cub->running = 1.0;
-	}
 	return (1);
 }
 

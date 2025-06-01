@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_images.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 11:25:34 by rafaelfe          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/06/01 16:01:46 by rafaelfe         ###   ########.fr       */
-=======
-/*   Updated: 2025/06/01 15:44:07 by gde-la-r         ###   ########.fr       */
->>>>>>> origin
+/*   Updated: 2025/06/01 16:18:33 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +28,10 @@ int	get_textures(t_cub *cub)
 		}
 		i++;
 	}
-<<<<<<< HEAD
-	cub->image.img = mlx_new_image(cub->mlx_ptr, WIDTH, HEIGHT);
-	if (!cub->image.img)
-	{
-		ft_putstr_fd("Error\nCould not start game image\n", 2);
-		free_displays(cub);
-	}
-	cub->image.addr = mlx_get_data_addr(cub->image.img,
-			&cub->image.bits_per_pixel,
-			&cub->image.line_length, &(cub->image.endian));
-=======
 	(*cub).image.img = mlx_new_image((*cub).mlx_ptr, WIDTH, HEIGHT);
-	(*cub).image.addr = mlx_get_data_addr((*cub).image.img, &(*cub).image.bits_per_pixel, &(*cub).image.line_length, &(*cub).image.endian);
-
->>>>>>> origin
+	(*cub).image.addr = mlx_get_data_addr((*cub).image.img,
+			&(*cub).image.bits_per_pixel, &(*cub).image.line_length,
+			&(*cub).image.endian);
 	return (1);
 }
 
