@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:15:22 by gde-la-r          #+#    #+#             */
-/*   Updated: 2025/06/01 17:11:01 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:16:28 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int ac, char **av)
 		return (0);
 	if (!check_args(av[1]))
 	{
-		ft_putstr_fd("Error\n Could not read file!\n", 2);
+		ft_putstr_fd("Error\nCould not read file!\n", 2);
 		return (0);
 	}
 	cub_init(&cub);

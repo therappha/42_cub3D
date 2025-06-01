@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 11:25:34 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 16:18:33 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:18:13 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ int	get_textures(t_cub *cub)
 		i++;
 	}
 	(*cub).image.img = mlx_new_image((*cub).mlx_ptr, WIDTH, HEIGHT);
+	if (!cub->image.img)
+	{
+		ft_putstr_fd("Error\nFailed to load main buffer\n", 2);
+		free_displays(cub);
+	}
 	(*cub).image.addr = mlx_get_data_addr((*cub).image.img,
 			&(*cub).image.bits_per_pixel, &(*cub).image.line_length,
 			&(*cub).image.endian);

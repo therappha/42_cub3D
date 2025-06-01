@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:10:27 by gde-la-r          #+#    #+#             */
-/*   Updated: 2025/06/01 15:44:36 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:15:41 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_open(char *map, t_cub *cub)
 {
 	cub->fd = open(map, O_RDONLY);
 	if (cub->fd == -1)
-		return (close(cub->fd), ft_putstr_fd("no file", 2),
+		return (close(cub->fd), ft_putstr_fd("Error\nNo file ", 2),
 			ft_putstr_fd(map, 2), ft_putstr_fd("\n", 2), 0);
 	return (cub->fd);
 }
