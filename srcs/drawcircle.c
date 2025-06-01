@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawcricle.c                                       :+:      :+:    :+:   */
+/*   drawcircle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../includes/cub.h"
 
-void circlebres(t_cub *cub, int xc, int yc, t_point pos)
+void	circlebres(t_cub *cub, int xc, int yc, t_point pos)
 {
 	int	x;
 	int	y;
