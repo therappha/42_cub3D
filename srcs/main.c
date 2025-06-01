@@ -39,7 +39,7 @@ int	main(int ac, char **av)
 	check_map(&cub);
 	if (cub.error)
 	{
-		print_error("Error\nSomething whent wrong!\n");
+		print_error("Error\nSomething went wrong!\n");
 		free_all(&cub);
 		return (0);
 	}
