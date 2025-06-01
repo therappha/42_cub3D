@@ -34,7 +34,9 @@ int	get_textures(t_cub *cub)
 		ft_putstr_fd("Error\nCould not start game image\n", 2);
 		free_displays(cub);
 	}
-	cub->image.addr = mlx_get_data_addr(cub->image.img, &cub->image.bits_per_pixel, &cub->image.line_length, &(cub->image.endian));
+	cub->image.addr = mlx_get_data_addr(cub->image.img,
+			&cub->image.bits_per_pixel,
+			&cub->image.line_length, &(cub->image.endian));
 	return (1);
 }
 

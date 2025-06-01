@@ -88,7 +88,6 @@ void	drawbackground(t_cub *cub)
 
 	size.x = WIDTH;
 	size.y = HEIGHT / 2;
-	drawrect(&cub->image, (t_point){0, 0}, (t_point){WIDTH, HEIGHT / 2},cub->ceiling_color);
-	drawrect(&cub->image, (t_point){0, HEIGHT / 2}, (t_point){WIDTH, HEIGHT / 2}, cub->floor_color);
-
+	drawrect(&cub->image, (t_point){0, 0}, size, cub->ceiling_color);
+	drawrect(&cub->image, (t_point){0, size.y}, size, cub->floor_color);
 }
