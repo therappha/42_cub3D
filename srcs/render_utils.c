@@ -6,7 +6,7 @@
 /*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:00:38 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 13:00:19 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/06/01 15:44:34 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,14 @@ void	drawrect(t_image *image, t_point pos, t_point size, int color)
 		}
 		x++;
 	}
+}
+
+void	drawbackground(t_cub *cub)
+{
+	t_point	size;
+
+	size.x = WIDTH;
+	size.y = HEIGHT / 2;
+	drawrect(&cub->image, (t_point){0, 0}, size, cub->ceiling_color);
+	drawrect(&cub->image, (t_point){0, HEIGHT / 2}, size, cub->floor_color);
 }

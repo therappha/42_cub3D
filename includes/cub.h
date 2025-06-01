@@ -6,7 +6,7 @@
 /*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 13:00:30 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/06/01 15:43:25 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ typedef enum e_texture
 
 int			free_displays(t_cub *cub);
 void		init_window(t_cub *cub);
+void		print_fps(t_cub *cub);
 
 //gameloop
 int			game_loop(t_cub *cub);
@@ -165,11 +166,11 @@ int		extract_number(char *str);
 
 //render utils
 void		drawrect(t_image *image, t_point pos, t_point size, int color);
-
+void		drawbackground(t_cub *cub);
 void		ft_pixelput(t_image *data, int x, int y, int color);
 void		drawline(t_cub *cub, t_point start, t_point dest);
 void		drawtexture(t_cub *cub, t_point pos, t_point size, t_ray *ray);
-void		circleBres(t_cub *cub, int xc, int yc, int r);
+void		drawcircle(t_cub *cub, int xc, int yc, int r);
 
 //raycast logic
 void		raycast(t_cub *cub);

@@ -6,7 +6,7 @@
 /*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:06:28 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 13:00:30 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/06/01 15:44:09 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ int	renderer(t_cub *cub)
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->image.img, 0, 0);
 	if (cub->debug)
 	{
-		cub->fps_string = ft_itoa((int)cub->fps);
-		mlx_string_put(cub->mlx_ptr, cub->win_ptr, 10, 10, 0xFFFFFF, cub->fps_string);
-		free(cub->fps_string);
+		print_fps(cub);
 	}
 	return (1);
 }

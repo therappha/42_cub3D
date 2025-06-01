@@ -6,7 +6,7 @@
 /*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 11:25:34 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 13:00:30 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/06/01 15:44:07 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 int	ft_load_images(t_cub *cub, t_image *image);
 
-int get_textures(t_cub *cub)
+int	get_textures(t_cub *cub)
 {
 	int	i;
 
 	i = 0;
-
 	while (i < 4)
 	{
 		if (!ft_load_images(cub, &cub->textures[i]))
@@ -34,6 +33,7 @@ int get_textures(t_cub *cub)
 
 	return (1);
 }
+
 int	ft_load_images(t_cub *cub, t_image *image)
 {
 	if (!image->path)
