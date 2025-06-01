@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+         #
+#    By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/31 23:19:12 by gde-la-r          #+#    #+#              #
-#    Updated: 2025/06/01 16:21:31 by rafaelfe         ###   ########.fr        #
+#    Updated: 2025/06/01 16:32:12 by gde-la-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,8 @@ SRCS= $(SRCS_DIR)/delta.c \
 	  $(SRCS_DIR)/load_map_utils.c \
 	  $(SRCS_DIR)/colors.c \
 	  $(SRCS_DIR)/check_map.c \
+  	  $(SRCS_DIR)/map_dup.c \
+
 
 OBJS=$(SRCS:.c=.o)
 

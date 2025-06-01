@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 14:54:16 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 16:20:35 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:33:20 by gde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	check_map(t_cub *cub)
 		return ;
 	}
 	copy_map(cub);
+	map_dup(cub);
 	flood_fill_caller(cub);
 	if (cub->parsed_map)
 	{

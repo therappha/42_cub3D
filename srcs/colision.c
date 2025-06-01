@@ -16,20 +16,21 @@ void	get_colision(t_point mv, t_cub *cub)
 {
 	float	try_x;
 	float	try_y;
-	float	length;
 	float	vel;
+	int		new_x;
+	int		new_y;
 
-	length = sqrt((mv.x * mv.x) + (mv.y * mv.y));
 	vel = MOVE_SPEED * cub->running;
-	if (length != 0)
+	try_x = cub->player.pos.x + mv.x * vel * cub->delta;
+	try_y = cub->player.pos.y + mv.y * vel * cub->delta;
+	new_x = (int)(try_x + mv.x * F);
+	new_y = (int)(try_y + mv.y * F);
+	if (new_y > 0 && new_y < cub->map_height + 2
+		&& new_x > 0 && new_x < cub->map_width + 2)
 	{
-		mv.x /= length;
-		mv.y /= length;
-		try_x = cub->player.pos.x + mv.x * vel * cub->delta;
-		if (cub->map[(int)(cub->player.pos.y)][(int)(try_x + mv.x * F)] != '1')
+		if (cub->map[(int)(cub->player.pos.y)][new_x] != '1')
 			cub->player.pos.x = try_x;
-		try_y = cub->player.pos.y + mv.y * vel * cub->delta;
-		if (cub->map[(int)(try_y + mv.y * F)][(int)(cub->player.pos.x)] != '1')
+		if (cub->map[new_y][(int)(cub->player.pos.x)] != '1')
 			cub->player.pos.y = try_y;
 	}
 }
