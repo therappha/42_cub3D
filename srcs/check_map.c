@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 14:54:16 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 16:33:20 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:58:12 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,14 @@ void	check_parser(t_cub *cub)
 		if (cub->textures[i].path == NULL)
 		{
 			cub->error = true;
+			print_error("Error\nInvalid Textures\n");
 			return ;
 		}
 		i++;
+	}
+	if (!cub->found.floor)
+	{
+		
 	}
 	if (!cub->found.ceiling || !cub->found.floor || !cub->found.map
 		|| cub->ceiling_color == -1 || cub->floor_color == -1

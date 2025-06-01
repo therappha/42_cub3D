@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 20:22:34 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 13:39:39 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:37:13 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ void	flood_fill_caller(t_cub *cub)
 			{
 				flood_fill(cub, x, y);
 				if (cub->error)
+				{
+					ft_putstr_fd("Error\nMap not closed\n", 2);
 					return ;
+				}
 			}
 			x++;
 		}

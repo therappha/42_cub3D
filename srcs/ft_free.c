@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 18:39:30 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 13:41:13 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:54:45 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,15 @@ void	ft_free_arr(char **arr)
 		free(arr[i++]);
 	free(arr);
 	return ;
+}
+
+void	print_error(char *str)
+{
+	static bool	printed;
+
+	if (!printed)
+	{
+		ft_putstr_fd(str, 2);
+		printed = true;
+	}
 }

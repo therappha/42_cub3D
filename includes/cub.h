@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 17:09:46 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:55:06 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ t_image		*get_wall_text_from_direction(t_cub *cub, t_ray *ray);
 
 //struct utils
 int			check_args(char *str);
+void	print_error(char *str);
 
 //math
 int			ft_abs(int num);
