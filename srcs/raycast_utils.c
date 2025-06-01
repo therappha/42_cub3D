@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 12:48:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 16:14:31 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:48:00 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	get_hit(t_cub *cub, t_ray *ray)
 			ray->map.y += ray->step.y;
 			ray->ray_side = 1;
 		}
-		if (ray->map.y < 0 || ray->map.x < 0 || ray->map.x >= cub->map_width
-			|| ray->map.y >= cub->map_height)
+		if (ray->map.y < 0 || ray->map.x < 0 || ray->map.x >= cub->map_width + 2
+			|| ray->map.y >= cub->map_height + 2)
 		{
 			break ;
 		}
