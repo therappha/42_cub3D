@@ -142,6 +142,7 @@ typedef enum e_texture
 
 int			free_displays(t_cub *cub);
 void		init_window(t_cub *cub);
+void		print_fps(t_cub *cub);
 
 //gameloop
 int			game_loop(t_cub *cub);

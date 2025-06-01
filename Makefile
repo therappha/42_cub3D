@@ -25,7 +25,6 @@ SRCS= $(SRCS_DIR)/delta.c \
 	  $(SRCS_DIR)/game_loop.c \
 	  $(SRCS_DIR)/load_map.c \
 	  $(SRCS_DIR)/drawcricle.c \
-	  $(SRCS_DIR)/get_mouse_pos.c \
 	  $(SRCS_DIR)/main.c \
 	  $(SRCS_DIR)/drawlines.c \
 	  $(SRCS_DIR)/get_time.c \

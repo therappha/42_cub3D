@@ -36,10 +36,11 @@ void drawcircle(t_cub *cub, int xc, int yc, int r)
 	int	d;
 	t_point	drawpos;
 
-	int x = 0;
+	x = 0;
 	y = r;
 	d = 3 - 2 * r;
-	circlebres(cub, xc, yc, x, y);
+	drawpos = (t_point){x, y};
+	circlebres(cub, xc, yc, drawpos);
 	while (y >= x)
 	{
 		if (d > 0)
