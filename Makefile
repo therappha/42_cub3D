@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+         #
+#    By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/31 23:19:12 by gde-la-r          #+#    #+#              #
-#    Updated: 2025/06/01 14:59:34 by rafaelfe         ###   ########.fr        #
+#    Updated: 2025/06/01 16:14:41 by gde-la-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS_DIR= ./srcs
 SRCS= $(SRCS_DIR)/delta.c \
 	  $(SRCS_DIR)/game_loop.c \
 	  $(SRCS_DIR)/load_map.c \
-	  $(SRCS_DIR)/drawcricle.c \
+	  $(SRCS_DIR)/drawcircle.c \
 	  $(SRCS_DIR)/main.c \
 	  $(SRCS_DIR)/drawlines.c \
 	  $(SRCS_DIR)/get_time.c \
@@ -43,7 +43,9 @@ SRCS= $(SRCS_DIR)/delta.c \
 	  $(SRCS_DIR)/colision.c \
 	  $(SRCS_DIR)/flood_fill.c \
 	  $(SRCS_DIR)/raycast_utils.c \
-	  $(SRCS_DIR)/check_map.c \
+	  $(SRCS_DIR)/checkers.c \
+	  $(SRCS_DIR)/load_map_utils.c \
+	  $(SRCS_DIR)/colors.c \
 
 OBJS=$(SRCS:.c=.o)
 
