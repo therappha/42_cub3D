@@ -113,6 +113,7 @@ int	check_assets(t_cub *cub, char *line)
 		if (!handle_color(cub, line + i + 1, 'F'))
 		{
 			cub->error = true;
+			print_error("Error\nInvalid floor!\n");
 			return (0);
 		}
 	}
@@ -121,6 +122,7 @@ int	check_assets(t_cub *cub, char *line)
 		if (!handle_color(cub, line + i + 1, 'C'))
 		{
 			cub->error = true;
+			print_error("Error\nInvalid ceiling!\n");
 			return (0);
 		}
 	}

@@ -30,7 +30,7 @@ int	main(int ac, char **av)
 		return (0);
 	if (!check_args(av[1]))
 	{
-		ft_putstr_fd("Error\nCould not read file!\n", 2);
+		print_error("Error\nCould not read file!\n");
 		return (0);
 	}
 	cub_init(&cub);
@@ -39,6 +39,7 @@ int	main(int ac, char **av)
 	check_map(&cub);
 	if (cub.error)
 	{
+		print_error("Error\nSomething whent wrong!\n");
 		free_all(&cub);
 		return (0);
 	}

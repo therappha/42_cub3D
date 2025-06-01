@@ -52,7 +52,7 @@ void	flood_fill_caller(t_cub *cub)
 				flood_fill(cub, x, y);
 				if (cub->error)
 				{
-					ft_putstr_fd("Error\nMap not closed\n", 2);
+					print_error("Error\nMap not closed\n");
 					return ;
 				}
 			}

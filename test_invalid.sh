@@ -3,6 +3,8 @@
 for file in maps/invalid/*.cub; do
     echo "Testando: $file"
     ./cub3D "$file"
+	echo
+
     exit_code=$?
 
     if [ $exit_code -eq 139 ]; then
