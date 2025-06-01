@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gde-la-r <gde-la-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 16:31:42 by gde-la-r         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:09:46 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,6 @@ typedef struct s_ray
 	t_image	*texture;
 }	t_ray;
 
-/*NO assets/textures/ice.xpm
-SO assets/textures/lava.xpm
-WE assets/textures/bricks.xpm
-EA assets/textures/leaves.xpm
-
-F 101,183,65
-C 123,211,234
-*/
-
 typedef struct s_cub
 {
 	void			*mlx_ptr;
@@ -141,6 +132,7 @@ typedef enum e_texture
 
 int			free_displays(t_cub *cub);
 void		init_window(t_cub *cub);
+void		init_mlx(t_cub *cub);
 void		print_fps(t_cub *cub);
 
 //gameloop
@@ -204,7 +196,7 @@ void		move_camera(t_cub *cub);
 void		move(t_cub *cub);
 
 //colision.c
-void		get_colision(t_point move, t_cub *cub);
+void		get_collision(t_point move, t_cub *cub);
 
 //debug
 void		debug_directions(t_cub *cub);
