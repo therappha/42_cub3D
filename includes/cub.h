@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 11:46:23 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 12:49:24 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,15 +164,20 @@ void	flood_fill_caller(t_cub *cub);
 
 //render utils
 void		drawrect(t_image *image, t_point pos, t_point size, int color);
-//LINE TOO LONG
-t_image		*get_wall_color_from_direction(t_cub *cub, int side, float ray_x, float ray_y);
+
 void		ft_pixelput(t_image *data, int x, int y, int color);
-//LINE TOO LONG
 void		drawline(t_cub *cub, t_point start, t_point dest);
-void		drawtexture(t_cub *cub, t_point pos, t_point size, int textX, float wall_heigth, t_image *text);
+void		drawtexture(t_cub *cub, t_point pos, t_point size, t_ray *ray);
 void		circleBres(t_cub *cub, int xc, int yc, int r);
+
+//raycast logic
 void		raycast(t_cub *cub);
-t_image		*get_wall_color_from_direction(t_cub *cub, int side, float ray_x, float ray_y);
+void		init_ray_start(t_cub *cub, t_ray *ray);
+void		ray_init(t_cub *cub, t_ray *ray, int x);
+void		get_hit(t_cub *cub, t_ray *ray);
+void		get_ray_size(t_cub *cub, t_ray *ray);
+void		get_ray_texture(t_cub *cub, t_ray *ray);
+t_image		*get_wall_text_from_direction(t_cub *cub, t_ray *ray);
 
 //struct utils
 int			check_args(char *str);

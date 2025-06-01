@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gde-la-r <gde-la-r@student.42porto.com>    +#+  +:+       +#+         #
+#    By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/31 23:19:12 by gde-la-r          #+#    #+#              #
-#    Updated: 2025/05/31 23:19:14 by gde-la-r         ###   ########.fr        #
+#    Updated: 2025/06/01 12:50:44 by rafaelfe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRCS= $(SRCS_DIR)/delta.c \
 	  $(SRCS_DIR)/debug.c \
 	  $(SRCS_DIR)/colision.c \
 	  $(SRCS_DIR)/flood_fill.c \
+	  $(SRCS_DIR)/raycast_utils.c \
 
 OBJS=$(SRCS:.c=.o)
 
