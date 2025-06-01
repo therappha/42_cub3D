@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:46:08 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 12:48:11 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:00:31 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	raycast(t_cub *cub)
 	t_point	draw_pos;
 
 	x = 0;
-	while (x < SCREEN_SIZE_X)
+	while (x < WIDTH)
 	{
 		ray_init(cub, &ray, x);
 		get_hit(cub, &ray);

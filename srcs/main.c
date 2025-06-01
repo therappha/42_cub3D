@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:15:22 by gde-la-r          #+#    #+#             */
-/*   Updated: 2025/05/31 22:20:19 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:00:31 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ int	main(int ac, char **av)
 	if (!get_textures(&cub))
 		return (0);
 	get_player_pos(&cub);
-	cub.win_ptr = mlx_new_window(cub.mlx_ptr, SCREEN_SIZE_X, SCREEN_SIZE_Y, "cub3d");
+	cub.win_ptr = mlx_new_window(cub.mlx_ptr, WIDTH, HEIGHT, "cub3d");
 	mlx_hook(cub.win_ptr, DestroyNotify, (1L<<17), free_displays, &cub);
 	mlx_hook(cub.win_ptr, 02, (1L<<0), key_pressed, &cub);
 	mlx_hook(cub.win_ptr, 03, (1L<<1), key_released, &cub);

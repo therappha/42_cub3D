@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 11:25:34 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/05/31 14:52:43 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:04:26 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 int	ft_load_images(t_cub *cub, t_image *image);
 
-int get_textures(t_cub *cub)
+int	get_textures(t_cub *cub)
 {
 	int	i;
 
 	i = 0;
-
 	while (i < 4)
 	{
 		if (!ft_load_images(cub, &cub->textures[i]))
@@ -29,11 +28,13 @@ int get_textures(t_cub *cub)
 		}
 		i++;
 	}
-	(*cub).image.img = mlx_new_image((*cub).mlx_ptr, SCREEN_SIZE_X, SCREEN_SIZE_Y);
-	(*cub).image.addr = mlx_get_data_addr((*cub).image.img, &(*cub).image.bits_per_pixel, &(*cub).image.line_length, &(*cub).image.endian);
-
+	cub->image.img = mlx_new_image(cub->mlx_ptr, WIDTH, HEIGHT);
+	cub->image.addr = mlx_get_data_addr(cub->image.img,
+			&cub->image.bits_per_pixel, &cub->image.line_length,
+			&(cub->image.endian));
 	return (1);
 }
+
 int	ft_load_images(t_cub *cub, t_image *image)
 {
 	if (!image->path)

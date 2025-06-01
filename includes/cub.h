@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 12:49:24 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:28:09 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <sys/time.h>
 # include <stdbool.h>
 
-# define SCREEN_SIZE_X 1024
-# define SCREEN_SIZE_Y 768
+# define WIDTH 1024
+# define HEIGHT 768
 # define LINE_COLOR 0xFFFF00
 # define MOVE_SPEED 4.0
 # define TILE_SIZE 64
@@ -168,7 +168,7 @@ void		drawrect(t_image *image, t_point pos, t_point size, int color);
 void		ft_pixelput(t_image *data, int x, int y, int color);
 void		drawline(t_cub *cub, t_point start, t_point dest);
 void		drawtexture(t_cub *cub, t_point pos, t_point size, t_ray *ray);
-void		circleBres(t_cub *cub, int xc, int yc, int r);
+void		drawcircle(t_cub *cub, int xc, int yc, int r);
 
 //raycast logic
 void		raycast(t_cub *cub);
