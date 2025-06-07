@@ -6,13 +6,13 @@
 #    By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/31 23:19:12 by gde-la-r          #+#    #+#              #
-#    Updated: 2025/06/01 17:08:23 by rafaelfe         ###   ########.fr        #
+#    Updated: 2025/06/07 20:15:46 by rafaelfe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= cub3D
 CC= cc
-CFLAGS = -g -Wall -Wextra -Werror -I $(INCLUDES) #-fsanitize=address
+CFLAGS = -g  -I $(INCLUDES) #-fsanitize=address
 LDFLAGS =  -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm
 INCLUDES= ./includes
 LIBFT_DIR= ./libs/libft

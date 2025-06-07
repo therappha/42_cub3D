@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 11:25:34 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 18:06:37 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:12:02 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	get_textures(t_cub *cub)
 		print_error("Error\nFailed to load main buffer\n");
 		free_displays(cub);
 	}
+	ft_load_images(cub, &cub->floor_texture);
 	(*cub).image.addr = mlx_get_data_addr((*cub).image.img,
 			&(*cub).image.bits_per_pixel, &(*cub).image.line_length,
 			&(*cub).image.endian);

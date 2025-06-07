@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:03:20 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/01 16:22:46 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:10:24 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	cub_init(t_cub *cub)
 	cub->mlx_ptr = NULL;
 	cub->win_ptr = NULL;
 	cub->running = 1.0;
+	cub->floor_texture.path = ft_strdup("assets/textures/floor.xpm");
 }
 
 t_point	get_camera(t_cub *cub, char c)
