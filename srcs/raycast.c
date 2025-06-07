@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:46:08 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/07 20:34:17 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/07 21:11:05 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,18 @@ void	raycast(t_cub *cub)
 		while (j < HEIGHT)
 		{
 			x = (WIDTH / 2 - i);
-			y = j + FOCAL_LEN;
+			y = j + FOCAL_LEN ;
 			z = j - HEIGHT / 2 + 0.01;
 			rx = (y * cub->player.camera.x + x * -cub->player.plane.x);
 			ry = (y * cub->player.camera.y + x * -cub->player.plane.y);
 			p.x = (rx / z + cub->player.pos.x ) * SCALE;
 			p.y = (ry / z  +cub->player.pos.y ) * SCALE;
-			texture.x = clamp((int)p.x % cub->floor_texture.x, 0, cub->floor_texture.x -1);
-			texture.y = clamp((int)p.y % cub->floor_texture.y, 0, cub->floor_texture.y -1);
-			color = *(int *)((cub->floor_texture.addr + ((int)texture.y * cub->floor_texture.line_length + (int)texture.x * ((cub->floor_texture).bits_per_pixel / 8))));
+			texture.x = (int)p.x;
+			texture.y =(int)p.y;
+			if (texture.x >= 0 && texture.x < cub->floor_texture.x && texture.y >= 0 && texture.y < cub->floor_texture.y)
+				color = *(int *)((cub->floor_texture.addr + ((int)texture.y * cub->floor_texture.line_length + (int)texture.x * ((cub->floor_texture).bits_per_pixel / 8))));
+			else
+				color = 0x008000;
 			ft_pixelput(&cub->image, i, j, color);
 			j++;
 		}
@@ -54,7 +57,7 @@ void	raycast(t_cub *cub)
 		get_ray_texture(cub, &ray);
 		draw_pos = (t_point){i, ray.wall_start};
 		draw_size = (t_point){1, ray.wall_end - ray.wall_start};
-		drawtexture(cub, draw_pos, draw_size, &ray);
+	//	drawtexture(cub, draw_pos, draw_size, &ray);
 		i++;
 	}
 }

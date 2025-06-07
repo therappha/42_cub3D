@@ -6,7 +6,7 @@
 /*   By: rafaelfe <rafaelfe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:34:13 by rafaelfe          #+#    #+#             */
-/*   Updated: 2025/06/07 20:48:58 by rafaelfe         ###   ########.fr       */
+/*   Updated: 2025/06/07 21:10:20 by rafaelfe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define FOV 66
 # define CAMERA_SPEED 4.0
 # define F 0.1
-# define SCALE 30
+# define SCALE 15
 # define FOCAL_LEN 100
 
 typedef struct s_point
